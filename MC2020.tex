@@ -1,0 +1,889 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Multivariable Calculus}
+\author{Josh Joseph}
+\date{Summer 2020}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{amsbsy}
+\usepackage{etoolbox}
+
+\AtBeginEnvironment{gather}{\setcounter{equation}{0}}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+\setcounter{section}{10}
+\section{Parametric Equations and Polar Coordinates}
+
+\subsection{Curves Defined By Parametric Equations}
+\textrm{}
+Some curves cannot be defined in the form of $y=f(x)$ since they fail the vertical line test.
+
+Instead, a curve can be defined(in this case with 2D space) with one or more \textbf{parametric equations}, where $x$ and $y$ are given as functions of a parameter $t$.
+\begin{gather*}
+    x=f(t)\\
+    y=g(t)
+\end{gather*}
+
+As $t$ varies, the points $(f(t),g(t))$ trace out a \textbf{parametric curve}. Consecutive points on this curve are at equal time intervals, but not necessarily equal distances.
+
+An arrowhead can be used to specify the direction of time on such a curve. The domain can also be restricted as shown below:
+\begin{gather*}
+    x=f(t)\\
+    y=g(t)\\
+    a \leqslant t \leqslant b
+\end{gather*}
+In this case, the traced curve would be drawn from \textbf{initial point} $(f(a),g(a))$ to \textbf{terminal point} $(f(b),g(b))$
+
+For example, the curve given by the set of parametric equations $x=cos(t)$ and $y=sin(t)$ would trace out a circle as seen in Fig. \ref{unitcirc}. \\
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5]{UnitCircle.png}
+\caption{The Unit Circle and Parametric Equations}
+\label{unitcirc}
+\end{center}
+\end{figure}
+
+Since these curves are defined as a function of a parameter, multiple different equations can describe the same curve. For example, $x=cos(2t)$ and $y=sin(2t)$. Because the range of the $sin$ and $cos$ functions are the same, these equations would draw out the same curve as Figure \ref{unitcirc}.
+
+A \textbf{family} of parametric equations is a group of equations with the same parameter that trace out similar curves, normally by changing a constant. Circles, Lines, and Cycloids can be traced out using families of parametric equations.
+
+\subsection{Calculus with Parametric Curves}
+\subsubsection{Slope of a Parametric Curve}
+By eliminating the parameter $t$ the parametric equations $x=f(t)$ and $y=g(t)$ can be written in the general form $h(x)$:
+\begin{gather*}
+    y = g(t) = h(f(t))
+\end{gather*}
+Applying the chain rule,
+\begin{gather*}
+y'(t) = g'(t) = h'(f(t))*f'(t) = h'(x)*f'(t)
+\end{gather*}
+If $f'(t) \neq 0$ then
+\begin{gather*}
+    h'(x) = \frac{g'(t)}{f'(t)}
+\end{gather*}
+This can be rewritten as:
+\begin{gather*}
+    \frac{d}{dx} (y) = \frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}}
+\end{gather*}
+By replacing $y$ with $\frac{dy}{dx}$:
+\begin{gather*}
+    \frac{d}{dx} (\frac{dy}{dx}) = \frac{d^2y}{dx^2} = \frac{\frac{d}{dt} (\frac{dy}{dx})}{\frac{dx}{dt}}
+\end{gather*}
+\subsubsection{Areas and Volumes with Parametrics}
+Since the area under a curve of $y = h(x)$ is given by $\int_a^b h(x) dx$, a similar formula can be obtained for parametric equations where $x=f(t)$ and $y=g(t)$:
+\begin{gather*}
+    Area = \int_a^b y\hspace{2pt}dx = \int_c^d y \hspace{2pt} \frac{dx}{dt} \hspace{2pt}dt = \int_c^d g(t) * f'(t) \hspace{2pt} dt
+\end{gather*}
+Where $c$ is the left endpoint and $d$ is the right endpoint.
+\linebreak\linebreak
+A similar formula can be proved for the arc length of a parametric curve:
+\begin{gather*}
+    Arc\hspace{2pt}Length = \int_a^b \sqrt{1+(\frac{dy}{dx})^2} \hspace{3pt}dx
+    = \int_c^d \sqrt{1+(\frac{\frac{dy}{dt}}{\frac{dx}{dt}})^2} \hspace{3pt} \frac{dx}{dt} \hspace{2pt} dt
+    \linebreak\linebreak
+    = \int_c^d \sqrt{(\frac{dx}{dt})^2 + (\frac{dy}{dt})^2} \hspace{3pt} dt
+\end{gather*}
+Even if the parametric curve cannot be expressed in the form $y=h(x)$ a limit Riemann sum can be used to prove this equation true.
+
+The Surface Area of a solid of revolution can be derived similarly, using the non-parametric formula.
+
+\begin{gather*}
+    SA = \int_c^d 2\pi y \sqrt{(\frac{dx}{dt})^2 + (\frac{dy}{dt})^2} \hspace{3pt} dt
+\end{gather*}
+\subsection{Polar Coordinates}
+\subsubsection{Defining Polar Coordinates}
+Sometimes Cartesian coordinates are not convenient to represent some functions, where \textbf{polar coordinates} could be used. A \textbf{polar axis}, corresponding to the x-axis in Cartesian, is used as the base axis. Every point $P$ in the plane can be represented with two coordinates $(r,\theta)$, where $r$ is the distance from the origin to $P$ and $\theta$ is the angle between the polar axis and the line drawn from the origin to $P$, as seen in Figure \ref{polar}.
+
+A point $(-r,\theta)$ can be defined as $(r,\theta+\pi)$. Because points are specified using angles around the polar axis, multiple coordinates can specify the same location. For example, the coordinates $(r,\theta)$ can also be written as:
+\begin{gather*}
+(r, \theta+2\pi n)
+\end{gather*}
+\begin{center}
+    or
+\end{center}
+\begin{gather*}
+(-r, \theta+(2n+1)\pi)
+\end{gather*}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=5]{MC11-polar.png}
+\caption{Polar Coordinates}
+\label{polar}
+\end{center}
+\end{figure}
+Converting from polar to Cartesian coordinates can be done using trigonometric functions of $\theta$.
+\begin{gather*}
+    x = r cos(\theta)\hspace{50pt} y = r sin(\theta)
+\end{gather*}
+To convert from Cartesian to polar use:
+\begin{gather*}
+    r^2 = x^2 + y^2 \hspace{50pt} tan\hspace{2pt}\theta = \frac{y}{x}
+\end{gather*}
+The graph of a polar equation involves all points that can be represented using $(r,\theta)$ and whose coordinates make the equation true.\\
+\subsubsection{Symmetry}
+Polar symmetry can be used to help graph polar equations easier. Similar to Cartesian symmetry in $x$ and $y$, there are a few rules for polar symmetry.\\
+
+If the Polar equation is unchanged when:
+\begin{enumerate}
+    \item $\theta$ is switched with $-\theta$, then the graph is symmetric over the polar axis.
+    \item $r$ is switched with $-r$ or $\theta$ is replaced with $\theta + \pi$, the curve is symmetric about the origin(180 degree rotation symmetry).
+    \item $\theta$ is replaced by $\pi - \theta$, then the graph is symmetric about the '$y$' axis, (the line $\theta = \frac{\pi}{2}$).
+\end{enumerate}
+\subsubsection{Slope of a Polar Curve}
+To find the instantaneous slope or tangent line at a point on a polar curve, rewrite the polar function $r=f(\theta)$ as parametric equations with $\theta$ as a parameter.
+\begin{gather*}
+    x = r cos(\theta) = f(\theta)cos(\theta)\hspace{20pt}y = r sin(\theta) = f(\theta)sin(\theta)
+\end{gather*}
+Now by finding the slope of the now-parametric curve:
+\begin{gather*}
+    \frac{dy}{dx} = \frac{\frac{dy}{d\theta}}{\frac{dx}{d\theta}}
+    = \frac{\frac{dr}{d\theta}*sin(\theta) + r cos(\theta)}{\frac{dr}{d\theta}*cos(\theta) - rsin(\theta)}
+\end{gather*}
+For the special case $r=0$:
+\begin{gather*}
+    \frac{dy}{dx} = tan(\theta) \hspace{5pt} for \hspace{5pt} \frac{dr}{d\theta} \neq 0
+\end{gather*}
+\subsection{Areas and Lengths in Polar Coordinates}
+\subsubsection{Areas in Polar}
+The area of a region bounded by a polar equation can be derived from the area of a sector of a circle(since polar equations also depend on the angle):
+\begin{gather*}
+    A = \frac{1}{2}r^2\theta
+\end{gather*}
+Where $A$ is the area and $\theta$ is measured in radians.
+
+Given a region bounded by a curve $r=f(\theta)$ and the lines given by the polar equations $\theta=c$ and $\theta=d$, $0 < d - c \leqslant 2\pi$. Dividing the region into areas with equal width $\Delta \theta$, the area of Region $i$ can be approximated as:
+\begin{gather*}
+    A_i \approx \frac{1}{2} [f(\theta_i)]^2 * \Delta \theta
+\end{gather*}
+And so, a Riemann sum can be used to improve the approximation as $\Delta \theta \to 0$ and $n \to \infty$.
+\begin{gather*}
+    A = \lim_{n \to \infty} \sum_{i=1}^{n} \frac{1}{2} [f(\theta_i)]^2 * \Delta \theta = \int_c^d \frac{1}{2} [f(\theta_i)]^2 \hspace{2pt}d\theta
+\end{gather*}
+Since $r=f(\theta)$, this can also be written in a form similar to the circle sector formula:
+\begin{gather*}
+    A = \int_c^d \frac{1}{2} r^2 \hspace{2pt}d\theta
+\end{gather*}
+The area between two polar curves $f(\theta)$ and $g(\theta)$ can be derived using integral rules, where $j$ and $k$ are the angle coordinate of the points of intersection on both curves:
+\begin{gather*}
+    A = \frac{1}{2} \int_j^k ([f(\theta)]^2 - [g(\theta)]^2) \hspace{2pt}d\theta
+\end{gather*}
+The above works for $f(\theta) \geqslant g(\theta) \geqslant 0$ for all $\theta$ between $j$ and $k$.
+\subsubsection{Lengths in Polar}
+The Arc Length of a polar curve $r=f(\theta)$ between $\theta = a$ and $\theta = b$ can be found by treating $\theta$ as a parameter. This means that the parametric equations describing these are:
+
+\begin{gather*}
+    x = r * cos(\theta) = f(\theta)*cos(\theta)
+\\
+    y = r * sin(\theta) = f(\theta) * sin(\theta)
+\end{gather*}
+Using the product rule, where $r' = \frac{dr}{d\theta}$:
+\begin{gather*}
+    \frac{dx}{d\theta} = r' * cos(\theta) - r * sin(\theta)
+    \\
+    \frac{dy}{d\theta} = r' * sin(\theta) + r * sin(\theta)
+\end{gather*}
+Squaring both and adding yields:
+\begin{gather*}
+    (\frac{dx}{d\theta})^2 + (\frac{dy}{d\theta})^2 = (r')^2(sin^2(\theta) + cos^2(\theta)) + r^2(sin^2(\theta) + cos^2(\theta)) = r^2 + (\frac{dr}{d\theta})^2
+\end{gather*}
+Using the arc length formula(see 11.2), with $\theta$ as a parameter:
+\begin{gather*}
+    Arc\hspace{2pt}Length = \int_a^b \sqrt{r^2 + (\frac{dr}{d\theta})^2} \hspace{2pt} d\theta
+\end{gather*}
+\subsection{Conic Sections}
+Parabolas, ellipses, and hyperbolas can be formed by the intersection of a plane with a cone, which is why they are often called \textbf{conics} or \textbf{conic sections}.
+\subsubsection{Parabolas}
+A \textbf{parabola} is formed when a plane cuts into a cone at an angle so that it intersects the cone's base. It is the set of points that are equidistant from a \textbf{focus} point $F$ and a line(called the \textbf{directrix}.) The point directly halfway between the directrix and focus lies on the parabola, and this is the \textbf{vertex}. The perpendicular through $F$ and intersecting the directrix is the parabola's \textbf{axis}.
+
+If the focus is on the origin, then the focus of a basic parabola can be defined as the point $(0,p)$ and the directrix $y=-p$.
+
+Using the distance formula, the distance between any point $P(x,y)$ on the parabola to the focus is:
+\begin{gather*}
+    |PF| = \sqrt{x^2 + (y-p)^2}
+\end{gather*}
+Similarly, the distance from the line to $P$(perpendicularly) is:
+\begin{gather*}
+    d(P,directrix) = |y+p|
+\end{gather*}
+By definiton, these two should be equal.
+\begin{gather*}
+    \sqrt{x^2 + (y-p)^2} = |y+p|\\
+    x^2 + (y-p)^2 = (y+p)^2\\
+    x^2 + y^2 -2py + p^2 = y^2 + 2py + p^2\\
+    x^2 = 4py
+\end{gather*}
+If $a = \frac{1}{4p}$, then the standard form of a parabola based on the origin is:
+\begin{gather*}
+    y = \frac{x^2}{4p}\\
+    y = ax^2
+\end{gather*}
+If $p > 0$ then the parabola opens up, and the opposite when $p < 0$. Replacing $y$ and $x$ reflects the parabola over the line $y=x$:
+\begin{gather*}
+    y^2 = 4px
+\end{gather*}
+\subsubsection{Ellipses}
+An \textbf{ellipse} is formed when a plane intersects a cone and comes out on the other side without touching the base. It is the set of all points in a plane such that the sum of the distances from two focal points(\textbf{foci}) is constant.
+
+Assuming the simplest case, where the foci are located on the x-axis at equal distances from the origin, the foci are located at points $(c,0)$ and $(-c,0)$. The constant distance sum is $2a$, greater than zero.
+
+$P(x,y)$  is a point on the ellipse if
+\begin{gather*}
+    |PF_1| + |PF_2| = 2a\\
+    \sqrt{(x+c)^2 + y^2} + \sqrt{(x-c)^2 + y^2} = 2a\\
+    \sqrt{(x-c)^2 + y^2} = 2a - \sqrt{(x+c)^2 + y^2}\\
+    x^2 - 2xc + c^2 + y^2 = 4a^2 - 4a\sqrt{(x+c)^2 + y^2} + x^2 + 2xc + c^2 + y^2\\
+    a\sqrt{(x+c)^2+y^2} = a^2 + cx\\
+    a^2(x^2 + 2xc + c^2 + y^2) = a^4 + 2a^2xc + x^2c^2\\
+    (a^2 - c^2)x^2 + a^2y^2 = a^2(a^2-c^2)
+\end{gather*}
+Since $2c < 2a$(Triangle Inequality Theorem), we can define $b^2 = a^2 - c^2 > 0$. This becomes:
+\begin{gather*}
+    b^2x^2 + a^2y^2 = a^2b^2\\
+    \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1
+\end{gather*}
+When $y = 0$, the x-intercepts of the ellipse are $x = \pm a$. These points $(\pm a,0)$ are the the \textbf{vertices} of the ellipse and lie on its \textbf{major axis}. The y-intercepts are found to be $y = \pm b$. Since $x$ and $y$ are both squared in the equation, the ellipse is symmetric around both axes. A circle is just an ellipse where both foci are at the same point($c = 0$), and $r = a = b$.
+\subsubsection{Hyperbolas}
+A \textbf{hyperbola} made up of two branches can be formed by cutting two bases of a conic cone with a plane inclined vertically. It is the set of all points in a plane where the differences of distances from two \textbf{foci} are constant. Similar to an ellipse, where the distances from the points are added.
+
+This means that for any point $P(x,y)$ on the hyperbola, $|PF_1| - |PF_2| = \pm 2a$, where $a$ is a constant. Using a similar method to an ellipse, the equation for any hyperbola is:
+\begin{gather*}
+    \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1
+\end{gather*}
+Where the foci are at $x = \pm c$ so that $c^2 = a^2 + b^2$, with vertices at $x = \pm a$. The slant asymptotes are at $y = \pm (\frac{b}{a})x$. If the ellipse's major axis is on or parallel to the y-axis:
+\begin{gather*}
+    \frac{y^2}{a^2} - \frac{x^2}{b^2} = 1
+\end{gather*}
+Where the foci are at $y = \pm c$ so that $c^2 = a^2 + b^2$, with vertices at $y = \pm a$. The slant asymptotes are at $y = \pm (\frac{a}{b})x$.
+\subsubsection{Shifting Conics}
+The above equations were derived for a conic with major axis on the x-axis. These conics can be shifted by replacing $x$ and $y$ with $(x-h)$ and $(y-k)$ where $h$ and $k$ are the horizontal and vertical shifts.
+\subsection{Conics in Polar Coordinates}
+Instead of defining the ellipse and hyperbola with just foci, a more uniform definition can be applied to all conics:
+
+Let point $F$ be a focus and $l$ be a directrix. $e$ is a constant, the \textbf{eccentricity}. A conic can be defined as the set of all points $P$ in a plane where
+\begin{gather*}
+    \frac{|PF|}{|Pl|} = e
+\end{gather*}
+This conic is an ellipse if $e < 1$, a parabola if $e = 1$, and a hyperbola if $e > 1$.
+\begin{proof}
+If $e = 1$, then the above becomes the definition of a parabola.
+\\By converting $P$ to polar coordinates$(r,\theta)$, and setting $F$ at the origin:
+\begin{gather*}
+    |PF| = r \hspace{5pt} |Pl| = d - x = d - r cos(\theta)
+\end{gather*}
+Since $|PF| = e|Pl|$,
+\begin{gather*}
+    r = e(d - r cos(\theta))
+\end{gather*}
+Squaring both sides, and using $r^2 = x^2 + y^2$:
+\begin{gather*}
+    (1-e^2)x^2 + 2de^2x + y^2 = e^2d^2\\
+    (x+\frac{e^2d}{1-e^2})^2 + \frac{y^2}{1-e^2} = \frac{e^2d^2}{(1-e^2)^2}
+\end{gather*}
+By completing the square above, that resembles the equation of an ellipse for $e < 1$ since $1-e^2 \geqslant 0$.
+\begin{gather*}
+    \frac{(x-h)^2}{a^2} + \frac{y^2}{b^2} = 1\\
+    h = \frac{-e^2d}{1-e^2}\hspace{25pt}a^2 = \frac{e^2d^2}{(1-e^2)^2}\hspace{25pt}b^2 = \frac{e^2d^2}{1-e^2}
+\end{gather*}
+Finding the foci of this ellipse comes down to this,
+\begin{gather*}
+    c^2 = a^2 - b^2 = \frac{e^4d^2}{(1-e^2)^2}\\
+    c = \frac{e^2d}{1-e^2} = -h
+\end{gather*}
+Remember the foci are at $(\pm c, 0)$. Now reducing two of the above equations yields,
+\begin{gather*}
+    e^2 = \frac{c^2}{a^2}\\
+    e = \frac{c}{a}
+\end{gather*}
+If $e > 1$, that means that $1-e^2$ is now negative, which would only change the sign of $b^2$:
+\begin{gather*}
+    \frac{(x-h)^2}{a^2} - \frac{y^2}{b^2} = 1
+\end{gather*}
+This now fits the last case, the equation of the hyperbola.
+\end{proof}
+Since $r = e(d-rcos(\theta)$, the polar form of a conic is:
+\begin{gather*}
+    r = \frac{ed}{1 + cos(\theta)}
+\end{gather*}
+Now the directrix could be on the left too, in which case $x = -d$. Or it could be parallel to the y-axis where $y = \pm d$.
+\begin{gather*}
+    r = \frac{ed}{1 \pm e\hspace{2pt} cos(\theta)} \hspace{5pt}or \hspace{5pt}r = \frac{ed}{1 \pm e\hspace{2pt} sin(\theta)}
+\end{gather*}
+Which is an ellipse if $e < 1$, a parabola if $e = 1$, or a hyperbola if $e > 1$.
+\section{Infinite Sequences and Series}
+\subsection{Sequences}
+\subsubsection{Defining Sequences}
+A \textbf{sequence} is similar to a list of numbers that have an order:
+\begin{gather*}
+    a_1,a_2,a_3,a_4,...a_n
+\end{gather*}
+Where $a_1$ is the \textit{first term}, and $a_2$ is the \textit{second term}, so $a_n$ is the \textit{nth term}.
+
+With infinite sequences, the sequence never ends, so every term $a_n$ has a term after it $a_{n+1}$.
+
+Function properties can also be used by defining a function $f(n) = a_n$ where the domain is the positive integers.
+
+A sequence can be defined explicitly($a_n=2n$) or implicitly($a_n = 5 + a_{n-1}$).
+\subsubsection{Limits of Sequences}
+Some sequences, such as $a_n = \frac{n}{n+1}$, can converge upon a certain value. This is seen by graphing $f(n) = \frac{n}{n+1}$. $a_n$ seems to be approaching 1 as $n$ increases unbounded.
+\begin{gather*}
+    1 - \frac{n}{n+1} = \frac{n-n+1}{n+1} = \frac{1}{n+1}
+\end{gather*}
+So by increasing $n \to \infty$:
+\begin{gather*}
+    \lim_{n\to \infty} \frac{1}{n+1} = 0
+\end{gather*}
+This means that
+\begin{gather*}
+    \lim_{n\to \infty} \frac{n}{n+1} = 1
+\end{gather*}
+Any sequence $\{a_n\}$ with a limit $L$ can be written as
+\begin{gather*}
+    \lim_{n\to \infty} a_n = L
+\end{gather*}
+This is true if $a_n$ can get arbitrarily close to $L$ by choosing some applicable(usually large) value of $n$. If $\lim_{n\to \infty} a_n$ exists, then $a_n$ \textbf{converges}. If not, then it \textbf{diverges}.
+
+A more formal $\mathcal{E}$ definition of a sequence limit can also be used:
+
+If a sequence $a_n$ has a limit $L$ if for every positive $\mathcal{E}$, there is some integer $N$ in the domain of $a_n$ where
+\begin{gather*}
+    |a_n - L| < \mathcal{E}\hspace{5pt}when\hspace{5pt}n > N
+\end{gather*}
+This works as $\mathcal{E}$ can be arbitrarily small.
+To use function properties with sequences, a function $f(x)$ can be defined so that $f(n) = a_n$ for all $n$ in the domain of $a_n$. It follows that:
+
+If $lim_{x \to \infty} f(x) = L$ and $f(n) = a_n$ for all $n$ in the domain of $a_n$, then $lim_{n \to \infty} a_n = L$.
+
+However, since $a_n$ is only defined for positive integer $n$, a new definition of limits to infinity is needed:
+
+    $\lim_{n \to \infty} a_n = \infty$ means that for every positive number $M$, there is an integer $N$ where  $a_n > M$ and $n > N$
+
+Limit Laws work with series similar to how they work with functions.
+
+The squeeze theorem can also apply:
+
+If $a_n \leqslant b_n \leqslant c_n$ for all $n > n_0$ and $\lim_{n \to \infty} a_n = \lim_{n \to \infty} c_n = L$, then $\lim_{n \to \infty} b_n = L$
+\subsubsection{Absolute and Conditional Convergence(Sequences)}
+Absolute Convergence is when the sequence $|a_n|$ converges, as opposed to conditional convergence, when just $a_n$ does.
+\begin{gather*}
+    \textrm{If} \lim_{n \to \infty} |a_n| = 0, \textrm{then} \lim_{n \to \infty} a_n = 0
+\end{gather*}
+\begin{proof}
+\begin{gather*}
+    \textrm{Given:} \lim_{n \to \infty} |a_n| = 0\\
+    1) -|a_n| \leqslant a_n \leqslant |a_n|\\
+    2) \lim_{n \to \infty} -|a_n| = -\lim_{n \to \infty} |a_n| = 0\\
+    3) \textrm{ By the squeeze theorem, } \lim_{n \to \infty} a_n = 0
+\end{gather*}
+\end{proof}
+\subsubsection{Increasing, Decreasing, and Monotonic Sequences}
+A sequence is \textbf{increasing} if $a_n < a_{n+1}$ for all $n \geqslant 1$, and \textbf{decreasing} if $a_n > a_{n+1}$ for the same condition. It is \textbf{monotonic} if the sequence is either always increasing or always decreasing.
+
+A sequence is \textbf{bounded above} if there is some number $M$ where
+\begin{gather*}
+    a_n \leqslant M\textrm{ for all $n \geqslant 1$}
+\end{gather*}
+and \textbf{bounded below} if there is a number $N$ where
+\begin{gather*}
+    a_n \geqslant N\textrm{ for all $n \geqslant 1$}
+\end{gather*}
+If $a_n$ is bounded both above and below, then it is a \textbf{bounded} sequence.
+
+\textbf{If a sequence is bounded and monotonic, then it is convergent}.
+\begin{proof}
+Given $a_n$, an increasing monotonic sequence, the set given by $S = \{a_n|n \geqslant 1\}$ has a least upper bound by the \textbf{Completeness Axiom} $L$. If $\mathcal{E} > 0$, then $L - \mathcal{E}$ is not an upper bound, since $L$ is the \textit{least} upper bound.
+\begin{gather*}
+    a_N > L - \mathcal{E}\textrm{ for some constant integer N}
+\end{gather*}
+Since the sequence is increasing, $a_n \geqslant a_N$ if $n > N$, so
+\begin{gather*}
+    a_n > L - \mathcal{E}\\
+    0 \leqslant L - a_n < \mathcal{E}
+\end{gather*}
+The zero part is true since $a_n \leqslant L$. So:
+\begin{gather*}
+    |L - a_n| < \mathcal{E}
+\end{gather*}
+This is the $\mathcal{E}$ definition of a limit, so $\lim_{n \to \infty} a_n = L$, which proves convergence. A similar proof works if $a_n$ is decreasing.
+\end{proof}
+\subsection{Infinite Series}
+\subsubsection{Series Convergence and Divergence}
+By adding the terms of any infinite sequence, we get an \textbf{infinite series}, which is noted as:
+\begin{gather*}
+    \sum_{n=1}^{\infty} a_n
+\end{gather*}
+Though a lot of sums increase unbounded as $n \to \infty$, some \textbf{converge} upon a value, and cannot increase past it. For example, the series $\sum_{n=1}^{\infty} \frac{1}{2^n}$ will never increase past $1$, since every term after $n=2$ combined will never add up to $a_1 = \frac{1}{2}$. These convergences can be considered by looking at partial sums.
+
+A \textbf{partial sum} is a finite sum of a number of terms of an infinite sequence:
+\begin{gather*}
+    S_n = a_1 + a_2 + a_3 ... a_n = \sum_{i=1}^n a_i
+\end{gather*}
+If $\lim_{n \to \infty} S_n = q$ is a real number $q$, then $\sum_{n=1}^\infty a_n$ is convergent with $\sum_{n=1}^\infty a_n = q$. The \textbf{sum} of the series is $q$, and if $q$ doesn't exist, then the infinite sum of $a_n$ diverges.
+\subsubsection{Geometric Series}
+A geometric series is any series of the form:
+\begin{gather*}
+    a + ar + ar^2 + ar^3 ... ar^{n-1} = \sum_{n=1}^\infty ar^{n-1}\hspace{7pt}a,r \neq 0
+\end{gather*}
+For the special case $r = 1$, $S_n = a + a + a... = na \to \pm \infty$, so this series diverges. However, if $-1 \leqslant r < 1$, then:
+\begin{gather*}
+    \textrm{The geometric series converges to} \sum_{n=1}^\infty ar^{n-1} = \frac{a}{1-r}
+\end{gather*}
+If $r$ has any other value, then this series diverges.
+\begin{proof}
+If $r \neq 1$:
+\begin{gather*}
+    S_n = a + ar + ar^2...ar^{n-1}\\
+    r * S_n = ar + ar^2 + ar^3...ar^n\\
+    S_n - r*S_n = a - ar^n = a(1 - r^n) = S_n(1-r)\\
+    S_n = \frac{a(1-r^n)}{1-r} = \frac{a}{1-r} - \frac{ar^n}{1-r}
+\end{gather*}
+The sum of any series is $\lim_{q \to \infty} \sum_{n=1}^q a_n$:
+\begin{gather*}
+    \lim_{n \to \infty} S_n = \lim_{n \to \infty} [\frac{a}{1-r} - \frac{ar^n}{1-r}] = \frac{a}{1-r} - \frac{a}{1-r} * \lim_{n \to \infty} r^n
+\end{gather*}
+Since $\lim_{n \to \infty} r^n = 0 \textrm{ when } -1 < r < 1$:
+\begin{gather*}
+    \lim_{n \to \infty} S_n = \sum_{n=1}^\infty ar^{n-1} = \frac{a}{1-r}
+\end{gather*}
+\end{proof}
+\subsubsection{Limits and the Divergence Test}
+The limit of a sequence $a_n$ is strongly related to the convergence of its infinite series. In fact:
+\begin{gather*}
+    \textrm{If a series} \sum_{n = 1}^\infty a_n \textrm{ is convergent,}\lim_{n \to \infty} = 0
+\end{gather*}
+\begin{proof}
+If $S_n$ is the partial sum of $a_n$ for all $n$ required, then any $a_n = S_n - S_{n-1}$. Since the series $a_n$ is convergent, its partial sum sequence $S_n$ is convergent. Let $\lim_{n \to \infty} S_n = q$, then since $n-1 \to \infty$ when $n \to \infty$, $\lim_{n \to \infty} S_n= lim_{n \to \infty} S_{n-1}= q.$
+\begin{gather*}
+    a_n = S_n - S_{n-1}\\
+    \lim_{n \to \infty} a_n = \lim_{n \to \infty} S_n - \lim_{n \to \infty} S_{n-1} = q - q = 0
+\end{gather*}
+\end{proof}
+However, the reverse of this is not necessarily true. For example, even though $\lim_{n \to \infty} \frac{1}{n} = 0$, the harmonic series diverges.
+
+If a series is not convergent, it must be divergent. Since the limit of the terms of a convergent series must be 0, those that do not are divergent. This is the Divergence Test or the $n^{th}$ term test.
+\begin{gather*}
+    \textrm{If}\lim_{n \to \infty} a_n \neq 0 \textrm{ or DNE, then the series } \sum_{n = 1}^\infty a_n \textrm{ diverges.}
+\end{gather*}
+\subsubsection{Rules of Series}
+Since all infinite sums can be rewritten as limits of partial sums, all the limit rules apply when using operations on infinite series. If $\sum a_n$ and $\sum b_n$are convergent, then
+\begin{gather}
+    \sum_{n = 1}^\infty c * a_n = c\sum_{n = 1}^\infty a_n\\
+    \sum_{n = 1}^\infty(a_n + b_n) = \sum_{n = 1}^\infty a_n + \sum_{n = 1}^\infty b_n\\
+    \sum_{n = 1}^\infty(a_n - b_n) = \sum_{n = 1}^\infty a_n - \sum_{n = 1}^\infty b_n
+\end{gather}
+All of the above series are convergent. In (1), $c$ is a constant. This shows the sum or difference of two convergent series are also convergent.
+\subsection{The Integral Test and Estimates of Sums}
+\subsubsection{Improper Integrals and Infinite Series}
+Sometimes it is really difficult to get the sum of an infinite series, and so it is often more useful to find if the series converges/diverges.
+
+This can be done by drawing the graph of $f(n) = a_n$ and drawing Riemann approximations of width 1, since that means the area of each box would be $f(n) * 1 = a_n$. Now assume as $n \to \infty$, $f(n)$ eventually becomes decreasing and positive.
+
+Now, by using the value of the infinite(improper) integral, it is possible to use an upper or lower bound on $\sum a_n$. For example, to prove convergence:
+\begin{gather*}
+    \sum_{n = 1}^\infty a_n < \int_1^\infty f(x)\hspace{3pt}dx = c
+\end{gather*}
+This means that the series of $a_n$ must be less than $c$, a finite constant. This means that $a_n$ must converge.
+
+Similarly, if the integral diverged, and $\sum a_n > \int f(x) dx$, then the series would have to be infinite and diverge. This leads to the integral test:
+
+If $f(x)$ is a continuous function on $[1,\infty]$ and positive and decreasing as $n \to \infty$ where $f(n) = a_n$, then:
+\begin{gather}
+    \textrm{If } \int_1^\infty f(x)\hspace{3pt}dx\textrm{ converges, then }\sum_{n=1}^\infty a_n \textrm{ converges.}\\
+    \textrm{If } \int_1^\infty f(x)\hspace{3pt}dx\textrm{ diverges, then }\sum_{n=1}^\infty a_n \textrm{ diverges.}
+\end{gather}
+If the series starts at $n=c$, the integral $\int_c^\infty f(x)\hspace{3pt}dx$ should be used.
+\subsubsection{The p-series test}
+The integral test can also be used to prove the p-series test below:
+\begin{gather*}
+    \textrm{The series} \sum_{n=1}^\infty \frac{1}{n^p} \textrm{ converges only if } p > 1
+\end{gather*}
+\subsubsection{Estimating the Sum of a Series}
+Now if $\sum a_n$ is convergent, then it has a sum $s$. While the integral test cannot be used to find the sum of a series, it is possible to find an approximation. Any partial sum $S_n$ is an approximation that gets better as $n \to \infty$, since $\lim_{n \to \infty} S_n = s$. The \textbf{remainder} is the error in the approximation, simply:
+\begin{gather*}
+    R_n = s - S_n = a_{n+1} + a_{n+2} + a_{n+3}...
+\end{gather*}
+Using the Riemann sum approximation from the previous section, the partial sum $S_n$ represents all the boxes from $a_1$ to $a_n$ so $R_n$ represents the boxes that are remaining(hence $s - S_n$). So if $f(x)$ is decreasing
+\begin{gather*}
+    R_n \leqslant \int_n^\infty f(x)\hspace{3pt}dx
+\end{gather*}
+Modifying the Reimann approximation a little, using the left side instead of the right, a new picture can be drawn, where the $a_{n+1}$ box is above the curve, as well as all the boxes after. This can be done by translating to the right 1 unit(see Figure 3/4 in 12.2). Since the approximation is above the curve:
+\begin{gather*}
+    R_n \geqslant \int_{n+1}^\infty f(x)\hspace{3pt}dx
+\end{gather*}
+This leads to: Given $f(m) = a_m$, and f is continuous, positive, and decreasing over $[n,\infty]$. If $\sum a_n$ converges,
+\begin{gather*}
+     \int_{n+1}^\infty f(x)\hspace{3pt}dx \leqslant R_n \leqslant \int_n^\infty f(x)\hspace{3pt}dx
+\end{gather*}
+By adding $S_n$ to both sides, since $s = R_n + s$:
+\begin{gather*}
+    S_n + \int_{n+1}^\infty f(x)\hspace{3pt}dx \leqslant s \leqslant S_n + \int_n^\infty f(x)\hspace{3pt}dx
+\end{gather*}
+\subsubsection{Formal Proof of the Integral Test}
+\begin{proof}
+Using the Reimann approximation where the rectangles are under the curve(starting at $n+1 = 1+1 = 2$):
+\begin{gather*}
+    a_2 + a_3 + a_4....a_n \leqslant \int_1^n f(x)\hspace{3pt}dx
+\end{gather*}
+Shifting to the left one unit:
+\begin{gather*}
+    \int_1^n f(x)\hspace{3pt}dx \leqslant a_1 + a_2 + a_3...a_{n-1}
+\end{gather*}
+Since $f(x) > 0$:
+\begin{gather*}
+    \sum_{i = 2}^n a_i \leqslant \int_1^n f(x)\hspace{3pt}dx \leqslant \int_1^\infty f(x)\hspace{3pt}dx
+\end{gather*}
+If $\int f(x)\hspace{3pt}dx$ converges to M, and $S_n = a_1 + \sum_{i = 2}^n a_i$:
+\begin{gather*}
+    S_n = a_1 + \sum_{i = 2}^n a_i \leqslant a_1 + \int_1^\infty f(x)\hspace{3pt}dx = M\\
+    S_n \leqslant M
+\end{gather*}
+Since $a_n > 0$, $S_{n+1} > S_n$, and so $S_n$ is an increasing and monotonic sequence, which means $S_n$ is a convergent sequence, which means $\sum a_n$ is also convergent.
+
+If $\int_1^\infty f(x)\hspace{3pt}dx$ diverges then $\int_1^n f(x)\hspace{3pt}dx \to \infty \textrm{ as } n \to \infty$. From the second Riemann sum:
+\begin{gather*}
+    \int_1^n f(x)\hspace{3pt}dx \leqslant \sum_{i=1}^{n-1} a_i = S_{n-1}
+\end{gather*}
+This shows that $S_{n-1} \to \infty$, which means $S_n \to \infty$ and $\sum a_n$ diverges.
+\end{proof}
+\subsection{The Comparison Tests}
+Sometimes a smart way to check for convergence is by comparing to an easier series. For example, if $a_n < b_n$ and $b_n$ is convergent, then $a_n$ also has to be convergent, given that $a_n$ is increasing as $n \to \infty$. This idea only works when both series are positive(since \textit{series} are increasing the \textit{sequences} must be positive). The opposite logic works when negative.
+\subsubsection{The Direct Comparison Test}
+Let $\sum a_n$ and $\sum b_n$ be series with positive terms:
+\begin{gather}
+    \textrm{If } \sum b_n \textrm{ converges and } a_n \leqslant b_n\textrm{(for all n $\to \infty$) then } \sum a_n \textrm{ converges.}\\
+    \textrm{If } \sum b_n \textrm{ diverges and } a_n \geqslant b_n\textrm{(for all n $\to \infty$) then } \sum a_n \textrm{ diverges.}
+\end{gather}
+\begin{proof}
+(1) Let $s_n$ and $t_n$ be the partial sums of $a_n$ and $b_n$, respectively. Since $b_n$ converges(see (1) above), it has an infinite sum $t$. Since both \textit{sequences} are positive, their \textit{series} must be increasing. Since $a_n \leqslant b_n$, $s_n \leqslant t_n \leqslant t$. Since $s_n \leqslant t$, the series $\sum a_n$ is now bounded above \textit{and} increasing, so it must be convergent.
+
+(2) If $b_n$ diverges, that means that $t_n \to \infty$($b_n$ is increasing so it can't go to $-\infty$). Since $a_n \geqslant b_n, s_n \geqslant t_n$. \therefore $ s_n \to \infty$ and $\sum a_n$ diverges.
+\end{proof}
+\subsubsection{The Limit Comparison Test}
+However, when $a_n$ is greater than a convergent series or less than a divergent series, the Direct Comparison test is useless. However, another kind of comparison test can help.
+
+Let $\sum a_n$ and $\sum b_n$ be series with positive terms. Given that:
+\begin{gather*}
+    \lim_{n \to \infty} \frac{a_n}{b_n} = c
+\end{gather*}
+Where $c$ is any constant where $c > 0$. This means that both series either converge or diverge. In other words, if one converges then the other one does too, same for divergence.
+\begin{proof}
+Let $m$ and $M$ be two different positive numbers where $m < c < M$. Since $\frac{a_n}{b_n} \to c$ as $n$ gets very large, there must be some large integer $N$ where when $n > N$:
+\begin{gather*}
+    m < \frac{a_n}{b_n} < M \implies mb_n < a_n < Mb_n
+\end{gather*}
+If $\sum b_n$ converges, so does $M \sum b_n$. $a_n < Mb_n \therefore a_n$ converges. Similar logic can be used for divergence with $a_n > mb_n$.
+\end{proof}
+\subsubsection{Estimating Sums: Comparison Tests}
+Series comparisons can also be used to \textit{bound} the error on a series. For example, the remainder of a series $a_n$ is $R_n$:
+\begin{gather*}
+    R_{a_n} = s - S_n = a_{n+1} + a_{n+2} + a_{n+3}...\\
+    R_{b_n} = t - T_n = b_{n+1} + b_{n+2} + b_{n+3}...
+\end{gather*}
+Now since $a_n \leqslant b_n$, $R_{a_n} \leqslant R_{b_n}$(see above for why). The Comparison Test can be used in combination with the integral test to bound the error of more series:
+\begin{gather*}
+    R_{a_n} \leqslant R_{b_n} \leqslant \int_n^\infty f(x)\hspace{2pt}dx
+\end{gather*}
+\subsection{Alternating Series}
+Some series contain terms that are not always positive, and one very important one is the \textbf{alternating series}. An alternating series is one where the series changes sign every term, for example:
+\begin{gather*}
+    \sum_{n=1}^\infty \frac{(-1)^{n-1}}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5}...
+\end{gather*}
+\subsubsection{The Alternating Series Test}
+If an alternating series $\sum a_n = \sum_{n=1}^\infty (-1)^{n-1}b_n$ satisfies the following:
+\begin{gather}
+    b_n > 0\\
+    b_{n+1} \leqslant b_n \textrm{ for all n($b_n$ is decreasing or constant)}\\
+    \lim_{n \to \infty} b_n = 0
+\end{gather}
+Then $\sum a_n$ is convergent.
+
+Before the formal proof, consider the logical proof. If an alternating series converges, it will be oscillating around a convergence value. If the terms in $b_n$ are decreasing, then the amplitude of oscillation will decrease as the series closes in on its sum. However, if $b_n$ is increasing(or never reaches zero), the series will never close in and converge.
+\begin{proof}
+Since all the even partial sums are increasing and the odds are decreasing(remember the series alternates):
+\begin{gather*}
+    S_2 = a_1 - a_2 \geqslant 0 \textrm{ since $a_2 \leqslant a_1$}\\
+    S_4 = s_2 + (a_3 - a_4) \geqslant S_2 \textrm{ since $a_4 \leqslant a_3$}\\
+    \textrm{For all even partial sums($S_{2n}$):}\\
+    S_{2n} = S_{2n-2} + (a_{2n-1} - a_{2n}) \geqslant S_{2n-2} \textrm{ since $a_{2n} \leqslant a_{2n-1}$}
+\end{gather*}
+This shows that all the even partial sums are positive and increasing. All the even partial sums can be written as:
+\begin{gather*}
+    S_{2n} = a_1 - (a_2 - a_3) - (a_4 - a_5) ... - (a_{2n-2} - b_{2n-1}) - b_{2n}
+\end{gather*}
+Looking back at the quantities in parentheses, they are all positive, so $S_{2n}$ will never exceed $a_1$. Since $S_{2n}$ is increasing and bounded by $a_1$ it must be convergent, with a sum of $s$. Now for the odd partial sums:
+\begin{gather*}
+    \lim_{n \to \infty} s_{2n+1} = \lim_{n \to \infty} s_{2n} + \lim_{n \to \infty} a_{2n+1}
+\end{gather*}
+The second limit is zero by (3) of the series test above.
+\begin{gather*}
+    = s + 0 = s
+\end{gather*}
+Since the even and odd partial sums approach the same value $s$, the alternating series converges.
+\end{proof}
+\subsubsection{Estimating Sums: Alternating Series}
+Alternating Series can also be used to estimate and bound the error of a partial sum.
+
+If $\sum a_n$ is an alternating series that converges by the alternating series test(satisfies all conditions), then:
+\begin{gather*}
+    |R_n| = |s - S_n| \leqslant a_{n+1}
+\end{gather*}
+\begin{proof}
+The following can be seen from the Alternating Series Test(see figure from textbook, visual intuition)
+\begin{gather*}
+    |R_n| = |s - S_n| \leqslant |S_{n+1} - S_n| = a_{n+1}\\
+    |R_n| \leqslant a_{n+1}
+\end{gather*}
+\end{proof}
+\subsection{Absolute Convergence and the Ratio and Root Tests}
+\subsubsection{Absolute Convergence}
+Many of the convergence tests only work when the series is always positive or alternating, but what if it isn't? With any given series $\sum a_n$, another series $\sum |a_n|$ can be used(useful since all terms are now positive or zero).
+
+A series is \textbf{absolutely convergent} if $\sum |a_n|$ converges. Of course, this fact is not useful with positive $a_n$, since $|a_n| = a_n$ in that case.
+
+Sometimes, series can be convergent, but not absolutely convergent. Example would be $a_n = \frac{(-1)^{n-1}}{n}$. This series converges by the Alternating Series Test, but $|a_n| = \frac{1}{n}$ diverges(harmonic series). When this happens, $a_n$ is called \textbf{conditionally convergent}.
+
+However, the usefulness here comes from the following fact:
+\begin{gather*}
+    \textrm{If } \sum |a_n| \textrm{ converges, then } \sum a_n \textrm{ converges.}
+\end{gather*}
+\begin{proof}
+\begin{gather*}
+    0 \leqslant a_n + |a_n| \leqslant 2|a_n|
+\end{gather*}
+$2|a_n|$ must converge since $|a_n|$ converges, and therefore $a_n + |a_n|$ converges due to the direct comparison test. Since $a_n = (a_n + |a_n|) - (|a_n|)$, and both series in parenthesis are convergent, $a_n$ must be convergent.
+\end{proof}
+\subsubsection{The Ratio Test}
+This test is often a very useful one:
+\begin{gather}
+    \textrm{If} \lim_{n \to \infty} |\frac{a_{n+1}}{a_n}|= L < 1, \textrm{then } \sum a_n \textrm{ converges.}\\
+    \textrm{If} \lim_{n \to \infty} |\frac{a_{n+1}}{a_n}|= L > 1, \textrm{then } \sum a_n \textrm{ diverges.}\\
+    \textrm{If} \lim_{n \to \infty} |\frac{a_{n+1}}{a_n}|= L = 1, \textrm{then Ratio Test is inconclusive.}
+\end{gather}
+\begin{proof}
+To prove case (1), compare the given series to a convergent geometric series($r < 1$). Since $L < 1$ there has to be an $L < r < 1$ that fits between $L$ and $1$.
+\begin{gather*}
+    \lim_{n \to \infty} |\frac{a_{n+1}}{a_n}|= L < r < 1
+\end{gather*}
+After some $n = N$, the ratio $|\frac{a_{n+1}}{a_n}|$ will eventually become less than $r$:
+\begin{gather*}
+    |\frac{a_{n+1}}{a_n}| < r \textrm{ for $n \geqslant N$}\\
+    |a_{n+1}| < |a_n|r \textrm{ for all $n \geqslant N$}
+\end{gather*}
+By using $N,N+1,N+2...$ into the equation:
+\begin{gather*}
+    |a_{N+1}| < |a_N|r\\
+    |a_{N+2}| < |a_{N+1}|r < |a_N|r^2\\
+    |a_{N+3}| < |a_{N+2}|r^3\\
+\end{gather*}
+A more general form:
+\begin{gather*}
+    |a_{N+k}| < |a_N|r^k
+\end{gather*}
+Now consider a (separate) geometric series :
+\begin{gather*}
+    \sum_{k=1}^\infty |a_N|r^k = |a_N|r + |a_N|r^2 + |a_N|r^3...
+\end{gather*}
+This series is convergent because it's a geometric series with common ratio $r$, remember from before $r < 1$. Since $|a_{N+k}| < |a_N|r^k$, the direct comparison test shows that the former converges. Remember since a finite number of terms doesn't effect the final outcome, if $\sum a_{N+k}$ converges, so does $\sum a_n$.
+
+If $L >1$, then that means that eventually there must be an integer $N$ where:
+\begin{gather*}
+    |\frac{a_{n+1}}{a_n}| > 1\textrm{ for $n \geqslant N$}\\
+    |a_{n+1}| > |a_n|
+\end{gather*}
+Therefore $a_n$ is increasing and $\lim_{n \to \infty} \neq 0$. This means $a_n$ diverges by the $n^{th}$ term test.
+\end{proof}
+\subsubsection{The Root Test}
+This one is very similar to the ratio test:
+\begin{gather}
+    \textrm{If} \lim_{n \to \infty} \sqrt[n]{|a_n|} = L < 1, \textrm{then $\sum a_n$ converges.}\\
+    \textrm{If} \lim_{n \to \infty} \sqrt[n]{|a_n|} = L > 1, \textrm{then $\sum a_n$ diverges.}\\
+    \textrm{If} \lim_{n \to \infty} \sqrt[n]{|a_n|} = L = 1, \textrm{then the root test is inconclusive.}
+\end{gather}
+Note: \textbf{If $L=1$ on the ratio test, do not try the Root Test.}
+\begin{proof}
+The proof here is very similar to the Ratio Test. Let $r$ be a number so that it fits inside $L < r < 1$. There must be some large integer $N$ so that after that $\sqrt[n]{|a_n|} < r$.
+\begin{gather*}
+    \sqrt[n]{|a_n|} < r\textrm{ for $n \geqslant$ N}\\
+    |a_n| < r^n
+\end{gather*}
+Now create a geometric series like so:
+\begin{gather*}
+    \sum_{n = 1}^\infty r^n = r + r^2 + r^3... \implies \textrm{converges since $r < 1$.}\\
+    \sum_{n = 1}^\infty |a_n| < \sum_{n = 1}^\infty r^n \implies \sum a_n \textrm{ converges by Direct Comparison/Abs. Conv.}
+\end{gather*}
+Similarly, if $L > r > 1$, then $|a_n| > r^n$, which now diverges. By the comparison test, $a_n$ now diverges.
+\end{proof}
+\subsubsection{Rearranging Series}
+Unlike with finite addition, the commutative property does not apply to infinite sums, which means rearranging terms can actually change the value of the series. A \textbf{rearrangement} of a series means changing the order of the terms in the series.
+
+If a series has absolute convergence, it means that any rearrangement of the terms will not change the final sum. \textbf{However, if a series is conditionally convergent, given any real number $m$ there is sum rearrangement of terms that will result in a final sum of $m$.}
+\subsection{Testing Series}
+Testing series convergence can be difficult, but can be expedited by recognizing which series fit which tests the best, especially according to their general form.
+\begin{enumerate}
+    \item Before doing anything, if $\lim_{n \to \infty} a_n \neq 0$, $a_n$ automatically diverges.
+    \item If $a_n$ is in some form of $\frac{1}{n^p}$, then the p-series test is the easiest to use.
+    \item If the series has a similar form to a geometric series, more specifically where multiplying $a_n$ by a number $r$ gives $a_{n+1}$, the geometric series test can be used($|r| < 1$).
+    \item If the series is similar to any of the other tests(especially geometric or p-series), a Direct or Limit Comparison normally does the trick. For example, if $a_n$ is similar to a p-series(ex. a polynomial), only the highest power of the numerator and/or denominator should be used in the compared series, since then $a_n < \textrm{p-series.}$
+    \item If the series has a $(-1)^{n-1}$ or $(-1)^n$, try alternating series.
+    \item If the series has irregularly signed terms, try testing for convergence for $\sum |a_n|$.
+    \item Factorials and exponentials are often good with the Ratio or Root tests. \textbf{The Ratio or Root Tests do not work with algebraic/polynomial expressions.}
+    \item If $\int f(x) dx$ is easy to evaluate, the Integral Test is a good option(make sure it fits the test though).
+\end{enumerate}
+\subsection{Power Series}
+A \textbf{power series} is any series of the form:
+\
+\begin{gather*}
+    \sum_{n=0}^\infty c_n x^n = c_0 + c_1 x + c_2 x^2 + c_3 x^3...
+\end{gather*}
+All $c$ are constants. Notice that this series starts with $n = 0$ instead of the normal $n=1$, which means $x^0 = 1$ and the first term will always be a constant $c_0$.
+
+An example would be the power series given by $c_n = 1$, which would yield $\sum x^n$, the classic geometric series. This series converges when $|r| < 1$, or in this case when $|x| < 1$.
+
+Normally, power series are more general, in the way that they can be shifted:
+\begin{gather*}
+    \sum_{n = 0}^\infty c_n (x-a)^n = c_0 + c_1 (x-a) + c_2 (x-a)^2...
+\end{gather*}
+This is also a power series, but one that is \textbf{centered at a}. All power series are convergent at $a$, because when $x \to a$, every term except $c_0$ is zeroed out and the series converges to $c_0$.
+
+With power series, since they are full of exponentials, the Ratio Test(and sometimes Root Test) are very useful to find convergence. However, since the Ratio Test fails at $1$, other tests must be used to find convergence and divergence when the ratio test yields 1.
+
+For any power series $\sum_{n = 0}^\infty c_n (x-a)^n,$ one of the following must be true:
+\begin{gather}
+    \textrm{The series converges only when } x = a.\\
+    \textrm{The series converges for all } x.\\
+    \textrm{The series converges when $|x-a| < R$ and diverges when $|x-a| > R$.}
+\end{gather}
+(3) is true for a positive number $R$(could be $0$ or $\infty$). Basically, the inequalities in (3) suggest there is an \textbf{interval of convergence}, where $a - R < x < a + R$, and the series converges. In this case, $R$ is the \textbf{radius of convergence}. Of course, the endpoints of this interval could converge or diverge, and that must be tested separately.
+\subsection{Functions as Power Series}
+\subsubsection{Functions as Geometric Series}
+Because the sum of a convergent geometric series is $\frac{a}{1-r}$, many functions can actually be represented as sums of infinite geometric series. This makes it easier to differentiate/integrate, and to approximate. For example
+\begin{gather*}
+    f(x) = \frac{1}{1-x} = \sum_{n=0}^\infty x^n = 1 + x + x^2 + x^3...
+\end{gather*}
+In this case $r=x$, and remember this only works when $|x| < 1$, because otherwise the series does not converge.
+\subsubsection{Differentiating and Integrating Power Series}
+Because series are just sums, integrating and differentiating are easier on them than on their functional equivalents. This means utilizing something called \textbf{term-by-term differentiation or integration}, which uses the fact that the derivative of a sum is equal to the sum of the derivatives of each term, and same for integration, as follows:
+
+If a power series $\sum_{n=0}^\infty c_n (x-a)^n$ has a radius of convergence $R > 0$, then $f(x)$, the function defined by the series is differentiable(and continuous) on $(a-R, a+R)$, and:
+\begin{gather*}
+    f'(x) = c_1 + 2c_2(x-a) + 3c_3(x-a)^2... = \sum_{n=1}^\infty nc_n(x-a)^{n-1}\\
+    \int f(x) dx = c_0(x-a) + c_1\frac{(x-a)^2}{2} + c_2\frac{(x-a)^3}{3}...+C = \sum_{n=0}^\infty c_n \frac{(x-a)^{n+1}}{n+1} + C
+\end{gather*}
+The above comes from these simple rules:
+\begin{gather}
+    \frac{d}{dx} \bigg[\sum_{n=0}^\infty c_n(x-a)^n\bigg] = \sum_{n=0}^\infty \frac{d}{dx} \big[c_n(x-a)^n\big]\\
+    \int \bigg[\sum_{n=0}^\infty c_n(x-a)^n\bigg] dx= \sum_{n=0}^\infty \int \big[c_n(x-a)^n\big] dx
+\end{gather}
+\subsection{Taylor and Maclaurin Series}
+In the last section, we could find power series for functions that fit the geometric series($f(x) = \frac{a}{1-r}$). But what about for other functions, like maybe $f(x) = sin(x)$? This can be done by looking at power series in more general terms:
+\begin{gather*}
+    f(x) = c_n (x-a)^n = c_0 + c_1 (x-a) + c_2 (x-a)^2...
+\end{gather*}
+The only thing that could possibly change are the coefficients $c_n$, so $c_0$ can be found by using $x = a$:
+\begin{gather*}
+    f(a) = c_0 + c_1(a-a) + c_2(a-a)... = c_0
+\end{gather*}
+\subsubsection{Taylor and Maclaurin Series}
+Now taking the derivative eliminates $c_0$, and "shifts" the function down one coefficient:
+\begin{gather*}
+    f'(x) = c_1 + 2c_2(x-a) + 3c_3(x-a)^2...
+\end{gather*}
+The same idea here:
+\begin{gather*}
+    f'(a) = c_1
+\end{gather*}
+However, things get a little more complicated when you take the next few:
+\begin{gather*}
+    f''(a) = 2c_2\\
+    f^3(a) = 6c_3 = 3! * c_3
+\end{gather*}
+And the pattern continues, because the power rule multiplies the current coefficient by $(n-1)$ when taking a derivative, which means the final coefficient is going to be $n(n-1)(n-2)... = n!$ This leads to:
+\begin{gather*}
+    f^n(a) = n! c_n\\
+    c_n = \frac{f^{(n)}a}{n!}
+\end{gather*}
+This means that if $f(x)$ has a power series form at $x = a$:
+\begin{gather*}
+    \textrm{If } f(x) = \sum_{n=0}^\infty c_n(x-a)^n\textrm{ and }|x-a| < R\\
+    \textrm{then }c_n = \frac{f^{(n)}(a)}{n!}
+\end{gather*}
+For the special case $a = 0$, the series is called the \textbf{Maclaurin Series}:
+\begin{gather*}
+    f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!} = f(0) + \frac{f'(0)}{1}x + \frac{f''(0)}{2!}x^2...
+\end{gather*}
+However, this is only an approximation(which gets worse away from $a$ and with fewer terms). When is a a Taylor series equal to the function(inside the radius of convergence)?
+
+If $f(x)$ is equal to its Taylor series, then that must meant that $f(x) = \lim_{n \to \infty} T_n$, where $T_n$ are \textbf{nth degree Taylor polynomials}:
+\begin{gather*}
+    T_n = \sum_{i = 0}^n \frac{f^{(i)}(a)}{i!}(x-a)^i = f(a) + \frac{f'(a)}{1!}(x-a) + \frac{f''(a)}{2!}(x-a)^2...\frac{f^{(n)}(a)}{n!}(x-a)^n
+\end{gather*}
+As $n$ gets larger $T_n$ is a better approximation of $f(x)$, especially around $a$. This makes sense because $n=1$ is only going to be linear, $n=2$ quadratic, and so on.
+
+So as $n \to \infty, f(x)$ is the sum of its taylor series if:
+\begin{gather*}
+    f(x) = \lim_{n \to \infty} T_n(x)
+\end{gather*}
+Now for any $n$, the difference between $f(x)$ and $T_n(x)$ is the \textbf{remainder} $R_n(x)$:
+\begin{gather*}
+    R_n(x) = f(x) - T_n(x)\\
+    f(x) = R_n(x) + T_n(x)
+\end{gather*}
+Now if we find $\lim_{n \to \infty} R_n(x) = 0$, then:
+\begin{gather*}
+    \lim_{n \to \infty} T_n(x) = \lim_{n \to \infty}\bigg[f(x) - R_n(x)\bigg] = f(x)
+\end{gather*}
+It follows that if $\lim_{n \to \infty} R_n(x) = 0$, then $f(x)$ is equal to the sum of its Taylor series on $|x-a| < R$.
+\subsubsection{Taylor's Inequality}
+If $|f^{(n+1)}| \leqslant M$ for $|x-a| \leqslant d$, then the remainder $R_n(x)$:
+\begin{gather*}
+    |R_n(x)| \leqslant \frac{M}{(n+1)!}|x-a|^{n+1}
+\end{gather*}
+\begin{proof}
+Consider the case $n = 1$, assuming that $|f''(x)|\leqslant M \implies f''(x) \leqslant |f''(x)| \leqslant M$. For $a \leqslant x \leqslant a+d$(not $a-d$ because integral starts at $a$):
+\begin{gather*}
+    \int_a^x f''(t) dt \leqslant \int_a^x M dt\\
+\end{gather*}
+So using the FTC:
+\begin{gather*}
+    f'(x) - f'(a) \leqslant M(x-a)\\
+    f'(x) \leqslant f'(a) + M(x-a)
+\end{gather*}
+Now repeating:
+\begin{gather*}
+    \int_a^x f'(t) dt \leqslant \int_a^x \big[f'(a) + M(t-a)\big] dt\\
+    f(x) - f(a) \leqslant f'(a)(x-a) + M\frac{(x-a)^2}{2}\\
+    f(x) - f(a) - f'(a)(x-a) \leqslant M\frac{(x-a)^2}{2}
+\end{gather*}
+Remember $R_1(x) = f(x) - T_1(x) = f(x) - f(a) - f'(a)(x-a)$:
+\begin{gather*}
+    R_1(x) \leqslant \frac{M}{2}(x-a)^2
+\end{gather*}
+Now since $|f''(x)| \leqslant M, f''(x) \geqslant -M$, which gives(using a similar process as above):
+\begin{gather*}
+    R_1(x) \geqslant -\frac{M}{2}(x-a)^2\\
+    |R_1(x)| \leqslant \frac{M}{2}(x-a)^2\\
+    |R_1(x)| \leqslant \frac{M}{2}|x-a|^2
+\end{gather*}
+The last step required that $x > a$, but this is true when $x < a$ also. This proves the case $n = 1$ by integrating 2 times. Each $n$ case can be proved by integrating $n + 1$ times, to match $T_n(x)$.
+\end{proof}
+Taylor series are important because now it is possible to integrate functions that did not have easy anti-derivatives. For example, $f(x) = e^{-x^2}$ was not possible to integrate because there was no $2x$, but using series it is now.
+\subsubsection{Multiplying and Dividing Power Series}
+We know that adding and subtracting series behaves like polynomials do. However, it is also possible to multiply and divide them(ex. $f(x) = tan(x) = \frac{sin(x)}{cos(x)}$.
+
+In fact, multiplying and dividing can be done just as for normal polynomials(ex. foiling(not useful for infinite series though), vertical multiplication, and long division).
+\subsection{The Binomial Series}
+
+\end{document}
