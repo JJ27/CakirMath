@@ -885,5 +885,31 @@ We know that adding and subtracting series behaves like polynomials do. However,
 
 In fact, multiplying and dividing can be done just as for normal polynomials(ex. foiling(not useful for infinite series though), vertical multiplication, and long division).
 \subsection{The Binomial Series}
-
+These series expansions can be extended to functions under the Binomial Theorem, which is:
+\begin{gather*}
+    (a+b)^k = a^k + ka^{k-1}b + \frac{k(k-1)}{2!}a^{k-2}b^2 + \frac{k(k-1)(k-2)}{3!}a^{k-3}b^3...\\
+    \binom{k}{0} = 1\\ \binom{k}{n} = \frac{k(k-1)(k-2)...(k-n+1)}{n!} \textrm{ for $n = 1,2..k$}\\
+    (a+b)^k = \sum_{n=0}^k \binom{k}{n}a^{k-n}b^n
+\end{gather*}
+If $a = 1$ and $b = x$, then:
+\begin{gather*}
+    (a+b)^k = (1+x)^k = f(x) = \sum_{n=0}^k \binom{k}{n}x^n
+\end{gather*}
+However, the Binomial Theorem only works when $k$ is a positive integer, so to extend this construct a Maclaurin series off of $f(x)$:
+\begin{gather*}
+    f(x) = (1+x)^k\hspace{20pt}f(0) = 1\\
+    f'(x) = k(1+x)^{k-1}\hspace{20pt}f'(0) = k\\
+    f''(x) = k(k-1)(1+x)^{k-2}\hspace{20pt}f''(0) = k(k-1)\\
+    f^{(n)}(x) = k(k-1)...(k-n+1)(1+x)^{k-n}\hspace{20pt}f^{(n)}(0) = k(k-1)...(k-n+1)
+\end{gather*}
+Now the Maclaurin series can be constructed:
+\begin{gather*}
+    \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}x^n = \sum_{n=0}^\infty \frac{k(k-1)...(k-n+1)}{n!}x^n = \sum_{n=0}^\infty \binom{k}{n}x^n
+\end{gather*}
+By the Ratio Test:
+\begin{gather*}
+    \lim_{n \to \infty}|\frac{a_{n+1}}{a_n}| = \lim_{n \to \infty} \frac{|k-n|}{n+1}|x| = |-1||x| = |x|
+\end{gather*}
+So, this series converges when $|x| < 1$ and diverges when $|x| > 1$. However, the convergence at the endpoints depends on $k$. The series converges at $x = 1$ when $-1 < k < 0$ and at $\pm 1$ when $k \geqslant 0$. Remember that $\binom{k}{n}$ builds and adds factors each time. If $k$ is a positive integer and $n > k$, then there will eventually be a $(k-k) = 0$ factor in the numerator and the rest of the series will zero out. This means the series is not infinite anymore and actually reduces down to the normal binomial theorem.
+\subsubsection{Applications of Taylor Polynomials}
 \end{document}
