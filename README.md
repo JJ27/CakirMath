@@ -1,2 +1,3 @@
-# MC2020
-Multivariable Calculus 2020
+# MCLA2020
+Multivariable Calculus 2020-21
+Running Notes
