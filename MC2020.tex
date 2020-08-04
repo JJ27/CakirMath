@@ -912,4 +912,47 @@ By the Ratio Test:
 \end{gather*}
 So, this series converges when $|x| < 1$ and diverges when $|x| > 1$. However, the convergence at the endpoints depends on $k$. The series converges at $x = 1$ when $-1 < k < 0$ and at $\pm 1$ when $k \geqslant 0$. Remember that $\binom{k}{n}$ builds and adds factors each time. If $k$ is a positive integer and $n > k$, then there will eventually be a $(k-k) = 0$ factor in the numerator and the rest of the series will zero out. This means the series is not infinite anymore and actually reduces down to the normal binomial theorem.
 \section{Vectors and the Geometry of Space}
+\subsection{3D Coordinate Systems}
+On a plane, a specific point can be found using only two numbers, $a$ and $b$. The point $(a,b)$ specifies the distance in the $x$ and $y$ directions of the location of the point relative to some origin point. Similarly, in 3D space, three numbers $(a,b,c)$ are needed. Also, a third directional axis, the $z$ axis is needed. Normally, the $z$-axis is a vertical axis and the $x$-axis is on the left and the $y$-axis is on the right. To verify and visualize, use the right hand rule.
+\subsubsection{The Right Hand Rule}
+Lay your right hand in the direction of the $+y$-axis, and curl in the direction of the $+x$-axis, the direction of thumb will give the $+z$-axis.
+
+In 2D, the axes split the plane into 4 \textbf{quadrants}. In 3D, the 3 axis split space into twice that, or 8 \textbf{octants}.
+\subsubsection{Projection}
+Given a point $P(a,b,c)$ the projection of that point on the $xy$ plane is the same point except that the $z$-coordinate is 0. That means $P(a,b,c) \implies Q(a,b,0)$ where $Q$ is the projection. Similarly, the $xz$ projection is $(a,0,c)$ and $yz$ is $(0,b,c)$.\\\\
+The notation for planes and space is written based on the set of points. For example, a 1D line is given by $\mathbb{R}$, the set of all $(\mathbb{R})$. A plane, since 2 points are needed to specify would be $\mathbb{R} * \mathbb{R} = \mathbb{R}^2$ since 2 real numbers are needed. A space is $\mathbb{R}^3$. It is important to note what dimension you are working in, since $y=c$ is a line in $\mathbb{R}^2$ but a plane in $\mathbb{R}^3$.
+\subsubsection{3D Distances}
+The distance $|P_1P_2|$ between two points $P_1(x_1,y_1,z_1)$ and $P_2(x_1,y_1,z_1)$ in space is:
+\begin{gather*}
+    |P_1P_2| = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}
+\end{gather*}
+Notice how the formula reduces to the 2D distance formula in $\mathbb{R}^2$. Also, since each term is squared, which point is chosen for $P_1$ or $P_2$ does not matter.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5]{3D-distance.jpg}
+\caption{Distances in 3D}
+\label{dist}
+\end{center}
+\end{figure}
+\begin{proof}
+In Figure \ref{dist}, the pink line represents the distance $|P_1P_2|$, and a rectangular prism is constructed using the two points as opposite vertices. Refer to the figure for points $A,B$ defined above.
+\begin{gather*}
+    |P_1A| = |x_2-x_1|\hspace{35pt}|AB| = |y_2-y_1|\hspace{35pt}|BP_2| = |z_2-z_1|
+\end{gather*}
+Using the Pythagorean theorem:
+\begin{gather*}
+    |P_1P_2|^2 = |P_1B|^2 + |BP_2|^2\\
+    |P_1B|^2 = |AB|^2 + |P_1A|^2
+\end{gather*}
+Now substituting,
+\begin{gather*}
+    |P_1P_2|^2 = (x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2\\
+    |P_1P_2| = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}
+\end{gather*}
+\end{proof}
+Applying the distance formula, we can find the equation of a sphere in 3D, since the distance between the center and any point on the sphere is $r$. Squaring both sides of the distance formula with $|P_1P_2| = r$ yields the formula of a sphere with center $C(h,k,l)$.
+\begin{gather*}
+    (x-h)^2 + (y-k)^2 + (z-l)^2 = r^2
+\end{gather*}
+\subsection{Vectors}
 \end{document}
