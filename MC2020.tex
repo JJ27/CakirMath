@@ -13,11 +13,17 @@
 \usepackage{amsthm}
 \usepackage{amsbsy}
 \usepackage{etoolbox}
+\usepackage{esvect}
 
 \AtBeginEnvironment{gather}{\setcounter{equation}{0}}
 
 \renewcommand{\qedsymbol}{$\blacksquare$}
-
+\let\oldvec\vv
+\renewcommand{\vv}[1]{\oldvec{\mathbf{#1}}}
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\mathbf{#1}}}
+\let\vl\langle
+\let\vr\rangle
 
 \begin{document}
 
@@ -955,4 +961,92 @@ Applying the distance formula, we can find the equation of a sphere in 3D, since
     (x-h)^2 + (y-k)^2 + (z-l)^2 = r^2
 \end{gather*}
 \subsection{Vectors}
+A \textbf{vector} is any quantity that can be described by a magnitude and a direction. Vectors are often represented by a line that has a direction(indicated with an arrow) and a magnitude(indicated by the length). The notation for vectors here will be: $\vv{AB}$ for a vector with \textbf{initial point} $A$ and \textbf{terminal point} $B$. The magnitude of this vector is $|\vv{AB}|$.
+
+If two vectors $\vv{u}$ and $\vv{v}$ have the same magnitude and direction, they are considered equal. The \textbf{Zero Vector} is a vector with magnitude $0$ and no direction.
+\subsubsection{Vector Operations}
+If a particle moves along a displacement vector $\vv{AB}$ and another one $\vv{BC}$, then it's total displacement is called the \textbf{sum} of the vectors:
+\begin{gather*}
+    \vv{AC} = \vv{AB} + \vv{BC}
+\end{gather*}
+Visually, this \textbf{resultant} vector can be found by positioning the two vectors head to tail and drawing from the first head to the last tail as seen in Fig. \ref{vecadd}.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5,angle=2]{vectoraddition.png}
+\caption{Vector Addition}
+\label{vecadd}
+\end{center}
+\end{figure}
+The resultant $\vv{w}$ can also be obtained by starting both vectors at the same point and drawing the diagonal of the parallelogram indicated in Fig. \ref{vecadd}. Note how the parallelogram can also show that vector addition is commutative.
+
+\textbf{Scalar Multiplication} is multiplying any vector $\vv{v}$ by a constant $c$, forming a new vector $c\vv{v}$. Scalar Multiplication multiplies the magnitude of the vector by $c$. Remember a \textbf{scalar} is a vector with no direction.
+
+The new vector $c\vv{v}$'s magnitude is equal to $c|\vv{v}|$ and it's direction is the same as $\vv{v}$ when $c > 0$ and the opposite when $c < 0$. Notice how $c\vv{v}$ has the same direction as $\vv{v}$ when $c > 0$.
+
+The \textbf{negative} of $\vv{v}$ is $-\vv{v}$, simply $\vv{v}$ in the opposite direction. \textbf{Vector Subtraction} can be defined similar to algebraic subtraction:
+\begin{gather*}
+    a - b = a + (-b)\\
+    \vv{u} - \vv{v} = \vv{u} + (-\vv{v})
+\end{gather*}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5,angle=0]{vecsub.png}
+\caption{Vector Subtraction}
+\label{vecsub}
+\end{center}
+\end{figure}
+In Fig \ref{vecsub}, it can be seen how this works. Also, by lining up $\vv{a}$ and $\vv{b}$ at the same starting point, the vector connecting their tails is $\vv{a} - \vv{b}$. Notice how here subtraction is \textit{not} commutative.
+\subsubsection{Components and Resultants}
+To use vector mathematically, it makes sense to introduce a coordinate system. By convention, the vector starts at the origin and since 2 points define a line, only 2(or 3 in 3D) coordinates are needed to define a vector:
+\begin{gather*}
+    \vv{v} = \langle a,b \rangle
+\end{gather*}
+$\langle \rangle$ are used instead of $()$ to show that this is a vector and not a point. This representation from the origin to a particular point makes $\vv{v}$ a \textbf{position vector}.
+
+If the vector doesn't start at the origin, and instead goes between two points $A(x_1,y_1,z_1)$ and $B(x_2,y_2,y_2)$ then:
+\begin{gather*}
+    \vv{AB} = \vl x_2 - x_1, y_2 - y_1, z_2 - z_1 \vr
+\end{gather*}
+Remember the magnitude of a vector is the length of its line representation, so using the Pythagorean Theorem in coordinates:
+\begin{gather*}
+    |\vv{v}| = \sqrt{(v_x)^2 + (v_y)^2}
+\end{gather*}
+Thinking about the vector addition triangle, to add/subtract two vectors, just add/subtract their components(coordinates). The same works for scalar multiplication, because of similar triangles(scaling up).
+
+Sometimes vectors need to be greater than three dimensions, and so to represent $n$-dimensional vectors, the set $V_n$ represents the set of all possible $n$-dimensional vectors:
+\begin{gather*}
+    \vv{v_n} = \vl x,y,z...n \vr \in V_n
+\end{gather*}
+\subsubsection{Vector Properties}
+\begin{gather}
+    \vv{a} + \vv{b} = \vv{b} + \vv{a}\\
+    \vv{a} + 0 = \vv{a}\\
+    c(\vv{a} + \vv{b}) = c\vv{a} + c\vv{b}\\
+    (\vv{a} + \vv{b}) + \vv{c} = \vv{a} + (\vv{b} + \vv{c})\\
+    \vv{a} - \vv{a} = \vv{a} + -\vv{a} = 0\\
+    (c+d)\vv{a} = c\vv{a} + c\vv{b}
+\end{gather}
+These are easily proved, either algebraically or geometrically.
+\subsubsection{Unit Vectors}
+Consider three 3D vectors:
+\begin{gather*}
+    \hat{i} = \vl 1,0,0 \vr\hspace{35pt}\hat{j} = \vl 0,1,0 \vr\hspace{35pt}\hat{k} = \vl 0,0,1 \vr
+\end{gather*}
+These \textbf{unit vectors} all have magnitude $1$ and point in the $x,y,z$ directions. This is interesting because any vector can now be written as scalar multiples of unit vectors:
+\begin{gather*}
+    \vv{v} = \vl x,y,z \vr = \vl x,0,0 \vr + \vl 0,y,0 \vr + \vl 0,0,z \vr = x\hat{i} + y\hat{j} + z\hat{k}
+\end{gather*}
+In essence, this notation represents any vector as the vector sum of its components in the $x,y,z...n$ directions.
+
+In general, if $\vv{v} \neq 0$, then the unit vector $\hat{u}$ in the $v$-direction is:
+\begin{gather*}
+    \hat{u} = \dfrac{\vv{v}}{|\vv{v}|}
+\end{gather*}
+To show why this is true:
+\begin{gather*}
+    \vv{v} = |\vv{v}|\hat{u}\\
+    \hat{u} = \dfrac{\vv{v}}{|\vv{v}|}
+\end{gather*}
+This is true since $|\vv{v}|$ is a scalar quantity.
+\subsection{The Dot Product}
 \end{document}
