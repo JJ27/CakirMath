@@ -25,6 +25,11 @@
 \let\vl\langle
 \let\vr\rangle
 
+\makeatletter
+\newcommand*\vdot{\mathpalette\vdot@{.5}}
+\newcommand*\vdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
 \begin{document}
 
 \maketitle
@@ -1038,7 +1043,7 @@ These \textbf{unit vectors} all have magnitude $1$ and point in the $x,y,z$ dire
 \end{gather*}
 In essence, this notation represents any vector as the vector sum of its components in the $x,y,z...n$ directions.
 
-In general, if $\vv{v} \neq 0$, then the unit vector $\hat{u}$ in the $v$-direction is:
+In general, if $|\vv{v}| \neq 0$, then the unit vector $\hat{u}$ in the $v$-direction is:
 \begin{gather*}
     \hat{u} = \dfrac{\vv{v}}{|\vv{v}|}
 \end{gather*}
@@ -1049,4 +1054,75 @@ To show why this is true:
 \end{gather*}
 This is true since $|\vv{v}|$ is a scalar quantity.
 \subsection{The Dot Product}
+Addition, Subtraction, and Scalar Multiplication are possible, but can you multiply a vector by another vector? One way to do it is called the \textbf{dot product}.
+
+Given $\vv{a} = \vl x_1,y_1,z_1 \vr$ and $\vv{b} = \vl x_2,y_2,z_2 \vr$, the dot product of these is:
+\begin{gather*}
+    \vv{a} \vdot \vv{b} = x_1x_2 + y_1y_2 + z_1z_2
+\end{gather*}
+Note that the dot product is \textit{not a vector} but simply a number(scalar). As a result, this product is often called the \textbf{scalar product}.
+
+Some properties of the dot product are similar to numbers:
+\begin{gather}
+    \vv{a} \vdot \vv{a} = |a|^2\\
+    \vv{a} \vdot \vv{b} = \vv{b} \vdot \vv{a}\\
+    \textrm{\textbf{0}} \vdot \vv{a} = 0
+\end{gather}
+These can be proved easily by looking at the vector coordinates. They should also make sense. Associative Property also works here(not shown).
+\subsubsection{Visualizing the Dot Product}
+The dot product of two vectors that start at the same point can be given in terms of the angle $\theta$ between them, where $\theta \in [0,\pi]$. This should make sense, because if $\theta > \pi$ then there would be a smaller angle on the other side(think reflex angles). This new definition is used a lot more in physics(ex. work):
+\begin{gather*}
+    \vv{a} \vdot \vv{b} = |\vv{a}||\vv{b}|cos(\theta)
+\end{gather*}
+\begin{proof}
+Imagine a triangle $\Delta ABO$ where $OA,OB,AB$ represent $\vv{a},\vv{b},\vv{a}-\vv{b}$ respectively. Applying the law of cosines to $\theta = \measuredangle BOA$:
+\begin{gather*}
+    |\vv{a} - \vv{b}|^2 = |\vv{a}|^2 + |\vv{b}|^2 - 2|\vv{a}||\vv{b}|cos(\theta)\\
+    (\vv{a} - \vv{b})\vdot(\vv{a} - \vv{b}) = \vv{a} \vdot \vv{a} + \vv{b} \vdot \vv{b} - 2|\vv{a}||\vv{b}|cos(\theta)\\
+    \vv{a} \vdot \vv{a} - \vv{a} \vdot \vv{b} - \vv{b} \vdot \vv{a} + \vv{b} \vdot \vv{b} = \vv{a} \vdot \vv{a} + \vv{b} \vdot \vv{b} - 2|\vv{a}||\vv{b}|cos(\theta)\\
+    -2(\vv{a} \vdot \vv{b}) = -2|\vv{a}||\vv{b}|cos(\theta) \implies \vv{a} \vdot \vv{b} = |\vv{a}||\vv{b}|cos(\theta)
+\end{gather*}
+\end{proof}
+Using this we can conclude:
+\begin{gather*}
+    cos(\theta) = \dfrac{\vv{a} \vdot \vv{b}}{|\vv{a}||\vv{b}|}
+\end{gather*}
+Now since $\theta$ is the angle in between $\vv{a}$ and $\vv{b}$, these vectors are \textbf{perpendicular} or \textbf{orthogonal} if the angle between them is $90^{\circ} = \frac{\pi}{2}$ which leads to:
+\begin{gather*}
+    \vv{a} \vdot \vv{b} = |\vv{a}||\vv{b}|cos\bigg(\dfrac{\pi}{2}\bigg) = 0
+\end{gather*}
+So two vectors are \textbf{orthogonal} if and only if their dot product $= 0$.
+\subsubsection{Direction Angles and Direction Cosines}
+The \textbf{direction angles} of any nonzero vector $\vv{v}$ are the specific angles $\alpha,\beta,\gamma \in [0,\pi]$ that $\vv{v}$ makes with the positive $xyz$ axes. The cosines of these angles are called \textbf{direction cosines}.
+\begin{gather*}
+    cos(\alpha) = \dfrac{\vv{a} \vdot \hat{i}}{|\vv{a}||\hat{i}|} = \dfrac{\vl x_1,y_1,z_1 \vr \vdot \vl 1,0,0 \vr}{|\vv{a}|*1} = \dfrac{x_1}{|\vv{a}|}
+\end{gather*}
+Similarly:
+\begin{gather*}
+    cos(\beta) = \dfrac{y_1}{|\vv{a}|}\hspace{45pt}cos(\gamma) = \dfrac{z_1}{|\vv{a}|}
+\end{gather*}
+By squaring all expressions and using $(x_1)^2 + (y_1)^2 + (z_1)^2 = |a|^2$(dist. formula):
+\begin{gather*}
+    cos^2(\alpha) + cos^2(\beta) + cos^2(\gamma) = 1
+\end{gather*}
+Also, because of scalar multiplication:
+\begin{gather*}
+    \vv{a} = \vl x_1,y_1,z_1 \vr = \vl |\vv{a}|cos(\alpha),|\vv{a}|cos(\beta),|\vv{a}|cos(\gamma) \vr = |\vv{a}|\vl cos(\alpha),cos(\beta),cos(\gamma)\vr\\
+    \dfrac{\vv{a}}{|\vv{a}|} = \vl cos(\alpha),cos(\beta),cos(\gamma)\vr = \hat{a}
+\end{gather*}
+So the vector made up of direction cosines of $\vv{a}$ is the unit vector in the \textbf{a}-direction, which makes sense since $cos(\theta) = 1 * cos(\theta)$, and $|\hat{a}| = 1$
+\subsubsection{Projections}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5,angle=0]{vecproj.png}
+\caption{Vector Projections}
+\label{vecproj}
+\end{center}
+\end{figure}
+The figure above shows a \textbf{vector projection}, which is the vector component of $\vv{v}$ in the $\vv{u}$ direction, and it is represented by $\vv{p}$. It is obtained by first taking a \textbf{scalar projection}, which is the component of $\vv{v}$ along $\vv{u} = |\vv{v}|cos(\theta)$ and multiplying that by $\hat{u} = \frac{\vv{u}}{|\vv{u}|}$, the unit vector in the u-direction.
+\begin{gather*}
+    comp_a \vv{b} = \dfrac{\vv{a}}{|\vv{a}|}|\vv{b}|*cos(\theta) = \dfrac{\vv{a} \vdot \vv{b}}{|\vv{a}|}\\
+    proj_a \vv{b} = \hat{a}*comp_a \vv{b} = \dfrac{\vv{a}}{|\vv{a}|}\bigg[\dfrac{\vv{a} \vdot \vv{b}}{|\vv{a}|}\bigg] = \vv{a}\bigg[\dfrac{\vv{a} \vdot \vv{b}}{|\vv{a}|^2}\bigg]
+\end{gather*}
+\subsection{The Cross Product}
 \end{document}
