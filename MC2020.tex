@@ -580,7 +580,7 @@ Let $\sum a_n$ and $\sum b_n$ be series with positive terms:
 \begin{proof}
 (1) Let $s_n$ and $t_n$ be the partial sums of $a_n$ and $b_n$, respectively. Since $b_n$ converges(see (1) above), it has an infinite sum $t$. Since both \textit{sequences} are positive, their \textit{series} must be increasing. Since $a_n \leqslant b_n$, $s_n \leqslant t_n \leqslant t$. Since $s_n \leqslant t$, the series $\sum a_n$ is now bounded above \textit{and} increasing, so it must be convergent.
 
-(2) If $b_n$ diverges, that means that $t_n \to \infty$($b_n$ is increasing so it can't go to $-\infty$). Since $a_n \geqslant b_n, s_n \geqslant t_n$. \therefore $ s_n \to \infty$ and $\sum a_n$ diverges.
+(2) If $b_n$ diverges, that means that $t_n \to \infty$($b_n$ is increasing so it can't go to $-\infty$). Since $a_n \geqslant b_n, s_n \geqslant t_n$. $\therefore$ $ s_n \to \infty$ and $\sum a_n$ diverges.
 \end{proof}
 \subsubsection{The Limit Comparison Test}
 However, when $a_n$ is greater than a convergent series or less than a divergent series, the Direct Comparison test is useless. However, another kind of comparison test can help.
@@ -1125,4 +1125,148 @@ The figure above shows a \textbf{vector projection}, which is the vector compone
     proj_a \vv{b} = \hat{a}*comp_a \vv{b} = \dfrac{\vv{a}}{|\vv{a}|}\bigg[\dfrac{\vv{a} \vdot \vv{b}}{|\vv{a}|}\bigg] = \vv{a}\bigg[\dfrac{\vv{a} \vdot \vv{b}}{|\vv{a}|^2}\bigg]
 \end{gather*}
 \subsection{The Cross Product}
+A second type of vector product is called the \textbf{cross product}. However this time the product is not a scalar but an actual vector, and the cross product is often called the \textbf{vector product}.
+\subsubsection{Cross Products and Determinants}
+If $\vv{a} = \vl x_1,y_1,z_1 \vr$ and $\vv{b} = \vl x_2, y_2, z_2\vr$, then their cross product $\vv{a} \times \vv{b}$ is:
+\begin{gather*}
+    \vv{a} \times \vv{b} = \vl y_1z_2 - z_1y_2, z_1x_2 - x_1z_2, x_1y_2 - y_1x_2 \vr
+\end{gather*}
+This is an interesting product for one because $\vv{a} \times \vv{b}$ will always be $\perp$ to $\vv{a}$ and $\vv{b}$(proved later). Notice that cross products are only defined for 3D vectors $\vv{a}$ and $\vv{b}$.
+
+Cross products are often denoted using \textbf{determinants}, for example an order 2 determinant:
+\begin{gather*}
+    \begin{vmatrix}
+    a & b\\
+    c & d
+    \end{vmatrix}
+    \implies
+    \det
+    \begin{pmatrix}
+    a & b\\
+    c & d
+    \end{pmatrix}
+    = ad - bc
+\end{gather*}
+Now an order 3 determinant can be defined with order 2 determinants:
+\begin{gather*}
+\det
+    \begin{vmatrix}
+    x_1 & x_2 & x_3\\
+    y_1 & y_2 & y_3\\
+    z_1 & z_2 & z_3
+    \end{vmatrix}
+    =
+    x_1
+    \begin{vmatrix}
+    y_2 & y_3\\
+    z_2 & z_3
+    \end{vmatrix}
+    - x_2
+    \begin{vmatrix}
+    y_1 & y_3\\
+    z_1 & z_3
+    \end{vmatrix}
+    + x_3
+    \begin{vmatrix}
+    y_1 & y_2\\
+    z_1 & z_2
+    \end{vmatrix}
+\end{gather*}
+Notice how this works: For every $x_i$ in column $i$, $x_i$ is multiplied by the order 2 determinant found when the $x$-row and column $i$ are both deleted.
+
+Now for cross products, when two vectors $\vv{a} = x_1\hat{i} + x_2\hat{j} + x_3\hat{k}$ and $\vv{b} = y_1\hat{i} + y_2\hat{j} + y_3\hat{k}$, their cross product is shown in this determinant:
+\begin{gather*}
+    \vv{a} \times \vv{b} =
+    \begin{vmatrix}
+    x_2 & x_3\\
+    y_2 & y_3
+    \end{vmatrix}
+    \hat{i} -
+    \begin{vmatrix}
+    x_1 & x_3\\
+    y_1 & y_3
+    \end{vmatrix}
+    \hat{j} +
+    \begin{vmatrix}
+    x_1 & x_2\\
+    y_1 & y_2
+    \end{vmatrix}
+    \hat{k}
+    =
+    \begin{vmatrix}
+    \hat{i} & \hat{j} & \hat{k}\\
+    x_1 & x_2 & x_3\\
+    y_1 & y_2 & y_3
+    \end{vmatrix}
+\end{gather*}
+One interesting consequence of the cross product is that $\vv{a} \times \vv{b}$ is orthogonal(perpendicular) to $\vv{a}$ and $\vv{b}$. For this to even be possible for any vectors $\vv{a}$ and $\vv{b}$, this must take place in $V_3$.
+\begin{proof}
+This is easily proved by showing that $(\vv{a} \times \vv{b}) \vdot \vv{a} = 0$ and also for $\vv{b}$.
+\end{proof}
+\subsubsection{Visualizing Cross Products}
+$\vv{a} \times \vv{b}$ is perpendicular to the plane of $\vv{a}$ and $\vv{b}$, and so it is always perpendicular to both vectors. To find if $\vv{a} \times \vv{b}$ points up or down, use the \textbf{right hand rule} with fingers curling in the direction of rotation from $\vv{a}$ to $\vv{b}$ on the smaller angle($\leqslant 180^{\circ})$.
+
+To find the magnitude of the cross product: Given $\theta$, the angle between $\vv{a}$ and $\vv{b}$(the smaller one):
+\begin{gather*}
+    |\vv{a} \times \vv{b}| = |\vv{a}||\vv{b}|\sin(\theta)
+\end{gather*}
+\begin{proof}
+Expand the vector coordinates to show that:
+\begin{gather*}
+    |\vv{a} \times \vv{b}|^2 = |\vv{a}|^2|\vv{b}|^2(1 - \cos^2(\theta)) = |\vv{a}|^2|\vv{b}|^2\sin(\theta)
+\end{gather*}
+\end{proof}
+Note in this proof that square root of both sides yields $\sqrt{\sin^2(\theta)} = |\sin(\theta)| = \sin(\theta)$ for all $\theta \in [0,\pi]$.
+
+Using this, two nonzero vectors are parallel if and only if $\vv{a} \times \vv{b} = 0$, because $\vv{a} \times \vv{b} = 0$ when $\theta = 0^{\circ}$ or $180^{\circ}$, which only happens when $\vv{a} \parallel \vv{b}$.
+\subsubsection{Interpreting the Cross Product}
+One interpretation of the magnitude of the cross product is here:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.15,angle=0]{crossarea.jpg}
+\caption{Area of a Parallelogram}
+\label{crossarea}
+\end{center}
+\end{figure}
+In Figure \ref{crossarea}, the area of a parallelogram formed by two vectors $\vv{a}$ and $\vv{b}$ is shown. This area can be expressed as:
+\begin{gather*}
+    A = Bh = |\vv{b}|*h = |\vv{b}|*(|\vv{a}|\sin(\theta)) = |\vv{a} \times \vv{b}|
+\end{gather*}
+Notice how the area is $|\vv{a} \times \vv{b}|$ not $\vv{a} \times \vv{b}$. This is because the cross product is a vector, and also in general $\vv{a} \times \vv{b} \neq \vv{b} \times \vv{a}$. These two products will have the same magnitude but will point in opposite directions(right hand rule).
+
+Also, because the cross product is always perpendicular to both vectors:
+\begin{gather*}
+    \hat{i} \times \hat{j} = \hat{k}\hspace{75pt}\hat{j} \times \hat{i} = -\hat{k}
+\end{gather*}
+These unit vectors will be perpendicular to each other, also notice how $\hat{k}$ and $-\hat{k}$ point in opposite directions but both have a magnitude of $1$.
+
+Notice how(determinants):
+\begin{gather*}
+    \vv{a} \vdot (\vv{b} \times \vv{c}) =
+    \begin{vmatrix}
+    a_1 & a_2 & a_3\\
+    b_1 & b_2 & b_3\\
+    c_1 & c_2 & c_3
+    \end{vmatrix}
+\end{gather*}
+This combined product is called a \textbf{scalar triple product}, because it combines three vectors into a single scalar. Now why is this important? Refer to the figure below:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,angle=0]{crossvol.png}
+\caption{Volume of a Parallelogram}
+\label{crossvol}
+\end{center}
+\end{figure}
+We know from Figure \ref{crossarea} that the base of this figure is a parallelogram with area $|\vv{a} \times \vv{b}|$.
+\begin{gather*}
+    V = Ah = |\vv{a} \times \vv{b}|h = |\vv{a} \times \vv{b}||\vv{c}|\cos(\phi) = |\vv{c} \vdot (\vv{a} \times \vv{b})|
+\end{gather*}
+Notice how this is a form of the scalar triple product. Also note that if the volume determined this way is zero, then all three vectors must lie in the same plane, since $\vv{a} \times \vv{b} \perp \vv{c}$.
+\subsubsection{Applications}
+One application of the cross product is in physics, in torque for example:
+\begin{gather*}
+    \vv{\tau} = \vv{r} \times \vv{F}
+\end{gather*}
+This is because the only force that can turn something is the component of it that is perpendicular to the $\vv{r}$. This is also why the direction of a torque can be found using the right hand rule.
+\subsection{Equations of Lines and Planes}
 \end{document}
