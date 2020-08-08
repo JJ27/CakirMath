@@ -1064,7 +1064,7 @@ Note that the dot product is \textit{not a vector} but simply a number(scalar). 
 
 Some properties of the dot product are similar to numbers:
 \begin{gather}
-    \vv{a} \vdot \vv{a} = |a|^2\\
+    \vv{a} \vdot \vv{a} = |\vv{a}|^2\\
     \vv{a} \vdot \vv{b} = \vv{b} \vdot \vv{a}\\
     \textrm{\textbf{0}} \vdot \vv{a} = 0
 \end{gather}
@@ -1131,7 +1131,7 @@ If $\vv{a} = \vl x_1,y_1,z_1 \vr$ and $\vv{b} = \vl x_2, y_2, z_2\vr$, then thei
 \begin{gather*}
     \vv{a} \times \vv{b} = \vl y_1z_2 - z_1y_2, z_1x_2 - x_1z_2, x_1y_2 - y_1x_2 \vr
 \end{gather*}
-This is an interesting product for one because $\vv{a} \times \vv{b}$ will always be $\perp$ to $\vv{a}$ and $\vv{b}$(proved later). Notice that cross products are only defined for 3D vectors $\vv{a}$ and $\vv{b}$.
+This is an interesting product for one because $\vv{a} \times \vv{b}$ will always be $\perp$ to $\vv{a}$ and $\vv{b}$(shown later). Notice that cross products are only defined for 3D vectors $\vv{a}$ and $\vv{b}$.
 
 Cross products are often denoted using \textbf{determinants}, for example an order 2 determinant:
 \begin{gather*}
@@ -1213,7 +1213,7 @@ To find the magnitude of the cross product: Given $\theta$, the angle between $\
 \begin{proof}
 Expand the vector coordinates to show that:
 \begin{gather*}
-    |\vv{a} \times \vv{b}|^2 = |\vv{a}|^2|\vv{b}|^2(1 - \cos^2(\theta)) = |\vv{a}|^2|\vv{b}|^2\sin(\theta)
+    |\vv{a} \times \vv{b}|^2 = |\vv{a}|^2|\vv{b}|^2(1 - \cos^2(\theta)) = |\vv{a}|^2|\vv{b}|^2\sin^2(\theta)
 \end{gather*}
 \end{proof}
 Note in this proof that square root of both sides yields $\sqrt{\sin^2(\theta)} = |\sin(\theta)| = \sin(\theta)$ for all $\theta \in [0,\pi]$.
@@ -1253,7 +1253,7 @@ This combined product is called a \textbf{scalar triple product}, because it com
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.3,angle=0]{crossvol.png}
-\caption{Volume of a Parallelogram}
+\caption{Volume of a  Parallelepiped}
 \label{crossvol}
 \end{center}
 \end{figure}
@@ -1269,4 +1269,81 @@ One application of the cross product is in physics, in torque for example:
 \end{gather*}
 This is because the only force that can turn something is the component of it that is perpendicular to the $\vv{r}$. This is also why the direction of a torque can be found using the right hand rule.
 \subsection{Equations of Lines and Planes}
+Equipped with cross and dot products, we can come up with new definitions in geometry, that are easier to use in 3D space.
+\subsubsection{Lines}
+A line can be determined in a plane by giving a point and a direction(slope), which is how point-slope form works. Similarly, a 3D line can be defined using a point $P_0(x_0,y_0,z_0)$ and a direction, which here takes the form of a vector $\vv{v}$ parallel to the line. Now draw position vectors $\vv{r_0}$ and $\vv{r}$ to $P_0$ and $P(x,y,z)$ which will represent any point on the line. Now imagine a final vector $\vv{a}$ which goes between $P$ and $P_0$ on the line, and since both \textbf{$r$}-vectors start on the same point:
+\begin{gather*}
+    \vv{a} = \vv{r} - \vv{r_0}\\
+    \vv{r} = \vv{r_0} + \vv{a}
+\end{gather*}
+Since $\vv{a}$ is on the line, $\vv{a}$ and $\vv{v}$ are parallel, which means $\vv{a} = \vv{v}t$ for some scalar $t$(both vectors point in the same direction but have different lengths).
+\begin{gather*}
+    \vv{r} = \vv{r_0} + \vv{v}t
+\end{gather*}
+This is the \textbf{vector equation} of the line. The line is traced out as the \textbf{parameter} $t$ varies. When $t > 0$, $\vv{r}$ traces on one side of $P_0$ and when $t < 0$, $\vv{r}$ traces the other side.
+
+Rewriting $\vv{v} = \vl a,b,c \vr$, then $\vv{v}t = \vl ta, tb, tc\vr$. For our two position vectors $\vv{r} = \vl x,y,z \vr$ and $\vv{r_0} = \vl x_0, y_0, z_0 \vr$ so:
+\begin{gather*}
+    \vl x,y,z \vr = \vl x_0 + at, t_0 + bt, z_0 + ct \vr
+\end{gather*}
+Finally, equating components:
+\begin{gather*}
+    x = x_0 + at\hspace{30pt}y = y_0 + bt\hspace{30pt}z = z_0 + ct
+\end{gather*}
+These are called \textbf{parametric equations}(can you see why?) and they trace out a line, as each value of $t$ gives a point $(x,y,z)$ on the line. Notice the similarity between this and $y = mx + b$.
+
+Notice how any vector $\vv{v}$ parallel to the line could be used(with any magnitude) and the same line will be formed. If we use $\vv{v} = \vl a,b,c \vr$ then the numbers $a,b,c$ are called the \textbf{direction numbers} of the line. Since any magnitude of $\vv{v}$ could be used, the same line will be formed if $\vv{v} = \vl na, nb, nc \vr$.
+
+We can eliminate the parameter $t$ from all parametric equations by solving for it and substituting:
+\begin{gather*}
+    \dfrac{x-x_0}{a} = \dfrac{y - y_0}{b} = \dfrac{z - z_0}{c}
+\end{gather*}
+for $a,b,c \neq 0$. These non-parametric equations are called the \textbf{symmetric equations} of the line. However, as long as at least one of the direction numbers are not zero, this can be used. Ex. if $a = 0$, then $x = x_0 + (0)t$ and:
+\begin{gather*}
+    x = x_0\hspace{60pt}\dfrac{y-y_0}{b}=\dfrac{z-z_0}{c}
+\end{gather*}
+This also shows that the line lies on the plane $x = x_0$(in 3D space).
+
+Since $\vv{v} = \vl a,b,c \vr$, and $\vv{v}$ can be the vector drawn between any two points $P(x_0,y_0,z_0)$ and $P_1(x_1,y_1,z_1)$:
+\begin{gather*}
+    \vv{v} = \vl a,b,c \vr = \vl x_1 - x_0,y_1-y_0,z_1-z_0 \vr\\
+    a = x_1 - x_0\hspace{25pt}b = y_1 - y_0\hspace{25pt}c = z_1-z_0\\
+    \dfrac{x - x_0}{x_1 - x_0} = \dfrac{y - y_0}{y_1 - y_0} = \dfrac{z - z_0}{z_1 - z_0}
+\end{gather*}
+This can also be used as an equation of a line. Notice how you can derive the point slope form of a line from this. If you want to define a \textbf{line segment} instead of a whole line, restrict the parameter $t$.
+
+In fact, if you need to find a line segment between two points $P_0$ and $P_1$, find position vectors $\vv{r_0}$ and $\vv{r_1}$ respectively. Since both position vectors have tips on the line and start at the same point, we can choose $\vv{v} = \vv{r_1} - \vv{r_0}$:
+\begin{gather*}
+    \vv{r} = \vv{r_0} + \vv{v}t = \vv{r_0} + (\vv{r_1}-\vv{r_0})t = \vv{r_0}(1-t) + \vv{r_1}t
+\end{gather*}
+As $t$ ranges from $0$ to $1$, $\vv{r}$ traces out the correct line segment between $P_0$ and $P_1$.
+\subsubsection{Planes}
+To define a plane, a single parallel vector is not enough. However, with a orthogonal($\perp$) vector and an initial point(a plane could be defined as all points perpendicular to the vector on the same "level" as the initial point. This vector $\vv{n}$ is called the \textbf{normal vector}. Let $P_0(x_0,y_0,z_0)$ be the initial point and $P(x,y,z)$ be any point on the plane. Define position vectors $\vv{r}$ and $\vv{r_0}$. Since $\vv{r}$ and $\vv{r_0}$ start at the same point, $\vv{r} - \vv{r_0}$ will also be on the plane orthogonal to $\vv{n}$:
+\begin{gather*}
+    \vv{n} \vdot (\vv{r} - \vv{r_0}) = 0\\
+    \vv{n} \vdot \vv{r} = \vv{n} \vdot \vv{r_0}
+\end{gather*}
+If $\vv{n} = \vl a,b,c \vr$, $\vv{r} = \vl x,y,z \vr$ and $\vv{r_0} = \vl x_0,y_0,z_0 \vr$:
+\begin{gather*}
+    \vl a,b,c \vr \vdot \vl x-x_0,y-y_0,z-z_0 \vr = 0\\
+    a(x-x_0) + b(y-y_0) + c(z-z_0) = 0
+\end{gather*}
+This is the \textbf{scalar equation} of a plane. Notice that if $a,b,c$ are not all $0$ then the equation of a plane can take the form:
+\begin{gather*}
+    ax + by + cz + d = 0
+\end{gather*}
+The great thing about normal vectors is that they act as "markers" for planes. For example, two planes with normals $\vv{n_1}$ and $\vv{n_2}$ are parallel if their vectors are parallel, in other words is $\vv{n_2} = c\vv{n_1}$, where $c$ is a constant. If they aren't parallel, then they intersect in a line and the angle between the two planes($< 90^{\circ}$ is the angle between their vectors(use dot product).
+
+Since the intersection of two planes is a line, a line can be written as the intersection of two planes.
+\begin{gather*}
+    \dfrac{x-x_0}{a} = \dfrac{y-y_0}{b}\hspace{45pt}\dfrac{y-y_0}{b} = \dfrac{z-z_0}{c}
+\end{gather*}
+These two equations are equations of planes, and when set equal become an equation of a line!
+
+Lastly, the distance between two \textit{parallel} planes is:
+\begin{gather*}
+    D = \dfrac{|ax_1 + by_1 + cz_1 + d|}{\sqrt{a^2 + b^2 + c^2}}
+\end{gather*}
+This can be found by finding the projection of a vector between one point on each plane on their \textit{shared} normal vector.
+\subsection{Cylinders and Quadric Surfaces}
 \end{document}
