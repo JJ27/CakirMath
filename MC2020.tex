@@ -1346,4 +1346,24 @@ Lastly, the distance between two \textit{parallel} planes is:
 \end{gather*}
 This can be found by finding the projection of a vector between one point on each plane on their \textit{shared} normal vector.
 \subsection{Cylinders and Quadric Surfaces}
+Planes are a more simple type of surface, and graphing those are not too difficult. However, in more complex surfaces it is often useful to get the cross sections of the surface on different planes, which are called \textbf{traces}.
+\subsubsection{Cylinders}
+A cylinder is a type of surface that is made up of a set of lines(called \textbf{rulings}) that are all parallel to a given(central) line and pass through a curved plane. Note that a cylinder does not always have to be the cylinder you're thinking of(see \textbf{parabolic cylinder}).
+\subsubsection{Quadric Surfaces}
+A \textbf{quadric surface} is the result of a degree 2 polynomial equation written in $x,y,z$:
+\begin{gather*}
+    ax^2 + by^2 + cz^2 + dxy + eyz + fxz + gx + hy + Iz + j = 0
+\end{gather*}
+Quadric surfaces are the 3D equivalent to the 2D conics(see 11.5)
+\subsubsection{Sketching Surfaces}
+The main method for sketching surfaces is to use traces(cross-sections) that are parallel to the $xyz$ planes. For example, to graph:
+\begin{gather*}
+    \dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} + \dfrac{z^2}{c^2} = 1
+\end{gather*}
+First find the traces in each direction, by substituting $x=k$ then $y=k$ and finally $z=k$, where $k$ is any number. This simplifies the 3D surface into a bunch of slices of 2D curves.
+\begin{gather*}
+    \dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1 - \dfrac{k^2}{c^2}
+\end{gather*}
+This is an example of $z = k$, where every term on the right side is a constant, which means that when $k^2 < c^2$ then the right side is $< 1$ and the trace is an ellipse.
+\subsection{Cylindrical and Spherical Coordinates}
 \end{document}
