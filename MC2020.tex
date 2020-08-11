@@ -1366,4 +1366,48 @@ First find the traces in each direction, by substituting $x=k$ then $y=k$ and fi
 \end{gather*}
 This is an example of $z = k$, where every term on the right side is a constant, which means that when $k^2 < c^2$ then the right side is $< 1$ and the trace is an ellipse.
 \subsection{Cylindrical and Spherical Coordinates}
+In 3D, polar coordinates are expressed in two different but useful coordinate systems.
+\subsubsection{Cylindrical Coordinates}
+In \textbf{cylindrical coordinates} any point in 3D space can be represented by three numbers $(r,\theta,z)$ where $r$ and $\theta$ are the polar coordinates of the point on 2D space(on the $xy$ plane), and $z$ is the $z$-coordinate of the point.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6,angle=0]{cylcoords.png}
+\caption{Cylindrical Coordinates}
+\label{cylcoords}
+\end{center}
+\end{figure}
+To convert from cylindrical to rectangular:
+\begin{gather*}
+    x = r\cos(\theta)\hspace{20pt}y=r\sin(\theta)\hspace{20pt}z=z
+\end{gather*}
+To convert back to rectangular:
+\begin{gather*}
+    r^2 = x^2 + y^2\hspace{20pt}\tan(\theta) = \dfrac{y}{x}\hspace{20pt}z=z
+\end{gather*}
+Cylindrical coordinates are the best to choose when dealing with symmetry about a certain axis(especially the $z$-axis). Imagine a cylinder around the $z$-axis $x^2 + y^2 = c^2$. In cylindrical coordinates, that equation is $r=c$, since $\theta$ and $z$ can vary to create the cylinder.
+\subsubsection{Spherical Coordinates}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6,angle=0]{spherical.png}
+\caption{Spherical Coordinates}
+\label{sphcoords}
+\end{center}
+\end{figure}
+The \textbf{spherical coordinates} of a point in 3D can be described using $(\rho, \theta, \phi)$, where $\rho = |OP|$ and $\theta$ is the same angle in cylindrical. $\phi$ is the angle between $\rho$ and the $z$-axis.
+\begin{gather*}
+    \rho \geqslant 0\hspace{25pt}0 \leqslant \phi \leqslant \pi
+\end{gather*}
+This coordinate system is useful when dealing with symmetry about a point. Easiest way to see this is with a sphere, with equation $\rho = c$, since $\theta$ and $\phi$ can vary wildly, drawing out a sphere with all points a distance $\rho = c$ away from the origin.
+
+Some common spherical coordinate uses are $\theta = c$(a half plane), $\phi = c$, a cone above the $xy$ plane when $c \in [0, \frac{\pi}{2}]$ and below when $c \in [\frac{\pi}{2},\pi]$.
+
+To convert from spherical to rectangular, refer to Figure \ref{sphcoords}, and imagine points $P(x,y,z)$, $Q$, which is when a line is drawn straight from $P$ to the $z$-axis, and $P'$, which is when a line is drawn straight down from $P$ to the $xy$ plane. Using the Alt. Interior Angle theorem, the angle between $\rho$ and $z$ in the figure is $\phi$:
+\begin{gather*}
+    z = \rho\cos(\phi)\hspace{20pt}x = r\cos(\theta) = \rho\sin(\phi)\cos(\theta)\hspace{20pt}y = r\sin(\theta) = \rho\sin(\phi)\sin(\theta)
+\end{gather*}
+Finally, to convert from rectangular to spherical, use the distance formula(along with the above):
+\begin{gather*}
+    \rho^2 = x^2 + y^2 + z^2
+\end{gather*}
+\section{Vector Functions}
 \end{document}
