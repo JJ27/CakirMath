@@ -30,6 +30,8 @@
 \renewcommand{\hat}[1]{\oldhat{\mathbf{#1}}}
 \let\vl\langle
 \let\vr\rangle
+\let\ve\hat
+\renewcommand{\ve}[1]{\vl#1\vr}
 
 \makeatletter
 \newcommand*\vdot{\mathpalette\vdot@{.5}}
@@ -1399,7 +1401,7 @@ Cylindrical coordinates are the best to choose when dealing with symmetry about 
 \label{sphcoords}
 \end{center}
 \end{figure}
-The \textbf{spherical coordinates} of a point in 3D can be described using $(\rho, \theta, \phi)$, where $\rho = |OP|$ and $\theta$ is the same angle in cylindrical. $\phi$ is the angle between $\rho$ and the $z$-axis.
+The \textbf{spherical coordinates} of a point in 3D can be described using $(\rho, \theta, \phi)$, where $\rho = |OP|$(dist. from origin to $P$) and $\theta$ is the same angle in cylindrical. $\phi$ is the angle between $\rho$ and the $z$-axis.
 \begin{gather*}
     \rho \geqslant 0\hspace{25pt}0 \leqslant \phi \leqslant \pi
 \end{gather*}
@@ -1416,4 +1418,32 @@ Finally, to convert from rectangular to spherical, use the distance formula(alon
     \rho^2 = x^2 + y^2 + z^2
 \end{gather*}
 \section{Vector Functions}
+\subsection{Vector Functions and Space Curves}
+\subsubsection{Limits and Continuity}
+Since a function in a basic sense is a mapping of one element of the \textbf{domain} to another element in the \textbf{range}, a \textbf{vector-valued function} is a mapping from a scalar domain to a vector range. In simple terms, every number $t$ in the domain can be mapped to some vector in $V_3$ defined as $\vv{r} = \ve{f(t),g(t),h(t)}$, where $f,g$ and $h$ are the \textbf{component functions} of $\vv{r}$:
+\begin{gather*}
+    \vv{r}(t) = \ve{f(t),g(t),h(t)} = f(t)\hat{i} + g(t)\hat{j} + h(t)\hat{k}
+\end{gather*}
+As usual, the domain of $\vv{r}(t)$ is the set of all $t$ where $f,g$ and $h$ are defined. The \textbf{limit} of a vector function is simply the limit of it's components:
+\begin{gather*}
+    \lim_{t \to c} \vv{r}(t) = \ve{\lim_{t \to c} f(t), \lim_{t \to c} g(t), \lim_{t \to c} h(t)}
+\end{gather*}
+If all limits exist, then the vector function's limit exists. If the limit of $\vv{r}(t)$ is $\vv{L}$, then the magnitude and direction of $\vv{r}(t)$ approaches that of $\vv{L}$ for values close to $c$. Limits of vector functions obey the same laws as real functions do. It follows that:
+
+Any vector function $\vv{r}(t)$ is continuous at $c$ if:
+\begin{gather*}
+    \lim_{t \to c} \vv{r}(t) = \vv{r}(c)
+\end{gather*}
+It follows that $\vv{r}(t)$ is continuous if and only if it's components are.
+\subsubsection{Space Curves}
+Imagine a vector function $\vv{r}$ with components $f,g$ and $h$, which are all continuous. Now imagine a curve C drawn using the set of points:
+\begin{gather*}
+    x = f(t)\hspace{40pt}y=g(t)\hspace{40pt}z=h(t)
+\end{gather*}
+Look familiar? Yes, these are \textbf{parametric equations} of the curve C, and the vector $\vv{r}$ traces out C as $t$ varies. These are just like 3D parametric equations! If C fits the case, the C is a \textbf{space curve}.
+\subsubsection{Visualizing Space Curves}
+Computer drawing with space curves is a good way to visualize it, but when you do not have technology at your disposal it's good to have a way of visualizing these. You can think of the parametric equations as "traces", similar to drawing surfaces.
+
+Another way to visualize space curves is to draw them on surfaces, for example you could visualize a curve of intersection between two cylinders.
+\subsection{Derivatives and Integrals of Vector Functions}
 \end{document}
