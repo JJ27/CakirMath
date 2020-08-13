@@ -1446,4 +1446,43 @@ Computer drawing with space curves is a good way to visualize it, but when you d
 
 Another way to visualize space curves is to draw them on surfaces, for example you could visualize a curve of intersection between two cylinders.
 \subsection{Derivatives and Integrals of Vector Functions}
+\subsubsection{Derivatives}
+Because the limit of a vector function is defined similar to a normal function, we can define the derivative similarly as well(since derivatives are based off limits).
+
+The \textbf{derivative} $\vv{r}'$ of a vector function $\vv{r}$:
+\begin{gather*}
+    \dfrac{d\vv{r}}{dt}=\vv{r}'(t) = \lim_{h \to 0}\dfrac{\vv{r}(t+h) - \vv{r}(t)}{h}
+\end{gather*}
+Remember that $\vv{r}(t+h)$ and $\vv{r}(t)$ are both position vectors that start at the same point. So $\vv{r}(t+h) - \vv{r}(t)$ is the distance between them because of simple vector subtraction, which can be treated as secant vector on the curve. As $h \to 0$, the secant vector becomes a \textbf{tangent vector} as long as $\vv{r}'(t)$ exists and $\vv{r}'(t) \neq 0$. So now the \textbf{tangent line} is defined as the line parallel to the vector $\vv{v} = \vv{r}'(t)$ that goes through the point of tangency $P$.
+
+The \textbf{unit tangent vector}, or the unit vector in the direction of the tangent:
+\begin{gather*}
+    \vv{T}(t) = \dfrac{\vv{r}'(t)}{|\vv{r}'(t)|}
+\end{gather*}
+However, there is an easier way to get the derivative of a vector function. If $\vv{r} = \ve{f(t),g(t),h(t)}$, where $f,g$ and $h$ are differentiable:
+\begin{gather*}
+    \vv{r}'(t) = \ve{f'(t),g'(t),h'(t)}
+\end{gather*}
+This is easily shown by applying the limit definition to each component.
+
+The \textbf{second derivative} is simply the derivative of the derivative, or $\vv{r}''(t)$.
+
+A curve of a function $\vv{r}(t)$ is smooth on an interval if $\vv{r}'$ is continuous and $\vv{r}'(t) \neq 0$, except possibly on the endpoints.
+
+Differentiation rules are the same for a vector function as for a normal function. Dot products and cross products of vectors obey the product rule.
+\subsubsection{Integrals}
+We can apply the same vector derivative logic to integration with limits to Riemann sums:
+\begin{gather*}
+    \int_a^b \vv{r}(t) dt = \lim_{n \to \infty} \sum_{i = 1}^n \vv{r}(t_i)\Delta t
+\end{gather*}
+Applying this to each component, we get:
+\begin{gather*}
+    \int_a^b \vv{r}(t) dt = \Bigg\vl\bigg[\int_a^b f(t) dt\bigg], \bigg[\int_a^b g(t) dt\bigg], \bigg[\int_a^b h(t) dt\bigg]\Bigg\vr
+\end{gather*}
+The FTC also works with vector functions:
+\begin{gather*}
+    \int_a^b \vv{r}(t) dt = \bigg[\vv{R}(t)\bigg]_a^b = \vv{R}(b) - \vv{R}(a)
+\end{gather*}
+where $\vv{R}$ is the antiderivative of $\vv{r}$.
+\subsection{Arc Length and Curvature}
 \end{document}
