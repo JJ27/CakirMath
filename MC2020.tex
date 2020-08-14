@@ -32,6 +32,8 @@
 \let\vr\rangle
 \let\ve\hat
 \renewcommand{\ve}[1]{\vl#1\vr}
+\let\d\hat
+\renewcommand{\d}{\hspace{3pt}\textrm{d}}
 
 \makeatletter
 \newcommand*\vdot{\mathpalette\vdot@{.5}}
@@ -1485,4 +1487,90 @@ The FTC also works with vector functions:
 \end{gather*}
 where $\vv{R}$ is the antiderivative of $\vv{r}$.
 \subsection{Arc Length and Curvature}
+\subsubsection{Arc Length}
+From chapter 11, the arc length of a 2D curve with parametric equations $x = f(t)$ and $y = g(t)$ between $a$ and $b$ has arc length:
+\begin{gather*}
+    L = \int_a^b \sqrt{\bigg[f'(t)\bigg]^2 + \bigg[g'(t)\bigg]^2}\d t
+\end{gather*}
+where $f'$ and $g'$ must be continuous on the interval. This is found by taking the limit of an n-sided inscribed polygon(as $n \to \infty$). Doing the exact same thing with parametric equations $x = f(t), y = g(t), z = h(t)$. If the curve is traced exactly one time from $a$ to $b$:
+\begin{gather*}
+    L = \int_a^b \sqrt{\bigg[f'(t)\bigg]^2 + \bigg[g'(t)\bigg]^2+\bigg[h'(t)\bigg]^2}\d t\\
+    = \int_a^b \sqrt{\bigg[\dfrac{dx}{dt}\bigg]^2 + \bigg[\dfrac{dy}{dt}\bigg]^2+\bigg[\dfrac{dz}{dt}\bigg]^2}\d t\\
+    = \int_a^b |\vv{r}'(t)|\d t
+\end{gather*}
+Even though different \textbf{parametrizations} of a curve C are possible(different parametric equations that show the same curve), the arc length found will be the same.
+
+Let C be a curve given by $\vv{r}(t) = f(t)\hat{i} + g(t)\hat{j} + h(t)\hat{k}$ for $t \in [a,b]$, and C is traced exactly once in the interval. C's \textbf{arc length function}:
+\begin{gather*}
+    s(t) = \int_a^t |\vv{r}'(u)| \d u = \int_a^t \sqrt{\bigg[\dfrac{dx}{du}\bigg]^2 + \bigg[\dfrac{dy}{du}\bigg]^2+\bigg[\dfrac{dz}{du}\bigg]^2}\d u
+\end{gather*}
+Taking the derivative of both sides and using FTC:
+\begin{gather*}
+    \dfrac{ds}{dt} = |\vv{r}'(t)|
+\end{gather*}
+It is often useful to parametrize a curve \textbf{with respect to arc length} because arc length is a distance, which is not relative(doesn't change depending on your coordinate system). If any curve $\vv{r}(t)$ and $s(t)$, the arc length function is given, then you can solve for $t$ asa fucntion of $s$: $t = t(s)$. Now since $\vv{r} = \vv{r}(t) \implies \vv{r} = \vv{r}(t) = \vv{r}(t(s))$. For example, $\vv{r}(t(3))$ represents the position vector of $\vv{r}$ at the point 3 units of arc length from the starting point.
+\subsubsection{Curvature}
+If C is a smooth curve defined by $\vv{r}(t)$, then $\vv{r}'(t) \neq 0$, also the unit tangent vector $\vv{T}$, which is the unit of the derivative:
+\begin{gather*}
+    \vv{T}(t) = \dfrac{\vv{r}'(t)}{|\vv{r}'(t)|}
+\end{gather*}
+Imagining a curve, the direction of $\vv{T}$ will change fast when the curve is sharply curved, and slower when the curve is straighter. The \textbf{curvature} of C at a point is how fast the curve changes direction at that point. It is the rate of change of the unit tangent with respect to arc length. Arc length is used because as mentioned it doesn't change when parameterized:
+\begin{gather*}
+    \kappa(t) = |\dfrac{d\vv{T}}{ds}|
+\end{gather*}
+Using the chain rule:
+\begin{gather*}
+    \dfrac{d\vv{T}}{dt} = \dfrac{d\vv{T}}{ds}\dfrac{ds}{dt}\\
+    \kappa = |\dfrac{d\vv{T}}{ds}| = |\dfrac{\frac{d\vv{T}}{dt}}{\frac{ds}{dt}}| = \dfrac{|\vv{T}'(t)|}{|\vv{r}'(t)|}
+\end{gather*}
+This can be used to show that small circles have large curvature and large circles have smaller curvature. The curvature of a circle with radius $a$ is:
+\begin{gather*}
+    \kappa = \dfrac{1}{a}
+\end{gather*}
+The following is often more convenient to use:
+\begin{gather*}
+    \kappa(t) = \dfrac{|\vv{r}'(t) \times \vv{r}''(t)|}{|\vv{r}'(t)|^3}
+\end{gather*}
+\begin{proof}
+Since $\vv{T} = \dfrac{\vv{r}'}{|\vv{r}'|}$ and $|\vv{r}'| = \dfrac{ds}{dt}$:
+\begin{gather*}
+    \vv{r}' = |\vv{r}'|\vv{T} = \dfrac{ds}{dt}\vv{T}\\
+\end{gather*}
+Taking a derivative(use product rule):
+\begin{gather*}
+    \vv{r}'' = \dfrac{d^2s}{dt^2}\vv{T} + \dfrac{ds}{dt}\vv{T}'
+\end{gather*}
+Cross both sides, and use the fact that $\vv{T} \times \vv{T} = 0$:
+\begin{gather*}
+    \vv{r}' \times \vv{r}'' = \bigg(\dfrac{ds}{dt}\bigg)^2(\vv{T} \times \vv{T}')
+\end{gather*}
+Since $\vv{T}$ is a unit vector, $|\vv{T}(t)| = 1$. Since $1$ is a constant, $\vv{T}$ is orthogonal to $\vv{T}'$. Also using $|\vv{a} \times \vv{b}| = |\vv{a}||\vv{b}| \sin(\theta)$:
+\begin{gather*}
+    |\vv{r}' \times \vv{r}''| = \bigg(\dfrac{ds}{dt}\bigg)^2|\vv{T} \times \vv{T}'| = \bigg(\dfrac{ds}{dt}\bigg)^2|\vv{T}||\vv{T}'| = \bigg(\dfrac{ds}{dt}\bigg)^2|\vv{T}'|\\
+    |\vv{T}'| = \dfrac{|\vv{r}' \times \vv{r}''|}{(ds/dt)^2} = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|^2}\\
+    \kappa = \dfrac{|\vv{T}'|}{|\vv{r}'|} = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|^3}
+\end{gather*}
+\end{proof}
+For the special case of a 2D curve with equation $y = f(x)$, we can use $x$ as the parameter: $\vv{r}(x) = x\hat{i} + f(x)\hat{j}\implies\vv{r}''(x) = f''(x)\hat{j}$. When crossing, since $\hat{i} \times \hat{j} = \hat{k}$, and $\hat{j} \times \hat{j} = 0: \vv{r}' \times \vv{r}'' = f''(x)\hat{k}$. Also noting that the arc length in 2D:
+\begin{gather*}
+    L = |\vv{r}'(x)| = \sqrt{1 + [f'(x)]^2}\\
+    \kappa(x) = \dfrac{|f''(x)|}{[1 + (f'(x))^2]^\frac{3}{2}}
+\end{gather*}
+\subsubsection{Normal and Binormal Vectors}
+At any point on a space curve $\vv{r}(t)$, there will be many vectors orthogonal to $\vv{T}$, but you can find one by noting that $|\vv{T}| = 1$, so $\vv{T'} \perp \vv{T}$. NOTE: \textbf{$\vv{T}'$ is not a unit vector!} But if $\vv{r}'$ is smooth(derivative not zero), the \textbf{unit normal vector} $\vv{N}(t)$, the unit vector of the unit tangent's derivative(a mouthful!):
+\begin{gather*}
+    \vv{N}(t) = \dfrac{\vv{T}'(t)}{|\vv{T}'(t)|}
+\end{gather*}
+The vector given by $\vv{B}(t) = \vv{T}(t) \times \vv{N}(t)$ is called the \textbf{binormal vector}. Since it's a cross, it is perpendicular to both $\vv{T}$ and $\vv{N}$.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5,angle=0]{tnb.png}
+\caption{Tangent, Normal, and Binormal}
+\label{tnb}
+\end{center}
+\end{figure}
+The plane defined by $\vv{N}$ and $\vv{B}$ at any point $P$ is called the \textbf{normal plane} at $P$. It contains all lines that are orthogonal to $\vv{T}$. The plane using $\vv{T}$ and $\vv{N}$ is the \textbf{osculating plane} at $P$(\textit{osculum} in Latin means \textit{kiss}). This plane is the closest to containing the part of the curve near $P$. In a 2D curve, this plane is simply the entire plane containing the curve.
+
+The circle that lies in the osculating plane and has the same tangent at $P$, which also lies on the concave side of $C$(the direction $\vv{N}$ points), and has radius $r = \frac{1}{\kappa}$ is the \textbf{osculating circle} at $P$. It best describes how C behaves near $P$, since it shares the same tangent, normal, and curvature.
+\subsection{Motion in Space: Velocity and Acceleration}
 \end{document}
