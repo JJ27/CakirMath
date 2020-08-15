@@ -1573,4 +1573,68 @@ The plane defined by $\vv{N}$ and $\vv{B}$ at any point $P$ is called the \textb
 
 The circle that lies in the osculating plane and has the same tangent at $P$, which also lies on the concave side of $C$(the direction $\vv{N}$ points), and has radius $r = \frac{1}{\kappa}$ is the \textbf{osculating circle} at $P$. It best describes how C behaves near $P$, since it shares the same tangent, normal, and curvature.
 \subsection{Motion in Space: Velocity and Acceleration}
+Tangent and Normal Vectors can be used in physics to study motion, which starts with position, velocity, and acceleration.
+\subsubsection{Position, Velocity, and Acceleration}
+\begin{gather*}
+    \vv{v}(t) = \lim_{h \to 0}\dfrac{\vv{r}(t + h) - \vv{r}(t)}{h}
+\end{gather*}
+As $h \to 0$, this vector approximates the distance traveled(traced by $\vv{r}$) over a small time interval. And as the limit is taken, this \textbf{velocity} becomes instantaneous. This \textbf{velocity vector} points in the direction of the tangent line(it is the tangent vector).
+
+The \textbf{speed} at time $t$ of a particle is the magnitude of the velocity vector, which makes sense since:
+\begin{gather*}
+    |\vv{v}(t)| = |\vv{r}'(t)| = \dfrac{ds}{dt}
+\end{gather*}
+which is the rate of change of distance with respect to time.
+
+In 1 dimension, the \textbf{acceleration} of a particle is the change in velocity:
+\begin{gather*}
+    \vv{a}(t) = \vv{v}'(t) = \vv{r}''(t)
+\end{gather*}
+Integrating the vectors allows you to go "backwards":
+\begin{gather*}
+    \vv{v}(t) = \vv{v}(t_0) + \int_{t_0}^t \vv{a}(t) \d t
+\end{gather*}
+\subsubsection{Forces}
+The equation relating the force, mass, and acceleration experienced by an object is called \textbf{Newton's Second Law} of Motion. If an object in experiences a force $\vv{F}(t)$ with mass $m$ and acceleration $\vv{a}(t)$:
+\begin{gather*}
+    \vv{F}(t) = m\vv{a}(t)
+\end{gather*}
+\subsubsection{Tangential and Normal Components}
+It is often useful to find the tangential and normal components of the acceleration vector. Using $v$ for speed:
+\begin{gather*}
+    \vv{T}(t) = \dfrac{\vv{r}'(t)}{|\vv{r}'(t)|} = \dfrac{\vv{v}}{v}\\
+    \vv{v} = v\vv{T}
+\end{gather*}
+Taking the derivative(use Product Rule):
+\begin{gather*}
+    \vv{a} = \vv{v}' = v'\vv{T} + v\vv{T}'\\
+    \kappa = \dfrac{|\vv{T}'|}{|\vv{r}'|} = \dfrac{|\vv{T}'|}{v}\implies |\vv{T}'| = \kappa v
+\end{gather*}
+Since $\vv{N} = \frac{\vv{T}'}{|\vv{T}'|}$:
+\begin{gather*}
+    \vv{T}' = |\vv{T}'| \vv{N} = \kappa v \vv{N}\\
+    \vv{a} = v'\vv{T} + \kappa v^2 \vv{N}
+\end{gather*}
+Since both $\vv{T}$ and $\vv{N}$ are unit vectors, their "coefficients" are the components in the tangential and normal directions:
+\begin{gather*}
+    \vv{a} = a_t \vv{T} + a_n \vv{N}\\
+    a_t = v'\hspace{40pt}a_n = \kappa v^2
+\end{gather*}
+Since there is no third component, this derivation proves that the acceleration of an object must lie in the $\vv{T}\vv{N}$ plane, the \textit{osculating plane}! Now remember that $\vv{T}$ points in the direction of motion(\textit{tangent}) and $\vv{N}$ points in the direction the curve is turning. So the tangential component of $\vv{a}$ is $v'$, which makes sense since in 1 dimension, acceleration is the derivative of velocity.
+
+Another example: If the object is moving in a circle, it's curvature is $\kappa = \frac{1}{r}$. So:
+\begin{gather*}
+    a_n = \kappa v^2 = \dfrac{1}{r}v^2 = \dfrac{v^2}{r}
+\end{gather*}
+which is the equation for centripetal acceleration, go figure! Oftentimes, it is easier to work with equations based on position vectors and their derivatives, so:
+\begin{gather*}
+    \vv{v} \vdot \vv{a} = v\vv{T} \vdot (v' \vv{T} + \kappa v^2 \vv{N})\\
+    = vv'\vv{T}\vdot \vv{T} + \kappa v^3 \vv{T} \vdot \vv{N}\\
+    = vv'
+\end{gather*}
+Last step because the dot product of the same vector is $1$, and the dot product of orthogonal vectors($\vv{T}$ and $\vv{N}$) is $0$.
+\begin{gather*}
+    a_t = v' = \dfrac{\vv{v} \vdot \vv{a}}{v} = \dfrac{\vv{r}'(t) \vdot \vv{r}''(t)}{|\vv{r}'(t)|}\\
+    a_n = \kappa v^2 = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|^3}|\vv{r}'(t)|^2 = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|}
+\end{gather*}
 \end{document}
