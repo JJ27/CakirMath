@@ -46,6 +46,31 @@
 
 \tableofcontents
 \newpage
+\section{Vectors}
+\subsection{The Geometry and Algebra of Vectors}
+A \textbf{vector} is a line segment with a direction starting from \textbf{initial point} $A$ to \textbf{terminal point} $B$. For every point $B$ there is a vector $\vv{OB}$ that corresponds to the displacement from $O$ to $B$, where $O$ is the origin. \textit{Refer to MC notes for more on vectors, this is mainly a recap and summarization}.
+\subsubsection{Vector Representations}
+There are two main ways to represent vectors, the first is a simple \textbf{row vector} while the second is a \textbf{column vector}:
+\begin{gather*}
+    \vv{v} = \ve{v_x,v_y,v_z...v_n}\\
+    \vv{v} = \begin{bmatrix}
+    v_x\\
+    v_y\\
+    v_z\\
+    \vdots\\
+    v_n
+    \end{bmatrix}
+\end{gather*}
+Two vectors are \textbf{equal} if they have the same components, or if they have the same length(magnitude) and direction. Vectors normally start in the \textbf{standard position}, with the tail at the origin. However, even if a vector is \textit{translated} away, equality does not depend on position.
 
+Vector addition and subtraction are covered in MC notes.
+\subsubsection{Linear Combinations}
+A vector $\vv{v}$ is a \textbf{linear combination} of vectors $\vv{v_1}, \vv{v_2},\vv{v_3}...\vv{v_k}$ if there are scalars $c_1,c_2,c_3...c_k$ which \textit{combine} to form $\vv{v} = c_1\vv{v_1} + v_2\vv{v_2} + c_3\vv{v_3}...c_k\vv{v_k}$. The scalars are called the \textbf{coefficients} of linear combinations.
 
+If $\vv{v}$ is a linear combination of vectors $\vv{v_1} \textrm{ and } \vv{v_2}$, then the coordinates of $\vv{v}$ with respect to $\vv{v_1},\vv{v_2}$ are $c_1$ and $c_2$.
+\subsubsection{Binary Vectors and Modular Arithmetic}
+Computers use \textit{binary} to communicate, a language made up of only $0$ and $1$. \textbf{Binary Vectors} are vectors that only have components $0$ or $1$. Using this, the rules of normal math operations must be changed so that whenever a number gets above $1$ it has to be reset down. For example, $3 \implies 1$, and $6 \implies 0$. Basically, any odd number is $1$ and even number is $0$. This binary space is denoted by $\mathbb{Z}_2$. If these vectors all have $n$ components then the space consisting of all of them is $\mathbb{Z}_2^n$, where $n$ is called the \textit{length} of the vector. Be careful not to confuse length in $\mathbb{R}$ with length in $\mathbb{Z}$.
+
+In a similar way, the vectors in $\mathbb{Z}_3$ reset every $3$. So to find a mathematical sum of vectors in this space, add up their components and divide by $3$ and their remainder is the correct value to use. This idea is similar to a clock or a periodic function that repeats.
+\subsection{Length and Angle: The Dot Product}
 \end{document}
