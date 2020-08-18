@@ -48,7 +48,7 @@
 \newpage
 \section{Vectors}
 \subsection{The Geometry and Algebra of Vectors}
-A \textbf{vector} is a line segment with a direction starting from \textbf{initial point} $A$ to \textbf{terminal point} $B$. For every point $B$ there is a vector $\vv{OB}$ that corresponds to the displacement from $O$ to $B$, where $O$ is the origin. \textit{Refer to MC notes for more on vectors, this is mainly a recap and summarization}.
+A \textbf{vector} $\vv{AB}$ is a line segment with a direction starting from \textbf{initial point} $A$ to \textbf{terminal point} $B$. For every point $B$ there is a vector $\vv{OB}$ that corresponds to the displacement from $O$ to $B$, where $O$ is the origin. \textit{Refer to MC notes for more on vectors, this is mainly a recap and summarization}.
 \subsubsection{Vector Representations}
 There are two main ways to represent vectors, the first is a simple \textbf{row vector} while the second is a \textbf{column vector}:
 \begin{gather*}
@@ -73,4 +73,35 @@ Computers use \textit{binary} to communicate, a language made up of only $0$ and
 
 In a similar way, the vectors in $\mathbb{Z}_3$ reset every $3$. So to find a mathematical sum of vectors in this space, add up their components and divide by $3$ and their remainder is the correct value to use. This idea is similar to a clock or a periodic function that repeats.
 \subsection{Length and Angle: The Dot Product}
+Note: MC notes section 13.3 goes into much more depth for the Dot Product.
+\subsubsection{The Dot Product}
+If $\vv{u} = \ve{u_1,u_2...u_n}$ and $\vv{v} = \ve{v_1,v_2...v_n}$, then the \textit{scalar }\textbf{dot product} of the two vectors is:
+\begin{gather*}
+    \vv{u} \vdot \vv{v} = u_1v_1 + u_2v_2 + ...u_nv_n
+\end{gather*}
+There are many important properties of the dot product, which are easily proved by expanding out the components and manipulating them. These are seen in 13.3 of MC notes. One example is $\vv{v} \vdot \vv{v} \geqslant 0$, which is true since multiplying any component(any number) by itself never yields a negative.
+\subsubsection{Vector Length}
+In $\mathbb{R}_2$, the distance between the origin and the point $(a,b)$ is the same as the length of the vector $\vv{v} = \ve{a,b}$, which is given by the Pythagorean Theorem, $|\vv{v}| = \sqrt{a^2 + b^2}$. Also note that $a^2 + b^2$ is the same thing as $\vv{v} \vdot \vv{v}$. So $|\vv{v}| = \sqrt{\vv{v} \vdot \vv{v}}$, which is always defined since $\vv{v} \vdot \vv{v} \geqslant 0$. This also implies that $\vv{v} \vdot \vv{v} = |\vv{v}|^2$.
+\subsubsection{Unit Vectors}
+Any vector with magnitude $1$ is called a unit vector. In fact, the set of all unit vectors in $\mathbb{R}_2$ is a unit circle(all points a distance $1$ from the origin. In $\mathbb{R}_3$ it is a unit sphere. Given any nonzero vector $\vv{v}$, the \textbf{unit vector} $\hat{v}$ in the $v$ direction is just the vector:
+\begin{gather*}
+    \hat{v} = \bigg[\dfrac{1}{|\vv{v}|}\bigg]\vv{v} = \dfrac{\vv{v}}{|\vv{v}|}
+\end{gather*}
+A special set of unit vectors is called the \textbf{standard unit vectors}. This set consist of all the unit vectors in $\mathbb{R}^n$ where each unit vector $\hat{e}_i$ has $i^{th}$ component $1$ and all other components $0$. In other words, all the unit vectors along the "axes" are standard unit vectors. Examples include $\hat{i},\hat{j},\hat{k}$ in $\mathbb{R}_3$.
+\subsubsection{Distance}
+On a number line, the distance between two points $a$ and $b$ is just $|a-b|$, the absolute value lets us ignore which is greater. This can be rewritten as $\sqrt{(a-b)^2}$ In two dimensions this formula is $\sqrt{(a_x-b_x)^2 + (a_y-b_y)^2}$. In general, this formula can be extended to $n$-dimensions:
+\begin{gather*}
+    \textrm{In } \mathbb{R}_n, d = \sqrt{(a_x-b_x)^2 + (a_y -b_y)^2 + (a_z-b_z)^2 +...(a_n-b_n)^2}
+\end{gather*}
+In terms of vectors, $d$ is just the length of $\vv{a} - \vv{b}$, which makes sense because taking $|\vv{a-b}|$ is just the square of the difference between each component of $\vv{a}$ and $\vv{b}$.
+\subsubsection{Angles}
+Refer to MC notes for notes on angles and direction cosines. Also, the Cauchy-Schwarz equality:
+\begin{gather*}
+    \vv{u} \vdot \vv{v} \leqslant |\vv{u}||\vv{v}|
+\end{gather*}
+This might seem easy to prove, using the cosine definition of the dot product, but note that that definition is proved using the Law of Cosines, which holds true for dimensions $n \leqslant 3$. This equality is not proved right now, but it does explain why the cosine definition works past three dimensions.
+
+\subsubsection{Projections}
+Projections and Components in MC chapter 13
+\subsection{Lines and Planes}
 \end{document}
