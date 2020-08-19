@@ -104,4 +104,60 @@ This might seem easy to prove, using the cosine definition of the dot product, b
 \subsubsection{Projections}
 Projections and Components in MC chapter 13
 \subsection{Lines and Planes}
+\subsubsection{Lines}
+The equation of a line in a plane is $ax +by = c$, which becomes $y = -\frac{a}{b}x + \frac{c}{b}$. Now to use vectors, we define a vector $\vv{n}$:
+\begin{gather*}
+    \vv{n} = \ve{a,b}\hspace{20pt}\vv{x} = \ve{x,y}\\
+    \vv{n} \vdot \vv{x} = 0
+\end{gather*}
+The last statement is true because $\vv{n}$ represents a vector with slope that is the negative reciprocal of the line's slope: $-\frac{a}{b}$. Another way to do this is to use a \textit{parallel vector} $\vv{d} = \ve{1,-2}$. This allows us to rewrite the line's equation as:
+\begin{gather*}
+    \vv{x} = \vv{d}t
+\end{gather*}
+If the line does not pass through the origin, this equation can be modified by adding a position vector $\vv{p} = \ve{x_0,y_0,z_0}$ that gives the line's position.
+\begin{gather*}
+    \vv{x} = \vv{p} + \vv{d}t\\
+    \vv{n} \vdot (\vv{x} - \vv{p}) = 0
+\end{gather*}
+Equating components gives the parametric equations of the line.
+\subsubsection{Planes}
+To generalize this to planes, we can defined a normal vector in $\mathbb{R}_3$ so that $\vv{n} = \ve{a,b,c}$. This also lets the following happen:
+\begin{gather*}
+    \vv{n} \vdot (\vv{x} - \vv{p}) = 0\\
+    ax + by + cz = d
+\end{gather*}
+To understand why this works, imagine a line in $\mathbb{R}_2$. It can be defined by a vector perpendicular to it, which gives the slope of the line, and a point to show the line's position. Similarly in $\mathbb{R}_3$, a plane can be defined by a vector perpendicular to it, which gives all the vectors that are perpendicular to it. A point also gives the position here, however note how in 3D the combination of all vectors $\perp$ forms a flat surface, or a plane.
+
+It is obvious that parallel planes will have the same normal vector, which implies that the $ax + by + cz$ coefficients will be multiples of each other. However $d$ will be different so they don't define the same plane, similar to how the y-intercept of parallel lines are different.
+
+It is also possible to define vector(and so parametric) equations for a plane. First take a position vector $\vv{p}$ representing a point on the plane, and two non-parallel direction vectors $\vv{u}$ and $\vv{v}$ that aren't parallel to each other but are parallel to the plane.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.7]{VecPlane.png}
+\caption{Defining a Plane with Vectors}
+\label{vecplane}
+\end{center}
+\end{figure}
+If we define the vectors as in Figure \ref{vecplane}, we can see that the distance from any general point $\vv{x}$ and $\vv{p}$ is just $\vv{x-p}$. Now notice how we can choose scalars $t$ and $s$ so that $s\vv{u} + t\vv{v} = \vv{x-p}$. Combining every possible combination of this defines the flat surface that is a plane. It follows that:
+\begin{gather*}
+    \vv{x} = \vv{p} + s\vv{u} + t\vv{v}
+\end{gather*}
+Looking at the figure, it makes sense why a single plane can't be defined with parallel direction vectors, since more than one plane could fit those conditions. Also note that plane is a 2 dimensional object, and requires two parameters to fully define it. For example, the parametric equation for $y$:
+\begin{gather*}
+    y = \vv{x}_y = \vv{p}_y + s\vv{u}_y + t\vv{v}_y
+\end{gather*}
+Since there are infinitely many lines in a plane, a line cannot be defined this way either. However, with two nonparallel normal vectors and a point, a line can defined as the set of points through $P$ perpendicular to $\vv{n}_1 $ and $\vv{n}_2$. Imagine a line being the $z$-axis, defined by two normal vectors off the $x$ and $y$ axis, with the point being the origin. Each normal vector can define it's own plane, so:
+\begin{gather*}
+    a_1x + b_1y + c_1z = d_1\\
+    a_2x + b_2y + c_2z = d_2
+\end{gather*}
+The set of all $x,y,z$ that satisfy these two equations forms a line. Geometrically, this shows that the intersection of two planes forms a line.
+
+Notice that a single equation of this type defines a different object as you increase dimensions. In $\mathbb{R}_2$, it defined a line. In $\mathbb{R}_3$, a plane, and in $R_n$, an $n-1$ dimension object called a \textit{hyperplane}. The relation between the dimension of an object $D_o$, the number of general equations required $E_o$, and the dimension of the space($D_s$) it is in:
+\begin{gather*}
+    D_o + E_o = D_s
+\end{gather*}
+This explains why the hyperplane defined by one equation is always one dimension lower than the space. It also explains why a line needs only one equation in $\mathbb{R}_2$ but two in $\mathbb{R}_3$.
+\section{Systems of Linear Equations}
 \end{document}
