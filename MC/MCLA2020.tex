@@ -20,6 +20,7 @@
 \usepackage{amsbsy}
 \usepackage{etoolbox}
 \usepackage{esvect}
+\usepackage{hyperref}
 
 \AtBeginEnvironment{gather}{\setcounter{equation}{0}}
 
@@ -1638,6 +1639,7 @@ Last step because the dot product of the same vector is $1$, and the dot product
     a_t = v' = \dfrac{\vv{v} \vdot \vv{a}}{v} = \dfrac{\vv{r}'(t) \vdot \vv{r}''(t)}{|\vv{r}'(t)|}\\
     a_n = \kappa v^2 = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|^3}|\vv{r}'(t)|^2 = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|}
 \end{gather*}
+\newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
@@ -1754,6 +1756,46 @@ Notice that a single equation of this type defines a different object as you inc
 \end{gather*}
 This explains why the hyperplane defined by one equation is always one dimension lower than the space. It also explains why a line needs only one equation in $\mathbb{R}_2$ but two in $\mathbb{R}_3$.
 \section{Systems of Linear Equations}
-\subsection{Linear Systems of Equations}
-\end{document}
+\subsection{Systems of Linear Equations}
+A \textbf{linear equation} of $n$ variables $x_1,x_2...x_n$ is an equation that can be rewritten in the form:
+\begin{gather*}
+    a_1x_! + a_2x_2 + ... a_nx_n = b
+\end{gather*}
+where all \textbf{coefficients} $a$ are and the \textbf{constant term} $b$ are constants. Note how the variable coefficients are all constants and not functions of $x$ or any other variable.
+
+A \textbf{solution} of a linear equation is a vector $\ve{s_1,s_2...s_n}$ whose components satisfy the equation when the substitution $s_1 \implies x_1, s_2 \implies x_2...s_n \implies x_n$ is made.
+
+A \textbf{system of linear equations} is a finite set of linear equations in the same variables, and its solution is a vector that is a solution to all equations in the system. The \textbf{solution set} of a system is the set of all vector solutions to that system.
+
+A system is \textbf{consistent} if it has at least one solution and \textbf{inconsistent} if not. There are only three possibilities with linear systems, because they are lines geometrically and the line intersects are solutions.
+\begin{enumerate}
+    \item A single unique solution(consistent)
+    \begin{itemize}
+        \item Two non-parallel lines that intersect.
+    \end{itemize}
+    \item Infinitely many solutions(consistent)
+    \begin{itemize}
+        \item Two non-parallel lines that coincide(share all points).
+    \end{itemize}
+    \item No Solutions at all
+    \begin{itemize}
+        \item Two parallel lines that never intersect.
+    \end{itemize}
+\end{enumerate}
+Two linear systems are \textbf{equivalent} if they have the same solutions(this makes sense because they can effectively be merged). One useful approach to solve is to transform equations in the system into equivalent ones that are easier to deal with.
+
+Sometimes it is easier to solve systems by writing their coefficients into a matrix, since all their variables are the same(between equations). This matrix is called the \textbf{augmented matrix} of the system. For example:
+\begin{gather*}
+    x - y - z = 2\\
+    3x - 3y + 2z = 16\\
+    2x - y + z = 9\\
+    \begin{bmatrix}
+    \begin{array}{ccc|c}
+    1 & -1 & -1 &2 \\
+    3 & -3 & 2 & 16\\
+    2 & -1 & 1 & 9
+    \end{array}
+    \end{bmatrix}
+\end{gather*}
+\subsection{Direct Methods to Solve Linear Systems}
 \end{document}
