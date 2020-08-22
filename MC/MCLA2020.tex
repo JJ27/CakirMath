@@ -1798,4 +1798,80 @@ Sometimes it is easier to solve systems by writing their coefficients into a mat
     \end{bmatrix}
 \end{gather*}
 \subsection{Direct Methods to Solve Linear Systems}
+\subsubsection{Echelon Form}
+In a matrix if a variable is not present in the equation, that position is shown by $0$, for $0x$. Denoting a linear matrix by $A$ and a column vector $\vv{b}$ of constant terms of the system, the augmented matrix can be written as $[A|\vv{b}]$. A general method for solving matrices involves reducing the matrix to an \textbf{echelon form}, a sort of staircase form where the last row will hold the key to solving the entire thing.
+
+A matrix is in \textbf{echelon form} if:
+\begin{enumerate}
+    \item Any all-zero rows are at the bottom
+    \item In each nonzero row, the first nonzero item(the \textbf{leading entry}) is in the column to the left of any leading entries below.
+\end{enumerate}
+These conditions guarantee that the leading entries will form a staircase or triangle pattern, such that any column contains one or less leading entries. Once a matrix is in echelon form, it is very easy to solve and establish the number of solutions of the system.
+\subsubsection{Elementary Row Operations}
+Just like algebraic operations reduce an equation to equivalent equations until the variable is isolated, \textbf{elementary row operations} are operations that can transform a matrix to an equivalent \textit{reduced} matrix that is easier to work with.
+
+These elementary row operations result in an equivalent matrix:
+\begin{enumerate}
+    \item Switch two rows(switch their position)
+    \item Multiple any row by a nonzero constant(division implied too)
+    \item Add a multiple of one row to another row(subtraction implied too)
+\end{enumerate}
+The process of solving a matrix by applying these operations to bring it into echelon form is called \textbf{reduction}.
+
+Normally, you work from left to right and top down to choose a leading entry as a \textbf{pivot} and zero out(by multiplying and eliminating) the lower columns. Switching rows can make this easier. Most of the time it is easier to make the leading entry $1$. The interesting thing is that reducing a matrix into echelon form is not unique, there are many different valid echelon forms.
+
+Elementary row operations are \textit{reversible}, such that they can be undone in the opposite direction. Rows can be switched back, added multiples can be subtracted and multiplied rows can be divided out. This leads to:
+
+Two matrices $A$ and $B$ are equivalent if and only if there exist a sequence of elementary row operations that converts $A$ to $B$, which implies that if $A$ and $B$ can be reduced to the same echelon form then they are equivalent.
+
+\subsubsection{Gaussian Elimination}
+This entire process of reducing and solving a matrix is called \textbf{Gaussian Elimination}(though he didn't come up with it).
+\begin{enumerate}
+    \item Write the augmented matrix for the system
+    \item Use elementary row operations to reduce into echelon form
+    \item Use back substitution to solve the system
+\end{enumerate}
+Note that step 2 can be performed in many ways. Sometimes when solving systems this way there are more variables than equations(rows) in echelon form, which means there are infinitely many solutions. This is because the \textbf{free variables} can vary and still satisfy the equations(think of the equations as \textit{constraints} to the solution set). The non-free variables are called the \textbf{leading variables} which are the variables in the leading spot in the matrix rows.
+
+When dealing with infinitely many solutions, they still need to be defined. If $w$ and $y$ are the leading variables and $x$ and $z$ are free, the solution set(a vector) can be written by making the substitution $x = s$ and $z = t$.
+\begin{gather*}
+    \begin{bmatrix}
+    w\\
+    x\\
+    y\\
+    z
+    \end{bmatrix}
+     = \begin{bmatrix}
+     w(s)\textrm{ or }w(t)\\
+     s\\
+     y(s)\textrm{ or }y(t)\\
+     t
+     \end{bmatrix}
+\end{gather*}
+Since the number of leading variables is just the same as the number of nonzero rows, the number of free variables(also parameters $s$ and $t$) can be predicted before actually solving. The number of nonzero rows in an echelon form of a matrix is the same(proved later). This number is called the \textbf{rank} of the matrix. This implies that in an linear consistent system $A$ of $n$ variables:
+\begin{gather*}
+    \textrm{num of free variables = } n - \textrm{rank of $A$}
+\end{gather*}
+\subsubsection{Gauss-Jordan Elimination}
+A matrix is in \textbf{reduced echelon form} if:
+\begin{enumerate}
+    \item It is in row echelon form
+    \item The leading entry in echelon row is a $1$
+    \item Each column containing a leading $1$ has zeros in all other rows
+\end{enumerate}
+It is not really apparent but the reduced echelon form of a matrix is unique to equivalent matrices. So every equivalent matrix has the exact same reduced form(not proved here). Many problems in geometry can be solved using a linear system.
+
+\subsubsection{Homogeneous Systems}
+There is one type of system that always has at least one solution, the \textbf{homogeneous system} where the constant term vector is always $\vv{b} = \ve{0,0,0...0}$. This means that there will always be at least one solution, where every variable is 0. It will either have the one zero solution or infinitely many solutions(a property of lines).
+
+If there are more variables than equations in a homogeneous system then the system has an infinite number of solutions.
+\begin{proof}
+Since the system has one solution at least, rank($A) \leqslant m$), where $m$ is the number of equations, which is true because the number of equations is less than the number of variables. So,
+\begin{gather*}
+    \textrm{num of free variables} = n - \textrm{rank}(A) \geqslant n - m > 0
+\end{gather*}
+This shows that there is at least one free variables and there are infinite solutions.
+\end{proof}
+\subsubsection{Linear Systems on $\mathbb{Z}_p$}
+When $p$ is a prime number, we can solve system using elimination on $\mathbb{Z}_p$. For example $x + y + z = 1$ has exactly four solutions when $p = 2$. There are three cases when one variables is $1$ and all the others are $0$. The last case arises when all variables are $1$ since $1 + 1 + 1 = 1$. You don't need to use trial and error, since elimination works on these fields just as well as in $\mathbb{R}$.
 \end{document}
