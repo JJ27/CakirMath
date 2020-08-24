@@ -1634,7 +1634,7 @@ which is the equation for centripetal acceleration, go figure! Oftentimes, it is
     = vv'\vv{T}\vdot \vv{T} + \kappa v^3 \vv{T} \vdot \vv{N}\\
     = vv'
 \end{gather*}
-Last step because the dot product of the same vector is $1$, and the dot product of orthogonal vectors($\vv{T}$ and $\vv{N}$) is $0$.
+Last step because the dot product of two unit vectors is $1$, and the dot product of orthogonal vectors($\vv{T}$ and $\vv{N}$) is $0$.
 \begin{gather*}
     a_t = v' = \dfrac{\vv{v} \vdot \vv{a}}{v} = \dfrac{\vv{r}'(t) \vdot \vv{r}''(t)}{|\vv{r}'(t)|}\\
     a_n = \kappa v^2 = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|^3}|\vv{r}'(t)|^2 = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|}
@@ -1741,7 +1741,7 @@ If we define the vectors as in Figure \ref{vecplane}, we can see that the distan
 \end{gather*}
 Looking at the figure, it makes sense why a single plane can't be defined with parallel direction vectors, since more than one plane could fit those conditions. Also note that plane is a 2 dimensional object, and requires two parameters to fully define it. For example, the parametric equation for $y$:
 \begin{gather*}
-    y = \vv{x}_y = \vv{p}_y + s\vv{u}_y + t\vv{v}_y
+    y = \vv{x_y} = \vv{p_y} + s\vv{u_y} + t\vv{v_y}
 \end{gather*}
 Since there are infinitely many lines in a plane, a line cannot be defined this way either. However, with two nonparallel normal vectors and a point, a line can defined as the set of points through $P$ perpendicular to $\vv{n}_1 $ and $\vv{n}_2$. Imagine a line being the $z$-axis, defined by two normal vectors off the $x$ and $y$ axis, with the point being the origin. Each normal vector can define it's own plane, so:
 \begin{gather*}
@@ -1759,7 +1759,7 @@ This explains why the hyperplane defined by one equation is always one dimension
 \subsection{Systems of Linear Equations}
 A \textbf{linear equation} of $n$ variables $x_1,x_2...x_n$ is an equation that can be rewritten in the form:
 \begin{gather*}
-    a_1x_! + a_2x_2 + ... a_nx_n = b
+    a_1x_1 + a_2x_2 + ... a_nx_n = b
 \end{gather*}
 where all \textbf{coefficients} $a$ are and the \textbf{constant term} $b$ are constants. Note how the variable coefficients are all constants and not functions of $x$ or any other variable.
 
@@ -1870,8 +1870,93 @@ Since the system has one solution at least, rank($A) \leqslant m$), where $m$ is
 \begin{gather*}
     \textrm{num of free variables} = n - \textrm{rank}(A) \geqslant n - m > 0
 \end{gather*}
-This shows that there is at least one free variables and there are infinite solutions.
+This shows that there is at least one free variable and there are infinite solutions.
 \end{proof}
 \subsubsection{Linear Systems on $\mathbb{Z}_p$}
 When $p$ is a prime number, we can solve system using elimination on $\mathbb{Z}_p$. For example $x + y + z = 1$ has exactly four solutions when $p = 2$. There are three cases when one variables is $1$ and all the others are $0$. The last case arises when all variables are $1$ since $1 + 1 + 1 = 1$. You don't need to use trial and error, since elimination works on these fields just as well as in $\mathbb{R}$.
+\subsection{Spanning Sets and Linear Independence}
+One question: How do you find if a given vector is a linear combination of some other vectors?(see 1.1 for linear combination)
+
+For example, imagine these three vectors:
+\begin{gather*}
+    \vv{a} =
+    \begin{bmatrix}
+        a_x\\
+        a_y\\
+        a_z
+    \end{bmatrix}\hspace{30pt}
+    \vv{b} =
+    \begin{bmatrix}
+        b_x\\
+        b_y\\
+        b_z
+    \end{bmatrix}\hspace{30pt}
+    \vv{d} =
+    \begin{bmatrix}
+        d_x\\
+        d_y\\
+        d_z
+    \end{bmatrix}
+\end{gather*}
+We want to find out if $\vv{a}$ is a linear combination of $\vv{b}$ and $\vv{d}$, which means:
+\begin{gather*}
+    \begin{bmatrix}
+        a_x\\
+        a_y\\
+        a_z
+    \end{bmatrix}
+    = c_1
+    \begin{bmatrix}
+        b_x\\
+        b_y\\
+        b_z
+    \end{bmatrix}
+    + c_2
+    \begin{bmatrix}
+        d_x\\
+        d_y\\
+        d_z
+    \end{bmatrix}
+\end{gather*}
+for scalars $c_1,c_2$. This is easy though, by constructing a system of equations and using elimination on the matrix where $c_1,c_2$ are actually the \textit{variables} being solved for. If there are no solutions, then $\vv{a}$ is not a linear combination of the other two.
+
+So, a system of linear equations $[A|\vv{b}]$ is consistent if and only if $\vv{v}$ is a linear combination of the vectors formed on the columns of $A$.
+
+That should make sense, as it is saying there must be some values that satisfy the system, which is exactly what a consistent system is!
+\subsubsection{Spanning Sets}
+If $S = \{\vv{v_1},\vv{v_2}...\vv{v_k}\}$ is a set of vectors in $\mathbb{R}^n$, then the set of all the possible linear combinations of the vectors in $S$ is called the \textbf{span} of $S$. If span$(S) = \mathbb{R}^n$, then $S$ is a \textbf{spanning set} of $\mathbb{R}^n$.
+
+Because you can multiply an extra vector by the scalar $0$, any set that \textit{contains} a spanning set is also a spanning set. An easy spanning set is the unit vectors, since they can combine in varying amounts to produce a space.
+\subsubsection{Linear Independence}
+This is important because we can define \textbf{linear dependence} as when a vector is a linear combination of some other vectors. For example, $\vv{v}$ is dependent on $\vv{a}$ and $\vv{b}$:
+\begin{gather*}
+    \vv{v} = c_1\vv{a} + c_2\vv{b}
+\end{gather*}
+for scalars $c_1$ and $c_2$.
+However, in order for a \textit{set} of vectors to be linearly dependent, we have to define it differently, since which vector would be dependent on the rest?
+
+A set $S$ of vectors is \textbf{linearly dependent} if there are some scalars $c$ at least one of which is nonzero such that
+\begin{gather*}
+    c_1\vv{v_1} + c_2\vv{v_2} + c_k\vv{v_k} = 0
+\end{gather*}
+If $S$ does not meet these conditions then it is \textbf{linearly independent}.
+
+If all the scalars $c$ were $0$, then all vectors would be dependent. What linear dependence is saying is that the \textit{nontrivial} linear combination must be $0$, and so linear independence means the only way they can make $0$ is if all $c_i = 0$.
+
+This leads to some interesting observations. For example, every vector set containing the zero vector is dependent, because the nonzero scalar could be on the zero vector with all other scalars zero, which would result in a zero(dependent) result.
+
+The only way two vectors can be linearly dependent is if one is a multiple of the other. Why? Assume they are dependent:
+\begin{gather*}
+    c_1\vv{v} + c_2\vv{w} = 0\\
+    \vv{v} = -\dfrac{c_2}{c_1}\vv{w}
+\end{gather*}
+Another way to check for linear dependence(and to find a dependence relation) is to use a system of equations, with the scalars as variables. If the vectors are columns, then the constant vector is $\vv{b} = 0$, and if there is at least one \textit{nontrivial} solution, then the set of vectors is linearly dependent.
+
+Another method is to treat the vectors as rows of a matrix. Since performing elementary row operations results in an equivalent system, if any operation results in a new zero row, then the set is dependent. This is true because elementary row operations involve multiplying scalars and adding rows together, which is the same as a linear combination(any unused row vectors in the operation can have $c = 0$).
+
+In other words, if the \textit{rank} of the matrix is less than the original number of equations, then the set is dependent.
+
+One really thoughtful method concludes that if there are $m$ vectors in the set in $\mathbb{R}^n$, the set is linearly dependent is $m > n$. This is true because if the matrix form $[A,0]$ has a nontrivial solution, then we have dependence. This will always be true if we have more columns than rows(more variables(vectors) than equations), since the scalar on the "free" variable can balance out the sum of the other ones to make zero. We can always pick a scalar that works here, and so this means that if $m$(variables/num of vectors) is greater than $n$(equations/dimensions of the vector), the set is linearly dependent.
+\setcounter{subsection}{4}
+\subsection{Iterative Methods for Solving Linear Systems}
 \end{document}
