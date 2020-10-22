@@ -1639,6 +1639,42 @@ Last step because the dot product of two unit vectors is $1$, and the dot produc
     a_t = v' = \dfrac{\vv{v} \vdot \vv{a}}{v} = \dfrac{\vv{r}'(t) \vdot \vv{r}''(t)}{|\vv{r}'(t)|}\\
     a_n = \kappa v^2 = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|^3}|\vv{r}'(t)|^2 = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|}
 \end{gather*}
+\section{Partial Derivatives}
+\subsection{Functions of Two Variables}
+In some applications, a function requires a \textit{multivariable} input. This means it takes 2+ variables, such as $T = f(x,y)$. The temperature at a point on Earth requires a latitude and longitude input. The \textbf{domain} of $f$ is the constraints no lat and long($-90,90$ and $-180,180$). The range is the set of possible outputs. If no $D$ or $R$ is given, $D$ is assumed to be all numbers that make the function defined, and $R$ the outputs of $f(x_D,y_D)$.
+
+A function of 2 variables means that the input space is a subset of $\mathbb{R}^2$, a subset of the plane, and then range is a subset of $\mathbb{R}$, a number line.
+\subsubsection{Graphs}
+Normally, graphing is done similar to single variable functions. Like $y = f(x)$, $z = f(x,y)$. This creates a \textbf{surface}, like an ellipsoid.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.2]{Graphingf.png}
+\caption{A Simple Surface}
+\label{surface}
+\end{center}
+\end{figure}
+One special function:
+\begin{gather*}
+    \textrm{\textbf{Linear Multivariable Function: }} f(x,y) = ax + by + c
+\end{gather*}
+This function forms a plane when graphed.
+\subsubsection{Level Curves}
+Another way to visualize this type of function is a \textbf{level curve}. Think of traces of a function such that $f(x,y) = k$. This parallels contour maps and helps visualize the peaks and valleys of a function. The surface is steep when the contours are close together and further apart when the surface is shallow(note this steep/shallow does NOT correspond to direct height, just height \textit{change}). These are also similar to lines of electric potential(equipotential lines?).
+
+Note that without numbers you can only see the magnitude of the steepness, not the direction(it could be steep up or steep down).
+\subsection{Functions of 3+ Variables}
+Functions of \textit{three} or more variables are tricky but possible to work with. Using the same temperature example, you could write $T = f(x,y,t)$ where $t$ is now the \textit{time of year}, which is useful.
+
+Notice that the graph of $f(x,y)$ is generated in $3-D$. Similarly, the graph of $f(x,y,z)$ is in $4-D$ which is very difficult to imagine. However, you can imagine the traces of it like $f(x,y,z) = k$. For example, the function $f(x,y,z) = x^2 + y^2 + z^2$ has traces which are concentric spheres.
+
+For example, to find the total cost of a product which consists of $n$ parts, one could write:
+\begin{gather*}
+    f(x_1,x_2...x_n) = c_1x_1 + c_2x_2 ... c_nx_n
+\end{gather*}
+If you write two vectors $\vv{x} = \vl x_1, x_2...x_n \vr$ and $\vv{c}$ similarly, you can rewrite:
+\begin{gather*}
+    f(\vv{x}) = \vv{c} \vdot \vv{x}
+\end{gather*}
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
@@ -1958,5 +1994,5 @@ In other words, if the \textit{rank} of the matrix is less than the original num
 
 One really thoughtful method concludes that if there are $m$ vectors in the set in $\mathbb{R}^n$, the set is linearly dependent is $m > n$. This is true because if the matrix form $[A,0]$ has a nontrivial solution, then we have dependence. This will always be true if we have more columns than rows(more variables(vectors) than equations), since the scalar on the "free" variable can balance out the sum of the other ones to make zero. We can always pick a scalar that works here, and so this means that if $m$(variables/num of vectors) is greater than $n$(equations/dimensions of the vector), the set is linearly dependent.
 \setcounter{subsection}{4}
-\subsection{Iterative Methods for Solving Linear Systems}
+\subsection{Iterative Methods for Solving Linear Systems}t
 \end{document}
