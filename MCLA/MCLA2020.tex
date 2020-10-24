@@ -1640,7 +1640,7 @@ Last step because the dot product of two unit vectors is $1$, and the dot produc
     a_n = \kappa v^2 = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|^3}|\vv{r}'(t)|^2 = \dfrac{|\vv{r}' \times \vv{r}''|}{|\vv{r}'|}
 \end{gather*}
 \section{Partial Derivatives}
-\subsection{Functions of Two Variables}
+\subsection{Functions of Several Variables}
 In some applications, a function requires a \textit{multivariable} input. This means it takes 2+ variables, such as $T = f(x,y)$. The temperature at a point on Earth requires a latitude and longitude input. The \textbf{domain} of $f$ is the constraints no lat and long($-90,90$ and $-180,180$). The range is the set of possible outputs. If no $D$ or $R$ is given, $D$ is assumed to be all numbers that make the function defined, and $R$ the outputs of $f(x_D,y_D)$.
 
 A function of 2 variables means that the input space is a subset of $\mathbb{R}^2$, a subset of the plane, and then range is a subset of $\mathbb{R}$, a number line.
@@ -1662,7 +1662,7 @@ This function forms a plane when graphed.
 Another way to visualize this type of function is a \textbf{level curve}. Think of traces of a function such that $f(x,y) = k$. This parallels contour maps and helps visualize the peaks and valleys of a function. The surface is steep when the contours are close together and further apart when the surface is shallow(note this steep/shallow does NOT correspond to direct height, just height \textit{change}). These are also similar to lines of electric potential(equipotential lines?).
 
 Note that without numbers you can only see the magnitude of the steepness, not the direction(it could be steep up or steep down).
-\subsection{Functions of 3+ Variables}
+\subsubsection{Functions of 3+ Variables}
 Functions of \textit{three} or more variables are tricky but possible to work with. Using the same temperature example, you could write $T = f(x,y,t)$ where $t$ is now the \textit{time of year}, which is useful.
 
 Notice that the graph of $f(x,y)$ is generated in $3-D$. Similarly, the graph of $f(x,y,z)$ is in $4-D$ which is very difficult to imagine. However, you can imagine the traces of it like $f(x,y,z) = k$. For example, the function $f(x,y,z) = x^2 + y^2 + z^2$ has traces which are concentric spheres.
@@ -1675,6 +1675,62 @@ If you write two vectors $\vv{x} = \vl x_1, x_2...x_n \vr$ and $\vv{c}$ similarl
 \begin{gather*}
     f(\vv{x}) = \vv{c} \vdot \vv{x}
 \end{gather*}
+\subsection{Limits and Continuity}
+Taking an example function:
+\begin{gather*}
+    f(x,y) = \frac{\sin(x^2-y^2)}{x^2+y^2}
+\end{gather*}
+As $x$ and $y$ both approach $0$(the origin), we can find that the function approaches $1$. This can be written using multivariable limit notation:
+\begin{gather*}
+    \lim_{(x,y) \to (0,0)} f(x,y) = 0
+\end{gather*}
+This means that if you take any path in the domain of $f$ to $(0,0)$, you will approach $1$. You can get as close to the limit $L$ as you want by taking $(a,b)$ sufficiently close to $(0,0)$. The epsilon-delta definition:
+
+Let $f$ be a function of two variables, where the domain has all points \textit{arbitrarily} close to $(a,b)$(a small circle around the point). The \textbf{limit} of $f$ is $L$:
+\begin{gather*}
+    \lim_{(x,y) \to (a,b)} f(x,y) = L
+\end{gather*}
+if for every real number $\varepsilon > 0$ there is another number $\delta > 0$ where $f$ is $\varepsilon$ close to $L$ ($|f(x,y) - L| < \varepsilon$) whenever $(x,y)$ is in the domain and $0 < \sqrt{(x-a)^2 + (y-b)^2} < \delta$
+
+Note the final part. That is the distance formula in 2D, from $(x,y)$ to $(a,b)$. This is used because there are multiple directions of approach in 3D functions. Back in 2D you could only approach from left or right. Now you can from any direction, which is why this definition uses \textit{distance}.
+
+In fact, for a limit to be true it must be able to be approached from \textbf{all directions}. If it even fails in one direction then the limit \textbf{does not exist}.
+\subsubsection{Existing Limits}
+Calculating limits for multivariable functions can be greatly simplified by using limit laws. The squeeze theorem also works(though it's very interesting to squeeze a surface in between two others). Mainly use the epsilon-delta definition and start with:
+\begin{gather*}
+    |f(x,y) - L| < \varepsilon
+\end{gather*}
+Then work to find a $\delta$ using inequalities which fits the requirements and constraints given by the function and inequality methods. If you really can't find one it probably doesn't exist.
+\subsubsection{Continuity}
+A characteristic property of continuity in single variable functions is that $\lim_{x \to a} f(x) = f(a)$, which proves the function of continuous. Similarly, that works here:
+
+A function $f(x,y)$ is \textbf{continuous} at $(a,b)$ if
+\begin{gather*}
+    \lim_{(x,y) \to (a,b)} f(x,y) = f(a,b)
+\end{gather*}
+$f$ is continuous entirely if it fits this defintion over its entire domain. Using limit laws you can see why adding, subtracting, multiplying or dividing two continuous functions will still give a continuous function.
+
+A \textbf{polynomial function} in two variables takes the form:
+\begin{gather*}
+    f(x,y) = c_0x^my^n + ...
+\end{gather*}
+Since these functions are built up from the functions $f(x,y) = x, y, c$, all of which are continuous, \textbf{all polynomial functions are continuous}. \textbf{Rational Functions}, which are ratios of two polynomials, are also continuous(yes they are!) because limits work over division too.
+
+Now what about undefined polynomials? Like when the denominator is zero. Remember to be continuous, a function only needs to be continuous over it's \textit{domain}. Therefore, rational functions are still continuous. Lastly, it can be shown that for two continuous functions $f$ and $g$, $f \circ g$ is also continuous.
+\subsubsection{Functions of 3+ Variables}
+Everything done so far in this section can be extended to functions of $n$ variables, like:
+\begin{gather*}
+    \lim_{(x,y,z) \to (a,b,c)} f(x,y,z) = L
+\end{gather*}
+In this case the distance would be $\sqrt{(x-a)^2 + (y-b)^2 + (z-c)^2}$.
+
+To extend this further, we can use the vector notation from last section:
+
+If $f(\vv{x})$ is a function over its domain in $\mathbb{R}^n$, then $\lim_{\vv{x} \to \vv{a}} f(\vv{x}) = L$ if for every (small) number $\varepsilon > 0$ there is a $\delta > 0$ where:
+\begin{gather*}
+    |f(\vv{x}) - L| < \varepsilon \textrm{ whenever } x \in \textrm{ domain and } 0 < |\vv{x} - \vv{a}| < \delta
+\end{gather*}
+Notice how that last part is the \textit{magnitude} of the subtracted vector, which is basically the distance between them. Genius!
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
