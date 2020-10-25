@@ -39,6 +39,7 @@
 \makeatletter
 \newcommand*\vdot{\mathpalette\vdot@{.5}}
 \newcommand*\vdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\newcommand{\p}{\partial}
 \makeatother
 
 \begin{document}
@@ -1731,6 +1732,51 @@ If $f(\vv{x})$ is a function over its domain in $\mathbb{R}^n$, then $\lim_{\vv{
     |f(\vv{x}) - L| < \varepsilon \textrm{ whenever } x \in \textrm{ domain and } 0 < |\vv{x} - \vv{a}| < \delta
 \end{gather*}
 Notice how that last part is the \textit{magnitude} of the subtracted vector, which is basically the distance between them. Genius!
+\subsection{Partial Derivatives}
+\subsubsection{The Partial Derivative}
+Sometimes it becomes useful(with multivar functions) to see the effect that a tiny change in a single variable has on the function. This is done by keeping the other variable constant(which means this new derivative will also vary with the value of the other variable). This derivative is called a \textbf{partial derivative}. For example, a function $f(x,y)$ can have a partial derivative with respect to $x$:
+\begin{gather*}
+    f_x(x,y) = f_x = \frac{\p f}{\p x} = \lim_{h \to 0} \frac{f(x+h,y) - f(x,y)}{h}
+\end{gather*}
+This can also be written as $\frac{\p z}{\p x}$. Finding partial derivatives isn't that difficult. You just take the derivative of the function with respect to the variable, while treating other variables as constants(yes if a function is made of just a constant than it's derivative is zero).
+\subsubsection{Geometric Interpretations of Partial Derivatives}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.4]{PartialInterpretations.png}
+\caption{Geometric Partial Derivatives}
+\label{partderiv}
+\end{center}
+\end{figure}
+A surface $S$ is defined by $z = f(x,y)$, where a point $P(a,b,c)$ is present. By setting $y = b$ constant, we focus on the intersection between the plane $y = b$ and $S$, which is the curve $C_1$. Now by taking the derivative respect to $x$ here, you're locating the tangent $T_1$, where the slope of that tangent is $f_x(a,b)$. The same works for $f_y(a,b)$ on $C_2$ and $T_2$.
+\subsubsection{Functions of 3+ variables}
+To define partials with functions of 3+ variables, just keep 2+ constant and take with respect to one of them.
+\begin{gather*}
+    f_x(x,y,z) = \lim_{h \to 0} \frac{f(x+h,y,z) - f(x,y,z)}{h}
+\end{gather*}
+Geometric interpretation here is difficult. Partial derivatives can be taken with functions of any number of variables.
+\subsubsection{Higher Order Derivatives}
+If $f$ is a function of two variables, then the partial derivatives will also be functions of two variables. This means you can take $f_{xx}$ or $f_{yy}$. You can also take things like:
+\begin{gather*}
+    f_{xy} = \frac{\p}{\p y}\bigg(\frac{\p f}{\p x}\bigg) = \frac{\p^2f}{\p y \p x}
+\end{gather*}
+Note that this notation can sometimes be a little confusing, since $f_{xy} = \frac{\p^2f}{\p y \p x}$. So when you see the Leibniz notation, evaluate the rightmost partial first and then the one on the left.
+
+An interesting relationship here is that for most functions, $f_{xy} = f{yx}$, which is called \textbf{Clairaut's Theorem}. It works only when both second order partials are continuous on a "small enough disk" that contains the point.
+
+You can also define 3rd order partials similar to how you would define them for normal derivatives.
+\subsubsection{Partial Differential Equations}
+Partial derivatives occur often in physics as \textbf{partial differential equations} to express physical laws. For example,
+\begin{gather*}
+    \frac{\p^2 u}{\p x^2} + \frac{\p^2 u}{\p y^2} = 0
+\end{gather*}
+is called \textbf{Laplace's Equation} and functions that satisfy this are called \textbf{harmonic functions}, which have applications in many physical fields.
+
+The basic \textbf{wave equation}:
+\begin{gather*}
+    \frac{\p^2 u}{\p t^2} = a^2 \frac{\p^2 u}{\px^2}
+\end{gather*}
+
+This describes the motion of a wave where $u(x,t)$ is the (vertical) displacement of a string from equilibrium. This says that the acceleration of the string's distance from equilibrium is proportional to the acceleration in the string's height with respect to the distance(2nd derivative). For example, functions like $sin(x - at)$ would satisfy this.
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
