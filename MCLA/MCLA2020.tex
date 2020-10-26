@@ -1762,6 +1762,9 @@ If $f$ is a function of two variables, then the partial derivatives will also be
 Note that this notation can sometimes be a little confusing, since $f_{xy} = \frac{\p^2f}{\p y \p x}$. So when you see the Leibniz notation, evaluate the rightmost partial first and then the one on the left.
 
 An interesting relationship here is that for most functions, $f_{xy} = f{yx}$, which is called \textbf{Clairaut's Theorem}. It works only when both second order partials are continuous on a "small enough disk" that contains the point.
+\begin{proof}
+You can prove this by using the limit definiton and you will find that taking the limit of the limit(second derivative) will yield the same number either way(and this will only work when continuous).
+\end{proof}
 
 You can also define 3rd order partials similar to how you would define them for normal derivatives.
 \subsubsection{Partial Differential Equations}
@@ -1773,10 +1776,135 @@ is called \textbf{Laplace's Equation} and functions that satisfy this are called
 
 The basic \textbf{wave equation}:
 \begin{gather*}
-    \frac{\p^2 u}{\p t^2} = a^2 \frac{\p^2 u}{\px^2}
+    \frac{\p^2 u}{\p t^2} = a^2 \frac{\p^2 u}{\p x^2}
 \end{gather*}
 
 This describes the motion of a wave where $u(x,t)$ is the (vertical) displacement of a string from equilibrium. This says that the acceleration of the string's distance from equilibrium is proportional to the acceleration in the string's height with respect to the distance(2nd derivative). For example, functions like $sin(x - at)$ would satisfy this.
+
+\subsection{Tangent Planes and Linear Approximations}
+If you zoom in far enough to a single variable function, you will get something that starts to look more and more like a line, the tangent line. This idea should be similar in 3D, instead having a differential that works with two-variable functions instead.
+\subsubsection{Tangent Planes}
+Let's say a surface $S$ has an equation $z = f(x,y)$, and let $P_0(x_0,y_0,z_0)$ be a point on $S$. Using the direction curves from last section, the \textbf{tangent plane} of $S$ at $P_0$ is defined to be the plane that contains the intersecting tangents which are the slopes of the partial derivatives.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.7]{TangentPlanes.jpeg}
+\caption{Tangent Plane}
+\label{tanplanes}
+\end{center}
+\end{figure}
+The general equation for a plane is:
+\begin{gather*}
+    A(x-x_0) + B(y-y_0) + C(z-z_0) = 0
+\end{gather*}
+Dividing by $C$, and letting $a = -\frac{A}{C}$, and $b = -\frac{B}{C}$:
+\begin{gather*}
+    z - z_0 = a(x-x_0) + b(y-y_0)
+\end{gather*}
+Now by intersecting it with the plane $y = y_0$:
+\begin{gather*}
+    z - z_0 = a(x-x_0) \hspace{50pt} y = y_0
+\end{gather*}
+Notice how this looks similar to point-slope form, wherre $a$ is the slope, which we know to be $f_x(x_0,y_0)$. Doing the same for $y$ we can get:
+\begin{gather*}
+    z - z_0 = f_x(x_0,y_0) (x-x_0) + f_y(x_0,y_0) (y-y_0)
+\end{gather*}
+As you zoom in further to $P_0$, the level curves of the function begin to look more and more like parallel lines(with the same slope as a tangent plane), which is similar to the single variable equivalent.
+\subsubsection{Linear Approximations}
+Note how a tangent plane is similar to a tangent line. In fact, using the tangent plane equation can be a good approximation for the function, but only near the point of approximation and not further. The function $L$ of the tangent plane to a point is called the \textbf{linearization} of $f$ at the point.
+\subsubsection{Differentiability}
+Sometimes the partial derivatives of a function can exist, so the "differentiability implies continuity" doesn't really work for partial derivatives. Consider $f(x,y)$ with small changes to it:
+\begin{gather*}
+    \Delta z = f(a + \Delta x, b + \Delta y) - f(a,b)
+\end{gather*}
+So you can define real differentiability to be when $\Delta z$ can be expressed as:
+\begin{gather*}
+    \Delta z = f_x(a,b)\Delta x + f_y(a,b) \Delta y + \varepsilon_1 x + \varepsilon_2 y
+\end{gather*}
+Where both $\varepsilon \to 0$ as $\Delta x, \Delta y \to 0$.
+
+That definition is pretty hard to use so you can see if $f_x$ and $f_y$ exist near $(a,b)$ and are both continuous at that point, then $f$ is differentiable(can you see why?)
+\subsubsection{Differentials}
+In single-variable calculus, a differential is a small number $dx$ that can be given any small value. The other differential $dy$ is defined as:
+\begin{gather*}
+    dy = f'(x) dx
+\end{gather*}
+Now the \textbf{total differential} $dz$ can be defined as adding up all the changes coming from the other differentials, using partial derivatives:
+\begin{gather*}
+    dz = \frac{\p z}{\p x}dx + \frac{\p z}{\p y}dy
+\end{gather*}
+So instead using $dx = \Delta x = x - a$ and $dy = \Delta y = y - b$, we can write this in a familiar form:
+\begin{gather*}
+    dz = f_x(a,b)(x-a) + f_y(a,b)(y-b)
+\end{gather*}
+This is similar to a linear approximation, in fact we can rewrite the entrie linear approximation as:
+\begin{gather*}
+    f(x,y) \approx f(a,b) + dz
+\end{gather*}
+To see the geometric interpretation, $\Delta z$ is the change in the height of the surface, while $dz$ is the change in the height of the \textit{tangent plane}.
+\subsubsection{Functions of 3+ Variables}
+Extending again to three variables, the \textbf{linear approximation} is:
+\begin{gather*}
+    f(x,y,z) \approx f(a,b,c) + f_x(a,b,c)(x-a) + f_y(a,b,c)(y-b) + f_x(a,b,c)(z-c)
+\end{gather*}
+The \textbf{differential}, this time called $dw$:
+\begin{gather*}
+    dw = \frac{\p w}{\p x}dx + \frac{\p w}{\p y}dy + \frac{\p w}{\p z}dz
+\end{gather*}
+\subsection{The Chain Rule}
+For single variable calculus, the chain rule was:
+\begin{gather*}
+    \frac{dy}{dt} = \frac{dy}{dx}\frac{dx}{dt}
+\end{gather*}
+The new chain rule has a few different versions for its different cases.
+\subsubsection{Chain Rule One}
+\begin{gather*}
+    \frac{dz}{dt} = \frac{\p f}{\p x}\frac{dx}{dt} + \frac{\p f}{\p y}\frac{dy}{dt}
+\end{gather*}
+\begin{proof}
+Dividing the definition in the last section by $\Delta t$ yields:
+\begin{gather*}
+    \frac{\Delta z}{\Delta t} = \frac{\p f}{\p x}\Delta x + \frac{\p f}{\p y} \Delta y + \frac{\varepsilon_1 \Delta x}{\Delta t} + \frac{\varepsilon_2 \Delta y}{\Delta t}
+\end{gather*}
+Now taking $t \to 0$:
+\begin{gather*}
+    \frac{dz}{dt} = \frac{\p f}{\p x}\frac{dz}{dt} + \frac{\p f}{\p y} \frac{dy}{dt} + \lim_{t \to 0} \varepsilon_1 \frac{dx}{dt} + \lim_{t \to 0} \varepsilon_2 \frac{dy}{dt}
+\end{gather*}
+Since both $\varepsilon \to 0$, the final form is proved.
+\end{proof}
+This theorem should make a lot of sense.
+\subsubsection{Chain Rule Two}
+This case is used for when $x$ and $y$ are functions of two \textbf{independent variables} $s$ and $t$. By holding one of them constant, you can calculate the partial with respect to the other one by using Chain Rule One.
+
+\begin{gather*}
+    \frac{\p z}{\p s} = \frac{\p z}{\p x}\frac{\p x}{\p s} + \frac{\p z}{\p y}\frac{\p y}{\p s}
+\end{gather*}
+Then do the same thing for the $t$ variable. This should also make sense since you're adding up all the partial changes to get the full change.
+\subsubsection{Chain Rule General}
+The general chain rule now extends to $n$ variables, and takes on the same form:
+\begin{gather*}
+    \frac{\p u}{\p t_i} = \frac{\p u}{\p x_1}\frac{\p x_1}{\p t_1} + \frac{\p u}{\p x_2}\frac{\p x_2}{\p t_2}...\frac{\p u}{\p x_n}\frac{\p x_n}{\p t_i}
+\end{gather*}
+\subsubsection{Implicit Differentiation}
+If there's a function of two variables that is defined implicitly: $F(x,y) = 0$. You can differentiate both sides(assume $y = f(x)$):
+\begin{gather*}
+    \frac{\p F}{\p x}\frac{dx}{dx} + \frac{\p F}{\p y}\frac{dy}{dx}
+\end{gather*}
+Solving for the derivative:
+\begin{gather*}
+    \frac{dy}{dx} = -\frac{\frac{\p F}{\p x}}{\frac{\p F}{\p y}} = -\frac{F_x}{F_y}
+\end{gather*}
+The \textbf{Implicit Function Theorem} from advanced calculus can back this up, showing with certain assumptions that $y$ is a function of $x$ and that this definition holds.
+
+Now if $z = f(x,y)$ and $z$ is a third input variable into a 3 variable function, $F(x,y,f(x,y)) = 0$, then we can write:
+\begin{gather*}
+    \frac{\p F}{\p x}\frac{\p x}{\p x} + \frac{\p F}{\p y}\frac{\p y}{\p x} + \frac{\p F}{\p z}\frac{\p z}{\p x} = 0
+\end{gather*}
+Since $\frac{\p y}{\p x} = 0$, we can cancel that term and solve for the other partials:
+\begin{gather*}
+    \frac{\p z}{\p x} = -\frac{\frac{\p F}{\p x}}{\frac{\p F}{\p z}}\\
+    \frac{\p z}{\p y} = -\frac{\frac{\p F}{\p x}}{\frac{\p F}{\p y}}
+\end{gather*}
+
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
