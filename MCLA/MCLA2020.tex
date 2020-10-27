@@ -2038,7 +2038,7 @@ Notice how this form works and is easy to remember.
 \begin{proof}
 The first order directional derivative on $\vv{u} = \vl h,k \vr$ is:
 \begin{gather*}
-    D_{\vv{u}} f = f_x h + f_y k
+    D_{\hat{u}} f = f_x h + f_y k
 \end{gather*}
 Take the directional derivative a second time and complete the square(it's actually pretty complicated to do).
 \end{proof}
@@ -2049,7 +2049,37 @@ For a function of one variable continuous on $[a,b]$, $f$ must attain a maximum 
     \item Find the max and min values on the boundary of the interval(set).
     \item Compare those values to find the absolute max and min
 \end{enumerate}
+\subsection{Lagrange Multipliers}
+Lagrange's Method makes it possible to find the maximum and minimum values of a function $f$ of 2+ variables when there is a constraint(s) $g(x,y) = k$ or $g(x.y,z) = k$.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.7]{LagrangeMultiplier.png}
+\caption{Level Curve Intersections}
+\label{lag-mult}
+\end{center}
+\end{figure}
+We want to find any extreme values of $f$ when $f(x,y)$ lies on the level curve $g(x,y) = k$. This maximum value happens at the largest level curve of $f$(level curves in red) where they just barely meet. This largest value will have share the tangent with $g$. This works because remember $f$ has infinitely many level surfaces, so the highest one does exist and does share the tangent. Since both $\n f$ and $\n g$ are perpendicular to their tangents, a shared tangent means the gradient vectors are parallel.
 
+Since they are parallel, there must be a number $\lambda$ such that:
+\begin{gather*}
+    \n f(x_0,y_0,z_0) = \lambda \n g(x_0,y_0,z_0)
+\end{gather*}
+This number is called the \textbf{Lagrange Multiplier}.
+
+So to find the max and min values, first solve the system of equations for all $(x,y,z)$ such that:
+\begin{gather*}
+    \n f(x,y,z) = \lambda \n g(x,y,z)\hspace{20pt}g(x,y,z) = k
+\end{gather*}
+The compare these points to find the min. and max. values of $f$. If you write the equations in terms of scalar components:
+\begin{gather*}
+    f_x = \lambda g_x\hspace{20pt}f_y = \lambda g_y\hspace{20pt}...g(x,y,z) = k
+\end{gather*}
+\subsubsection{Two Constraints}
+When using 4D functions, you can add two constraints. When you imagine the level surfaces of such a function, they would be normal 3D surfaces. This means that you could intersect them to form a curve $C$. The gradients to both surfaces would be orthogonal to C, and so they themselves are perpendicular(assuming they aren't parallel). You can write(similar to $\hat{i}$ and $\hat{j}$ vector notation):
+\begin{gather*}
+    \n f = \lambda \n g + \mu \n h
+\end{gather*}
+By using components, which are the partials in each direction, you can effectively solve a system of equations that would find all the points, and compare those to find the max and min.
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
