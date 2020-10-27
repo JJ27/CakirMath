@@ -40,6 +40,7 @@
 \newcommand*\vdot{\mathpalette\vdot@{.5}}
 \newcommand*\vdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
 \newcommand{\p}{\partial}
+\newcommand{\n}{\nabla}
 \makeatother
 
 \begin{document}
@@ -1904,6 +1905,150 @@ Since $\frac{\p y}{\p x} = 0$, we can cancel that term and solve for the other p
     \frac{\p z}{\p x} = -\frac{\frac{\p F}{\p x}}{\frac{\p F}{\p z}}\\
     \frac{\p z}{\p y} = -\frac{\frac{\p F}{\p x}}{\frac{\p F}{\p y}}
 \end{gather*}
+\subsection{Directional Derivatives and the Gradient}
+\subsubsection{The Directional Derivative}
+Imagining any surface, we know how to find the rate of change going in the $x$ or $y$ directions. However, what if you want to go in \textit{any} direction? Like a direction specified by a point or vector? Enter the \textbf{directional derivative}.
+
+The partial derivatives $f_x$ and $f_y$ already give special cases of the partial derivative in the $\hat{i}$ and $\hat{j}$ directions. But if we want to find the rate of change for $z$ at a point $(x_0,y_0.z_0)$, we can use a general vector $\vv{u} = \vl a,b \vr$. Now consider a random surface $S$.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.15]{DirectDeriv.png}
+\caption{Directional Derivative}
+\label{dirderiv}
+\end{center}
+\end{figure}
+The plane that slices through the surface is in the direction of $\vv{u}$ and therefore the tangent $T$ represents the directional derivative in the $\vv{u}$ direction. Imagine a general point $Q(x,y,z)$ on the curve and project both points to $P',Q'$ on the $xy$ plane. Then:
+\begin{gather*}
+    \vv{P'Q'} = h\vv{u}
+\end{gather*}
+because $\vv{u}$ is parallel to $\vv{P'Q'}$ since both projected points were on the plane($h$ is a constant here). Looking at the right triangle in Fig. \ref{dirderiv}:
+\begin{gather*}
+    \Delta x = x - x_0 = ha\\
+    \Delta y = y - y_0 = hb\\
+    \frac{\Delta z}{h} = \frac{z-z_0}{h} = \frac{f(x_0 + ha, y_0 + hb) - f(x_0,y_0)}{h}
+\end{gather*}
+Now by taking $h \to 0$, we can find the directional derivative:
+\begin{gather*}
+    D_{\vv{u}}f(x_0,y_0) = \lim_{h \to 0} \frac{f(x_0 + ha, y_0 + hb) - f(x_0,y_0)}{h}
+\end{gather*}
+There is often an easier way to apply this, because:
+\begin{gather*}
+    D_{\vv{u}}f(x,y) = f_x a + f_y b
+\end{gather*}
+\begin{proof}
+Imagine a function of \textbf{single variable} $h$. Remember $h$ is not a constant here, such that:
+\begin{gather*}
+    g(h) = f(x_0 + ha, y_0 + hb)
+\end{gather*}
+The normal definition of a derivative gives:
+\begin{gather*}
+    g'(0) = \lim_{h \to 0}\frac{f(x_0 + ha, y_0 + hb) - f(x_0,y_0)}{h} = D_{\vv{u}}f(x_0,y_0)
+\end{gather*}
+If we rewrite $g(h) = f(x,y)$, then $x = x_0 + ha$ and $y = y_0 + hb$, now using the Chain Rule:
+\begin{gather*}
+    g'(h) = \frac{\p f}{\p x}\frac{dx}{dh} + \frac{\p f}{\p y}\frac{dy}{dh} = f_x a + f_y b
+\end{gather*}
+Now by taking $g'(0)$, we can see that both equations for $g'(0)$ are equal and so QED.
+\end{proof}
+Note that $\vv{u}$ must be a \textbf{unit vector} for this(pending verification here). Since it is a unit vector, we can use $a = \cos(\theta)$ and $b = \sin(\theta)$ to make $\vv{u} = \vl \cos(\theta), \sin(\theta) \vr$ and you can use an angle to specify the direction instead.
+\subsubsection{The Gradient Vector}
+Note that from the formula for the directional derivative, you can rewrite it as a dot product of two vectors.
+\begin{gather*}
+    D_{\vv{u}} f = f_x a + f_y b\\
+    = \vl f_x, f_y \vr \vdot \vv{u}
+\end{gather*}
+The first vector, which consists of the partial derivatives of $f$, is called the \textbf{gradient vector}, or \textbf{grad} $f$, or $\nabla f$, which is read "del" f.n So:
+\begin{gather*}
+    \nabla f = \frac{\p f}{\p x}\hat{i} + \frac{\p f}{\p y}\hat{j}\\
+    D_{\vv{u}} f = \n f \vdot \vv{u}
+\end{gather*}
+All the concepts discussed in this section so far work for multiple dimensions as well.
+\subsubsection{Maximizing the Directional Derivative}
+Imagine a differentiable function $f$ of 2-3 variables. The \textbf{maximum value} of the directional derivative is $|\n f(\vv{x})|$ and it occurs when $\vv{u}$ points in the same direction as $\vv{\n f(x)}$.
+\begin{proof}
+\begin{gather*}
+    D_{\vv{u}} f = \n f \vdot \vv{u} = |\n f||\vv{u}| \cos(\theta) =  |\n f| \cos(\theta)
+\end{gather*}
+The max. value occurs when $\theta = 0$, and it's the magnitude of the gradient vector. When $\theta = 0$, that means $\vv{u}$ and $\n f$ are in the same direction.
+\end{proof}
+\subsubsection{Tangent Planes to Level Surfaces}
+Imagine a level surface with $F(x,y,z) = k$ with $P(x_0,y_0,z_0)$. Define a curve $C$ that lies on the surface, so the curve can be detailed by $\vv{r}(t) = \vl x(t), y(t), z(t) \vr$, where P is a point on that. If $F$ and $x,y,z$ are differentiable:
+\begin{gather*}
+    \frac{\p F}{\p x}\frac{dx}{dt} + \frac{\p F}{\p y}\frac{dy}{dt} + \frac{\p F}{\p z}\frac{dz}{dt} = 0
+\end{gather*}
+Synthesizing this with a dot product:
+\begin{gather*}
+    \n F \vdot \vv{r}'(t) = 0
+\end{gather*}
+Particularly, $\n F(x_0,y_0,z_0) \vdot \vv{r}'(t_0) = 0$. Notice how this equation looks very similar to a plane. This equation means that the gradient is always perpendicular to the tangent vector to any curve that passes through the point on the surface. So now we can define the \textbf{tangent plane} to be the plane with normal vector $\n F$ that passes through the point $P$. Rewriting tihs:
+\begin{gather*}
+    F_x(x - x_0) + F_Y(y-y_0) + F_z(z-z_0) = 0
+\end{gather*}
+Converting this to the symmetric form:
+\begin{gather*}
+    \frac{x-x_0}{F_x} = \frac{y - y_0}{F_y} = \frac{z - z_0}{F_z}
+\end{gather*}
+Remember that we talked about tangent planes before, for the special case when it's only $z = f(x,y)$. You can write $F(x,y,z) = f(x,y) - z = 0$. Since you know $F = 0$ always, you can write the partial derivatives:
+\begin{gather*}
+    F_x = f_x\hspace{20pt}F_y = f_y \hspace{20pt}F_z = -1
+\end{gather*}
+So this special case becomes:
+\begin{gather*}
+    f_x(x-x0) + f_y(y-y_0) -(z-z_0) = 0
+\end{gather*}
+Rearranging this will get the tangent plane equation we found in section 15.4.
+\subsubsection{Significance of the Gradient}
+The gradient vector will always point in the direction of the \textbf{fastest increase}, we also know that the gradient will also point in the perpendicular direction to the level surface. Along the level surface, $f$ stays constant, so traveling $\perp$ to that will give you the fastest increase(think equipotential lines in a way). The gradient vector from a point can map out a curve that draws the curve of fastest ascent of $f$.
+\subsection{Maximum and Minimum Values}
+One of the most useful applications of the normal derivative was to find maximum and minimum values. $f(a,b)$ is a local maximum if for all points $(x,y)$ on a disk near $(a,b)$, $f(a,b) \geq f(x,y)$ and less for a local minimum. If these work for all points in the domain then they are absolute maxima or minima.
+
+If $f(a,b)$ is a local maximum or minimum at a point and the partial derivatives exist, then both partial derivatives must be zero at that point.
+\begin{proof}
+The reason this makes sense is because if you take a slice in the x or y directions, the same first derivative test should work as well(intuition there).
+\end{proof}
+If you think about it, whenever you have a local max or min, the tangent plane should be tangent. A point is a \textbf{critical point} if $f_x$ and $f_y$ both $= 0$. Now if you remember from single variable calculus, not all critical points are maxima or minima. Some are neither.
+
+This is actually possible in 3D. You can have a tangent plane be horizontal and not be a local min or max.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.7]{saddlePoint.png}
+\caption{Saddle Point}
+\label{saddle}
+\end{center}
+\end{figure}
+It's not a local maximum or minimum, but the tangent at the center is horizontal. This is called a \textbf{saddle point}. There's also something similar to the \textit{second derivative test} in single variable calculus.
+
+If the second partial derivatives of $f$ are continuous on a disk around $(a,b)$, where $f_x = 0$ and $f_y = 0$ there. Basically, $(a,b)$ is a critical point. Let:
+\begin{gather*}
+    D = D(a,b) = f_{xx}(a,b)f_{yy}(a,b) - \bigg[f_{xy}(a,b)]\bigg]^2
+\end{gather*}
+\begin{enumerate}
+    \item If $D > 0$ and $f_{xx}(a,b) > 0$, then $f(a,b)$ is a local max.
+    \item If $D > 0$ and $f_{xx}(a,b) < 0$, then $f(a,b)$ is a local min.
+    \item If $D < 0$, then this point is neither, it is a \textbf{saddle point}.
+\end{enumerate}
+This form can be written as a determinant:
+\begin{gather*}
+\begin{bmatrix}
+f_{xx} & f_{xy}\\
+f_{yx} & f_{yy}
+\end{bmatrix}
+\end{gather*}
+Notice how this form works and is easy to remember.
+\begin{proof}
+The first order directional derivative on $\vv{u} = \vl h,k \vr$ is:
+\begin{gather*}
+    D_{\vv{u}} f = f_x h + f_y k
+\end{gather*}
+Take the directional derivative a second time and complete the square(it's actually pretty complicated to do).
+\end{proof}
+\subsubsection{Absolute Maxima and Minima}
+For a function of one variable continuous on $[a,b]$, $f$ must attain a maximum and a minimum value by the extreme value theorem. This can be similar for two variable functions as well. However, to define an interval here we need to use a disk. A \textbf{closed set} contains the disk as well as the circle bounding it while an \textbf{open set} does not. A \textbf{bounded set} is a set which is contained within one disk. Within a closed, bounded set, a continous function $f$ must attain a maximum and minimum value at some point within it. To find these values:
+\begin{enumerate}
+    \item Find the values of $f$ which are critical points.
+    \item Find the max and min values on the boundary of the interval(set).
+    \item Compare those values to find the absolute max and min
+\end{enumerate}
 
 \newpage
 \part{Linear Algebra}
