@@ -1643,11 +1643,11 @@ Last step because the dot product of two unit vectors is $1$, and the dot produc
 \end{gather*}
 \section{Partial Derivatives}
 \subsection{Functions of Several Variables}
-In some applications, a function requires a \textit{multivariable} input. This means it takes 2+ variables, such as $T = f(x,y)$. The temperature at a point on Earth requires a latitude and longitude input. The \textbf{domain} of $f$ is the constraints no lat and long($-90,90$ and $-180,180$). The range is the set of possible outputs. If no $D$ or $R$ is given, $D$ is assumed to be all numbers that make the function defined, and $R$ the outputs of $f(x_D,y_D)$.
+In some applications, a function requires a \textit{multivariable} input. This means it takes 2+ variables, such as $T = f(x,y)$. The temperature at a point on Earth requires a latitude and longitude input. The \textbf{domain} of $f$ is the constraints on lat and long($-90,90$ and $-180,180$). The range is the set of possible outputs. If no $D$ or $R$ is given, $D$ is assumed to be all numbers that make the function defined, and $R$ the outputs of $f(x_D,y_D)$.
 
 A function of 2 variables means that the input space is a subset of $\mathbb{R}^2$, a subset of the plane, and then range is a subset of $\mathbb{R}$, a number line.
 \subsubsection{Graphs}
-Normally, graphing is done similar to single variable functions. Like $y = f(x)$, $z = f(x,y)$. This creates a \textbf{surface}, like an ellipsoid.
+Normally, graphing is done similar to single variable functions. Like $y = f(x)$, $z = f(x,y)$. This creates a \textbf{surface}, like an paraboloid.
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.2]{Graphingf.png}
@@ -1667,7 +1667,7 @@ Note that without numbers you can only see the magnitude of the steepness, not t
 \subsubsection{Functions of 3+ Variables}
 Functions of \textit{three} or more variables are tricky but possible to work with. Using the same temperature example, you could write $T = f(x,y,t)$ where $t$ is now the \textit{time of year}, which is useful.
 
-Notice that the graph of $f(x,y)$ is generated in $3-D$. Similarly, the graph of $f(x,y,z)$ is in $4-D$ which is very difficult to imagine. However, you can imagine the traces of it like $f(x,y,z) = k$. For example, the function $f(x,y,z) = x^2 + y^2 + z^2$ has traces which are concentric spheres.
+Notice that the graph of $f(x,y)$ is generated in $3D$. Similarly, the graph of $f(x,y,z)$ is in $4D$ which is very difficult to imagine. However, you can imagine the traces of it like $f(x,y,z) = k$. For example, the function $f(x,y,z) = x^2 + y^2 + z^2$ has traces which are concentric spheres.
 
 For example, to find the total cost of a product which consists of $n$ parts, one could write:
 \begin{gather*}
@@ -2072,7 +2072,7 @@ So to find the max and min values, first solve the system of equations for all $
 \end{gather*}
 The compare these points to find the min. and max. values of $f$. If you write the equations in terms of scalar components:
 \begin{gather*}
-    f_x = \lambda g_x\hspace{20pt}f_y = \lambda g_y\hspace{20pt}...g(x,y,z) = k
+    f_x = \lambda g_x\hspace{20pt}f_y = \lambda g_y\hspace{10pt}...\hspace{10pt}g(x,y,z) = k
 \end{gather*}
 \subsubsection{Two Constraints}
 When using 4D functions, you can add two constraints. When you imagine the level surfaces of such a function, they would be normal 3D surfaces. This means that you could intersect them to form a curve $C$. The gradients to both surfaces would be orthogonal to C, and so they themselves are perpendicular(assuming they aren't parallel). You can write(similar to $\hat{i}$ and $\hat{j}$ vector notation):
@@ -2080,6 +2080,68 @@ When using 4D functions, you can add two constraints. When you imagine the level
     \n f = \lambda \n g + \mu \n h
 \end{gather*}
 By using components, which are the partials in each direction, you can effectively solve a system of equations that would find all the points, and compare those to find the max and min.
+\section{Multiple Integrals}
+\subsection{Double Integrals Over Rectangles}
+The single integral was used to solve the problem of area under a curve, so a \textbf{double integral} could possibly be used to find the volume under a surface by taking the integral of the integral.
+\subsubsection{Single Integrals}
+Recall that:
+\begin{gather*}
+    \int_a^b f(x) dx = \lim_{n \to \infty} \sum_{i = 1}^n  f(x_i) \Delta x
+\end{gather*}
+Where that integral represents the area under $f(x)$ from $a$ to $b$.
+\subsubsection{Double Integrals and Volume}
+We can start by defining $f(x,y)$ defined on a closed rectangle $a \leqslant x \leqslant b$ and $c \leqslant y \leqslant d$.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.15]{doubleint.jpg}
+\caption{Approximating Double Integrals}
+\label{doubleint}
+\end{center}
+\end{figure}
+Split the area on the $xy$ plane into a bunch of smaller squares to approximate. Each square has area $\Delta A = \Delta x \Delta y$. If we choose some sample point $(x_i*,y_i*)$ on each square, the volume of each box is given by:
+\begin{gather*}
+    V_{ij} = f(x_i*,y_i*) \Delta A
+\end{gather*}
+To add all these boxes up:
+\begin{gather*}
+    V \approx \sum_{i = 1}^m\sum_{j = 1}^n f(x_{ij}*,y_{ij}*) \Delta A
+\end{gather*}
+As $m$ and $n$ get larger, the approximation will get better, so to find our final volume we need to take the limit.
+\begin{gather*}
+    V = \lim_{m,n \to \infty}\sum_{i = 1}^m\sum_{j = 1}^n f(x_{ij}*,y_{ij}*) \Delta A
+\end{gather*}
+So we can define the double integral over a rectangle $R$ as:
+\begin{gather*}
+    \iint_R f(x,y) dA = \lim_{m,n \to \infty}\sum_{i = 1}^m\sum_{j = 1}^n f(x_{ij}*,y_{ij}*) \Delta A
+\end{gather*}
+If $f(x,y) \geqslant 0$, then you can define the volume below $z = f(x,y)$:
+\begin{gather*}
+    V = \iint_R f(x,y)
+\end{gather*}
+\subsubsection{The Midpoint Rule}
+All the integral approximation methods for single integrals all have counterparts for double integrals. For example, the midpoint rule here uses a double Reimannn sum with points $(x_i,y_j)$ that are in the center of the boxes. These points are $\bar{x_i} = x_i - x_{i-1}$ and similarly for $y$.
+Therefore, we can define the midpoint rule:
+\begin{gather*}
+    \iint_R f(x,y) dA = \lim_{m,n \to \infty}\sum_{i = 1}^m\sum_{j = 1}^n f(\bar{x_{i}},\bar{y_{i}}) \Delta A
+\end{gather*}
+\subsubsection{Average Value}
+Remember that the average value of a single variable function was:
+\begin{gather*}
+    Average = \frac{1}{b - a}\int_a^b f(x) dx
+\end{gather*}
+Think about why this works. Area is base times height, and so taking the area and dividing by the base($b-a$) should give you the average height.
+
+So similarly, average value can be shown as:
+\begin{gather*}
+    Average = \frac{1}{A(R)}\iint_R f(x,y) dA
+\end{gather*}
+where $A(R)$ is the area of the region $R$. If you have $f \geqslant 0$, you can say that:
+\begin{gather*}
+    A(R) \times Average = \iint_R f(x,y) dA
+\end{gather*}
+This says that the square area of the region times the average height has the same volume as the volume under the surface.
+\subsubsection{Properties of Double Integrals}
+Most of the same properties in single integrals apply to double as well, since both are composed of similar sums. For example, addition of integrals(called \textit{linearity}) holds too. Multiplying a constant $c$ by an integral can be removed from the integral, etc.
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
