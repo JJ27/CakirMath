@@ -2142,6 +2142,65 @@ where $A(R)$ is the area of the region $R$. If you have $f \geqslant 0$, you can
 This says that the square area of the region times the average height has the same volume as the volume under the surface.
 \subsubsection{Properties of Double Integrals}
 Most of the same properties in single integrals apply to double as well, since both are composed of similar sums. For example, addition of integrals(called \textit{linearity}) holds too. Multiplying a constant $c$ by an integral can be removed from the integral, etc.
+\subsection{Iterated Integrals}
+Imagine a function $f(x,y)$ that is continuous on a rectangle $R = [a,b] \times [c,d]$. So $\int_c^d f(x,y) \d y$ means that $x$ is held constant while the integral is carried out, which is called \textbf{partial integration}. Note how this is similar to a partial derivative. Since the actual value of the integral depends on $x$, we can write:
+\begin{gather*}
+    A(x) = \int_c^d f(x,y) dy
+\end{gather*}
+Now if we integrate once more we get:
+\begin{gather*}
+    \int_a^b \int_c^d f(x,y) \,dy \,dx
+\end{gather*}
+When you integrate this, you always start from the inside and work your way out(similar to the Leibniz notation on partial derivatives).
+
+Now you can probably see where this is going. According to \textbf{Fubini's Theorem}, if $f(x,y)$ is continuous on $R$ then:
+\begin{gather*}
+    \iint_R f(x,y) \,dA = \int_a^b \int_c^d f(x,y) \,dy\,dx = \int_c^d \int_a^b f(x,y) \,dx\,dy
+\end{gather*}
+The actual proof for this is a little difficult, but if you think about integrating a solid, holding one variable constant gives you the area of a \textit{slice} of the solid. Now integrating the other variable will add up those area slices and give you the solid(which is the volume or the double integral). This should work both ways if you think about it.
+\subsection{Double Integrals Over General Regions}
+When integrating with a single integral, you always need to integrate over an interval(i.e $[0,2$). But with a double integral you need to integrate over a region which may or may not be a rectangle. But is that really true? With $f(x,y)$, define a new function $F$ which is $f(x,y)$ when you're in $R$ but $0$ if you're outside of it. $F$ should be defined on a rectangle so you can integrate. Since the parts outside $R$ do not contribute to the integral, they don't change the answer.
+\subsubsection{Type I and II Regions}
+A region is \textbf{Type I} if it lies between the graphs of two continuous functions of $x$, for example:
+\begin{gather*}
+    D = {(x,y) | a \leqslant x \leqslant b, g_1(x) \leqslant y \leqslant g_2(x)}
+\end{gather*}
+This means the region is bounded by 2 continuous functions and two lines $x=a$ and $x=b$. But how does this help integration?
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5]{genregions.png}
+\caption{Type I and II Regions}
+\label{genregions}
+\end{center}
+\end{figure}
+So to integrate:
+\begin{gather*}
+    \iint_R f(x,y) \,dA = \int_a^b\int_c^d f(x,y) \,dA = \int_a^b\int_{g_1(x)}^{g_2(x)} f(x,y) \,dA
+\end{gather*}
+Notice why this works. To the $y$ variable, both functions of $x$ are essentially constants. Remember integration is just addition, so you take each piece of $y$ that has it's own $g$-values, and add them together.
+
+A \textbf{Type II} region is similar except that the functions are of $y$ and not $x$.
+\textbf{Important}: Make sure you always draw a diagram or visualize what you are integrating. If you don't, you risk making mistakes.
+\subsubsection{Properties of Double Integrals}
+Two properties of double integrals we already know from 16.1. The \textbf{linearity}, an integral of a sum is the sum of the integrals, and you can pull a constant out of an integral. This one should also make sense. When $f \geqslant g$:
+\begin{gather*}
+    \iint_D f(x,y) \,dA \geqslant \iint_D g(x,y) \,dA
+\end{gather*}
+Now imagine the region $D$. If you split that region into two $D_1$ and $D_2$ that together can form $D$:
+\begin{gather*}
+    \iint_D f(x,y) \,dA = \iint_{D_1} f(x,y) \,dA + \iint_{D_2} f(x,y) \,dA
+\end{gather*}
+Another property:
+\begin{gather*}
+    \iint_D 1 \,dA = Area(D)
+\end{gather*}
+This should make sense. Think about a box. If the height of the box is $1$, then the volume of the box is numerically the same as the area of the box.
+
+So by making use of the last few properties, given that $m \leqslant f(x,y) \leqslant M$:
+\begin{gather*}
+    m\times A(D) = \iint_D f(x,y) \,dA \leqslant M\times A(D)
+\end{gather*}
+This is a little confusing, but you can get this simply by integrating the given inequality. This is useful though, since it allows you to bound the value of the integral if you can bound the value of $f$.
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
