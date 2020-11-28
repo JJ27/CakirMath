@@ -2333,6 +2333,23 @@ Lastly, there are \textbf{normal distributions}, which are true if the density f
 \begin{gather*}
     f(x) = \frac{1}{\sigma \sqrt{2\pi}}e^\frac{-(x-\mu)^2}{2\sigma^2}
 \end{gather*}
+\subsection{Surface Area}
+We can use double integrals to find out the surface area of a surface bounded by some region on the $xy$-plane. So let $S$ be a surface given by $z = f(x,y)$ and you can approximate a small rectangle on the $xy$-plane and find the corner of the rectangle closest to the origin. Get the tangent plane to that and if you do it for smaller and smaller rectangles, your approximation will get better and better.
+
+The tangent plane has to be some sort of parallelogram(think about it), so it can be defined by two vectors:
+\begin{gather*}
+    \vv{a} = \Delta x \,\hat{i} + f_x \Delta x \,\hat{j}\\
+    \vv{b} = \Delta y \,\hat{i} + f_y \Delta y \,\hat{j}
+\end{gather*}
+We know the area of a parallelogram here is $|\vv{a} \times \vv{b}|$ and so if you cross them you get:
+\begin{gather*}
+    |\vv{a} \times \vv{b}| = \sqrt{\bigg(\frac{\p z}{\p x}\bigg)^2 + \bigg(\frac{\p z}{\p y}\bigg)^2 + 1} \, \Delta A
+\end{gather*}
+So now if we convert it to double integral form:
+\begin{gather*}
+    A = \iint_D \sqrt{\bigg(\frac{\p z}{\p x}\bigg)^2 + \bigg(\frac{\p z}{\p y}\bigg)^2 + 1} \, dA
+\end{gather*}
+Notice how this is similar to the arc length formula.
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
