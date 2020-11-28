@@ -2350,6 +2350,69 @@ So now if we convert it to double integral form:
     A = \iint_D \sqrt{\bigg(\frac{\p z}{\p x}\bigg)^2 + \bigg(\frac{\p z}{\p y}\bigg)^2 + 1} \, dA
 \end{gather*}
 Notice how this is similar to the arc length formula.
+\subsection{Triple Integrals}
+Single integrals work for $f(x)$, double integrals work for $f(x,y)$, so were can define \textbf{triple integrals} to work for $f(x,y,z)$. So in this case the "region" used would be a box, where we use the same constraints as double integrals with $r \leqslant z \leqslant s$.
+
+If we divide the big box into smaller sub boxes, we can have each box with $\Delta V = \Delta x \, \Delta y \, \Delta z$. Using the same logic as the double integral:
+\begin{gather*}
+    \iiint_B f(x,y,z) \, dV = \sum_{i=1}^l\sum_{j=1}^m\sum_{k=1}^n f(x_i,y_j,z_k) \, \Delta V
+\end{gather*}
+This method is not really used in practice so we can apply Fubini's Theorem here:
+\begin{gather*}
+    \iiint_B f(x,y,z) \, dV = \int_r^s \int_c^d \int_a^b f(x,y,z) \, dx\, dy\, dz
+\end{gather*}
+Of course, you can integrate in whatever order is easiest and still get the same answer.
+\subsubsection{Triple Integrals on General Regions}
+We can do this the same way we did for double integrals, where we define it over a rectangle where the function exists but everything not on the rectangle is $0$, and so does not contribute to the integral.
+
+A solid region is \textbf{type I} if it lies between two continuous $z$-functions(functions of $x,y$). So you would evaluate like so:
+\begin{gather*}
+    \iiint_E f(x,y,z) \, dV = \iint_D \int_{u_1(x,y)}^{u_2(x,y)} f(x,y,z) \,dz \, dA
+\end{gather*}
+It is not as easy here though, because the remaining region $D$ can also be bounded by functions, for example a \textbf{type I} plane region, where the 2D region is bounded by two functions of $y$.
+
+Basically, integrate one step at a time and be sure you know exactly which order you are integrating in.
+
+A solid region is \textbf{type II} if it is bounded by two surface $x$ functions, and \textbf{type III} if it is bounded by two $y$ surface functions. Of course, in each case after you pass the first integral, the 2D region $D$ could be either type I or type II. Don't confuse plane and solid regions.
+\subsubsection{Applications of Triple Integrals}
+Single integrals help find the area, double integrals help find volume, but triple integrals are meaningless there because their functions exist in 4D, and a 4D volume is difficult to visualize. However, triple integrals are useful when you have 3 inputs and 1 output, and still need a way to integrate over that.
+
+First of all, if $f(x,y,z) = 1$, then:
+\begin{gather*}
+    V = \iiint_E \, dV
+\end{gather*}
+This should make sense, because you're just adding up the tiny blocks of the box, and then multiplying them by $1$.
+
+Any applications of double integrals can easily be extended to triple, for example mass:
+\begin{gather*}
+    m = \iiint_E \rho(x,y,z) \, dV
+\end{gather*}
+This time, the moments will be with respect to the axis which is the intersection of the coordinate planes:
+\begin{gather*}
+    M_{yz} = \iiint_E x\rho(x,y,z) \, dV
+\end{gather*}
+To find the moment off of the intersection of any two planes, use the other variable in the integrand. Similarly for center of mass,
+\begin{gather*}
+    \bar{x} = \frac{M_{yz}}{m}
+\end{gather*}
+The center of mass is located at $(\bar{x},\bar{y},\bar{z})$. If density of is constant, then this point is called the \textbf{centroid}. The \textbf{moments of inertia} off of the three coordinate axes:
+\begin{gather*}
+    I_x = \iiint_E (y^2 + z^2) \rho(x,y,z) \, dV
+\end{gather*}
+and similarly for the rest of the variables.
+
+The total electric charge on a solid object can be found with a triple integral(if the density is a function of three variables):
+\begin{gather*}
+    Q = \iiint_E \sigma(x,y,z)\, dV
+\end{gather*}
+If you want probability with three variables $XYZ$ then the \textbf{joint density function} satisfies:
+\begin{gather*}
+    f(x,y,z) \geqslant 0 \hspace{20pt} \int_{-\infty}^\infty\int_{-\infty}^\infty\int_{-\infty}^\infty f(x,y,z) \,dz \, dy \, dx = 1
+\end{gather*}
+Particularly, to find the probability that $(X,Y,Z)$ lies in the solid $E$:
+\begin{gather*}
+    P = \iiint_E f(x,y,z) \,dz\,dy\,dx
+\end{gather*}
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
@@ -2669,5 +2732,4 @@ In other words, if the \textit{rank} of the matrix is less than the original num
 
 One really thoughtful method concludes that if there are $m$ vectors in the set in $\mathbb{R}^n$, the set is linearly dependent is $m > n$. This is true because if the matrix form $[A,0]$ has a nontrivial solution, then we have dependence. This will always be true if we have more columns than rows(more variables(vectors) than equations), since the scalar on the "free" variable can balance out the sum of the other ones to make zero. We can always pick a scalar that works here, and so this means that if $m$(variables/num of vectors) is greater than $n$(equations/dimensions of the vector), the set is linearly dependent.
 \setcounter{subsection}{4}
-\subsection{Iterative Methods for Solving Linear Systems}t
 \end{document}
