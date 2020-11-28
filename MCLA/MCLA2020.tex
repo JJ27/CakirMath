@@ -33,8 +33,8 @@
 \let\vr\rangle
 \let\ve\hat
 \renewcommand{\ve}[1]{\vl#1\vr}
-\let\d\hat
-\renewcommand{\d}{\hspace{3pt}\textrm{d}}
+\let\bb\hat
+\renewcommand{\bb}[1]{\overline{\overline{#1}}}
 
 \makeatletter
 \newcommand*\vdot{\mathpalette\vdot@{.5}}
@@ -2201,6 +2201,138 @@ So by making use of the last few properties, given that $m \leqslant f(x,y) \leq
     m\times A(D) = \iint_D f(x,y) \,dA \leqslant M\times A(D)
 \end{gather*}
 This is a little confusing, but you can get this simply by integrating the given inequality. This is useful though, since it allows you to bound the value of the integral if you can bound the value of $f$.
+\subsection{Double Integrals in Polar Coordinates}
+Why do we use polar coordinates? Some regions are easier to describe using them. So if we want to evaluate a double integral over a circle, or a region bounded by circles, polar coordinates could come in handy.
+
+Remember from Ch. 11 that these conversions apply:
+\begin{gather*}
+    r = x^2 + y^2 \hspace{20pt} x = r\cos(\theta) \hspace{20pt} y = r\sin(\theta)
+\end{gather*}
+So now we can define a \textbf{polar rectangle}, where the dimensions are the polar dimensions:
+\begin{gather*}
+    R =\{(r,\theta)\,|\, a \leqslant r \leqslant b,\, \alpha \leqslant \theta \leqslant \beta\}
+\end{gather*}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5]{PolarRect.png}
+\caption{Polar Integration}
+\label{polrect}
+\end{center}
+\end{figure}
+We can split this rectangle into small sections too, into $m$ subsections where $\Delta r = \frac{b-a}{m}$ and $\Delta \theta = \frac{\beta - \alpha}{m}$. So the circles $r = r_i$ and outward lines $\theta = \theta_j$ split the big rectangle into many smaller ones.
+
+The center of one of the subrectangles has polar coordinates:
+\begin{gather*}
+    r_i^* = \frac{1}{2}(r_{i-1} + r_i)\hspace{20pt}\theta_j^* = \frac{1}{2}(\theta_{j-1} + \theta_j)
+\end{gather*}
+Now we can find the area of the subrectangle by subtracting circles $r = b$ and $r = a$ over $\Delta \theta = \theta_j - \theta_{j-1}$:
+\begin{gather*}
+    \Delta A_i = \frac{1}{2}(r_i^2 - r_{i-1}^2) \,\Delta \theta = \frac{1}{2}(r_i + r_{i-1})(r_i - r_{i-1}) \,\Delta \theta = r_i^* \Delta r \Delta \theta
+\end{gather*}
+So using this we can write a Reimann sum, where $f(x,y)$ now becomes $f(r_i^* \cos(\theta_j^*), r_i^* \sin(\theta_j^*))$. So if we write $g(r,\theta) = r * f(r\cos(\theta),r\sin(\theta))$ then we can get:
+\begin{gather*}
+    \sum_{i=1}^m\sum_{j=1}^n g(r_i^*,\theta_j^*) \Delta r \Delta \theta = \int_\alpha^\beta \int_a^b g(r,\theta) \,dr \,d\theta = \int_\alpha^\beta \int_a^b f(r \cos(\theta), r \sin(\theta))\,r\,dr\,d\theta
+\end{gather*}
+\textbf{Important:} Notice the leftover $r$ factor. This is because in a polar rectangle $dA = r\,dr\,d\theta$. Think about why this is. The total circumference of a circle is $\theta r$, where $\theta = 2\pi$. So the small circumference element will be $r \, d\theta$. A rectangle has $A = bh$, where $b = r \, d\theta$ and $h = dr$. So it makes sense that $dA = r\,dr\,d\theta$. Sidenote, make sure that you use the correct limits on the integral when using this formula.
+\subsubsection{General Regions}
+We can imagine a random polar region bounded by $r = h_2(\theta)$ and $r = h_1(\theta)$. So if the surface function $f$ is continuous on the region then:
+\begin{gather*}
+    \iint_R f(x,y) \, dA = \int_\alpha^\beta \int_{h_1(\theta)}^{h_2(\theta)} f(r \cos(\theta), r \sin(\theta))\,r\,dr\,d\theta
+\end{gather*}
+Notice how if you use $f(x,y) = 1$, you can get $\int \frac{1}{2} r^2(\theta) \, d\theta$, which we know is correct since $\iint_R \, dA = A$.
+\subsection{Applications of Double Integrals}
+Double integrals have many useful physical applications such as finding mass, electric charge, center of mass, and moment of inertia.
+\subsubsection{Density and Mass}
+A \textbf{lamina} is a 2D plate which looks similar to a region. Imagine a lamina as a region $D$ which its \textbf{density} $\rho(x,y)$ is a continuous function where in mass and area:
+\begin{gather*}
+    \rho(x,y) = \lim_{\textrm{rect} \to 0} \frac{\Delta m}{\Delta A}
+\end{gather*}
+This is where the dimensions of a small rectangle enclosing $(x,y)$ approach $0$. If we divide up the lamina into many smaller rectangles, we can find the total mass using the density. For a constant density, remember that $m = \rho A$, so we can use a similar integral form:
+\begin{gather*}
+    m = \iint_D \rho(x,y) \, dA
+\end{gather*}
+This idea works for any type of density. For example the \textbf{charge density} $\sigma$ can be used to find total charge on an area.
+\begin{gather*}
+    Q = \iint_D \sigma(x,y)\, dA
+\end{gather*}
+\subsubsection{Moments and Centers of Mass}
+The \textbf{moment} of a particle on an axis is the product of its mass and distance from the axis. We can find the moment of the entire thing by adding up the particle moments. So we know that for density $m = \rho \Delta A$, so we can write for each particle:
+\begin{gather*}
+    M_x = (\rho(x,y) \Delta A)y \implies \iint_R y\rho(x,y)\,dA
+\end{gather*}
+If we're going around the $x$-axis. If we use the $y$-axis then we can use $x$ in the integral instead. This should make sense, since $y$ is the distance from the $x$-axis to the edge of the thing.
+
+The \textbf{center of mass} is a point where we can treat all the mass of something concentrated there. This basically is the weighted "average" point for the mass of the entire thing. In other words, for the $y$-moment: $M_y = m\bar{x}$. The bar just means center fo mass point. Therefore:
+\begin{gather*}
+    \bar{x} = \frac{1}{m}\iint_R x\rho(x,y) \, dA\\
+    m = \iint_R \rho(x,y) \, dA
+\end{gather*}
+So to find center of mass you may need to solve two double integrals.
+\subsubsection{Moments of Inertia}
+The \textbf{moment of inertia}(not to be confused with the other moment) of any particle about an axis is $mr^2$, where $m$ is the mass and $r$ is the distance from the axis. So we can find the moment of inertia of a lamina by using a similar method as the last section.
+\begin{gather*}
+    I_x = \iint_R y^2 \rho(x,y) \,dA
+\end{gather*}
+It is also useful to find the moment of inertia \textbf{about the origin}, which is also called the \textbf{polar moment of inertia}:
+\begin{gather*}
+    I_0 = \iint_R (x^2+y^2) \rho(x,y) \, dA
+\end{gather*}
+Notice how $I_0 = I_x + I_y$. If you need to solve all three, don't be an idiot and actually do all three double integrals.
+
+In general, the moment of inertia is the analog of mass in rotational motion(i.e. $F = ma$ becomes $\tau = I \alpha$).
+
+The \textbf{radius of gyration} of a lamina around an axis is the number $R$ such that:
+\begin{gather*}
+    I = mR^2
+\end{gather*}
+This means that if all the mass of the lamina were pushed to a distance $R$ from the axis, then the moment of inertia would be the same as the current lamina. So around the $x$-axis, we have:
+\begin{gather*}
+    I_x = m\bb{y}^2
+\end{gather*}
+Here the double bars represent the radius of gyration. So if all the mass was concentrated at $(\bb{x},\bb{y})$ then the moment of inertia \textit{with respect to the axes} would not change.
+\subsubsection{Probability}
+The probability density function $f(x)$ for any continuous random variable shows the probability that the variable lies at any particular point. This means that $f(x) \geqslant 0$ and that $\int_{-\infty}^\infty f(x) = 1$, which should make sense since if you add all the probabilities everywhere you should get $1$. But to find the probability that the variable exists between $a$ and $b$, you can just use:
+\begin{gather*}
+    P = \int_a^b f(x) \, dx
+\end{gather*}
+If you consider two variables $X$ and $Y$(don't confuse them with the lowercase ones), we can use a \textbf{joint density function} to see the chances that $(X,Y)$ lies in a region $D$.
+
+Because probabilities can never be negative and must total to be 1, we have these properties:
+\begin{gather*}
+    f(x,y) \geqslant 0 \hspace{20pt} \iint_{\mathbb{R}^2} f(x,y) \, dA = 1
+\end{gather*}
+Just to note, we define $\mathbb{R}^2$ as the limit of $(-\infty, \infty)$ in any coordinate system(expanding boxes, expanding circles, etc.)
+
+If $X$ is a random variable with probability function $f_1(x)$ and $Y$ another one with $f_2(y)$, then $X$ and $Y$ are \textbf{independent} if:
+\begin{gather*}
+    f(x,y) = f_1(x) f_2(y)
+\end{gather*}
+That's how independent variables work normally. What are the odds of flipping heads and it raining outside? Multiply the odds of both happening.
+
+If $\mu$ is the average waiting time, then you can model waiting times by using the exponential decay function:
+\begin{gather*}
+    f(t) = \left\{
+        \begin{array}{ll}
+            0 & \quad t < 0 \\
+            \mu^{-1}e^{\frac{-t}{\mu}} & \quad t \geq 0
+        \end{array}
+    \right.
+\end{gather*}
+\subsubsection{Expected Values}
+If $X$ is a random variable, then its \textbf{mean} location is:
+\begin{gather*}
+    \mu = \int_{-\infty}^\infty xf(x) \, dx
+\end{gather*}
+This should make sense because $f(x)$ weights each location $x$ based on the probability. We can do a similar thing with a joint probability function:
+\begin{gather*}
+    \mu_x = \iint_{\mathbb{R}^2} xf(x,y) \, dA \hspace{20pt} \mu_y = \iint_{\mathbb{R}^2} yf(x,y) \, dA
+\end{gather*}
+Notice how these equations are very similar to the moment ones. You can calculate probability just like you calculate mass, by integrating some density function over a region. The total "mass" is $1$ here. You can think about the $\mu$ values as the center of mass.
+
+Lastly, there are \textbf{normal distributions}, which are true if the density function is:
+\begin{gather*}
+    f(x) = \frac{1}{\sigma \sqrt{2\pi}}e^\frac{-(x-\mu)^2}{2\sigma^2}
+\end{gather*}
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
