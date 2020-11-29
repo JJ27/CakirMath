@@ -2413,6 +2413,45 @@ Particularly, to find the probability that $(X,Y,Z)$ lies in the solid $E$:
 \begin{gather*}
     P = \iiint_E f(x,y,z) \,dz\,dy\,dx
 \end{gather*}
+\subsection{Triple Integrals in Cylindrical and Spherical}
+\subsubsection{Cylindrical Coordinates}
+Remember how cylindrical coordinates work, they are basically polar coordinates but raised to 3D, which means all points are defined by $(r,\theta, z)$. If a solid region $E$ is bounded in height by two $z$-functions and on the $xy$-plane by two functions of theta, then you have:
+\begin{gather*}
+    E = \bigg\{(r,\theta, z)\,|\, \alpha \leqslant \theta \leqslant \beta, \, h_1(\theta) \leqslant r \leqslant h_2(\theta),\, u_1(x,y) \leqslant z \leqslant u_2(x,y)\bigg\}
+\end{gather*}
+In cylindrical, $x$ and $y$ are replaced by $r\cos(\theta)$ and $r\sin(\theta)$. So using a similar method to the previous section, we can find the triple integral:
+\begin{gather*}
+    \iiint_E f(x,y,z) \, dV = \int_\alpha^\beta \int_{h_1(\theta)}^{h_2(\theta)}\int_{u_1(r\cos(\theta),r\sin(\theta))}^{u_2(r\cos(\theta),r\sin(\theta))} f(x,y,z) \,r \, dz\,dr\,d\theta
+\end{gather*}
+Note what $dV$ is here. It is the same as $dA$ in polar coordinates but multiplied by $z$. Since $V = Az$, $dV = z\,dA$.
+\subsubsection{Spherical Coordinates}
+Remember spherical coordinates, where the coordinates of any point are $(\rho, \theta, \phi)$ and the following figure describes:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6,angle=0]{sphcoords.png}
+\caption{Spherical Coordinates}
+\label{sphcoords}
+\end{center}
+\end{figure}
+Now we can define the triple integral in spherical but first we need to find the volume element $dV$ in these coordinates. We do that by finding the "polar rectangle" in spherical, which is called the \textbf{spherical wedge}. First we cut the space into spheres $\rho = \rho_i$, then half-planes $\theta = \theta_j$ and finally we cut above and below by half-cones $\phi = \phi_k$. This gives us a tiny wedge to work with:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.7,angle=0]{sphcoordel.png}
+\caption{Spherical Volume Element}
+\label{sphvol}
+\end{center}
+\end{figure}
+This volume element is a type of box, so we need to find the dimensions of the box to find the element. The figure says $r$ but in our case assume $r$ in the figure is $\rho$. It also switches our $\phi$ and $\theta$. So if we take $\rho \sin(\phi)$ that gives us the projection of the radius onto the $xy$-plane. Then by rotating that through an angle $d\theta$ on the plane that gives us our first dimension, the side of the box that turns in the $\theta$ direction. Then we can find the $\phi$ dimension by rotating $\rho$ through $d\phi$, which gives $\rho \, d\phi$. Finally the outward direction is just $d\phi$. To find the volume we multiply everything and that gives:
+\begin{gather*}
+    dV = (\rho \sin(\phi) \,d \theta)(\rho \,d\phi)(d\rho) = \rho^2 \sin(\phi) \,d\theta \, d\phi\, d\rho
+\end{gather*}
+Now we can easily figure out the triple integral using $\rho \in [a,b]$, $\theta \in [\alpha, \beta]$ and $\phi \in [c,d]$:
+\begin{gather*}
+    \iiint_E f(x,y,z)\, dV = \int_c^d \int_\alpha^\beta \int_a^b f(\rho\sin(\phi)\cos(\theta), \rho\sin(\phi)\cos(\theta), \rho\cos(\phi)) \, \rho^2 \sin(\phi) \,d\rho\, d\theta\,d\phi
+\end{gather*}
+Normally spherical coordinates are used when the solid regions or surfaces of integration are spheres or cones(since those would work with $\rho$ or $\phi$).
+
+\textbf{Important: }Make sure that you don't forget the $\rho^2 \sin(\phi)$ factor in the integral. This is just like the extra $r$ in polar or cylindrical integration, except a little more complicated.
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
