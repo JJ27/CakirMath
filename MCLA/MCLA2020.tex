@@ -2452,6 +2452,53 @@ Now we can easily figure out the triple integral using $\rho \in [a,b]$, $\theta
 Normally spherical coordinates are used when the solid regions or surfaces of integration are spheres or cones(since those would work with $\rho$ or $\phi$).
 
 \textbf{Important: }Make sure that you don't forget the $\rho^2 \sin(\phi)$ factor in the integral. This is just like the extra $r$ in polar or cylindrical integration, except a little more complicated.
+\subsection{Change of Variables in Multiple Integrals}
+\subsubsection{Double Integrals}
+With single integrals we simplified them by making a \textbf{u-substitution}. We can do something similar for double integrals by making a \textbf{change of variables}. We've already seen this in action when converting to polar coordinates. We use:
+\begin{gather*}
+    x = r \cos(\theta)\hspace{20pt}y = r\sin(\theta)
+\end{gather*}
+We convert from the integration region in the $xy$ plane to a new region in the $r\theta$ plane, and this is called a \textbf{transformation}. A transformation is just a function who's domain and range are a plane. If no two input points have the same output, then it is \textbf{one-to-one}. If this is the case, then a transformation $T$ has an \textbf{inverse transformation} $T^{-1}$ to go backwards.
+
+Imagine a transformation from $(u,v) \to (x,y)$ with two functions, $x = g(u,v)$ and $y = h(u,v)$. We could define a vector which defines the new region:
+\begin{gather*}
+    \vv{r} = g(u,v)\hat{i} + h(u,v)\hat{j}
+\end{gather*}
+To find the tangent parallelogram to the new region(it's not a plane because the region is confined), we need to pretend it is a tangent plane and write out two vectors like so:
+\begin{gather*}
+    \vv{r_u} = g_u\hat{i} + h_u\hat{j}\\
+    \vv{r_v} = g_v\hat{i} + h_v\hat{j}
+\end{gather*}
+Now if you want to compute the change in the plane, the new tangent parallelogram is formed by:
+\begin{gather*}
+    \Delta u \,\vv{r_u}\\
+    \Delta v \,\vv{r_v}
+\end{gather*}
+To find the area of the parallelogram you just take the cross product:
+\begin{gather*}
+    |(\Delta u \,\vv{r_u}) \times (\Delta v \,\vv{r_v})| \implies |\vv{r_u} \times \vv{r_v}| = \begin{vmatrix}
+        \dfrac{\p x}{\p u} && \dfrac{\p x}{\p v}\\\\
+        \dfrac{\p y}{\p u} && \dfrac{\p y}{\p v}
+    \end{vmatrix}\hat{k}
+\end{gather*}
+This special determinant is called the \textbf{Jacobian} of the transformation and has some special notation:
+\begin{gather*}
+    \frac{\p (x,y)}{\p (u,v)}
+\end{gather*}
+Finally we can tie it all together to find the area element:
+\begin{gather*}
+    \Delta A = \bigg|\frac{\p (x,y)}{\p (u,v)}\bigg| \Delta u \Delta v \implies dA = \bigg|\frac{\p (x,y)}{\p (u,v)}\bigg| \,du\, dv
+\end{gather*}
+So the change of variables(or u,v substitution) for a double integral is:
+\begin{gather*}
+    \iint_R f(x,y) \, dA = \iint_S f(x(u,v),y(u,v)) \,\bigg|\frac{\p (x,y)}{\p (u,v)}\bigg| \, du \, dv
+\end{gather*}
+In fact, if you use this with $x = r\cos(\theta)$ and $y = r\sin(\theta)$ you will get the formula for polar coordinate double integration. The normal rectangle region will get transformed into the polar rectangle.
+\subsubsection{Triple Integrals}
+The process for triple integrals is similar, except now you have a transformation carried out by three functions of three variables, with one new function $z(x,y,w)$. The Jacobian is the same except for a new row for $z$ and a new column for the new variable $w$. So you can quite easily see:
+\begin{gather*}
+    \iiint_R f(x,y,z) \, dV = \iiint_S f(x(u,v,w), y(u,v,w), z(u,v,w)) \,\bigg|\frac{\p (x,y,z)}{\p (u,v,w)} \bigg| \,du\,dv\,dw
+\end{gather*}
 \newpage
 \part{Linear Algebra}
 \setcounter{section}{0}
