@@ -2500,6 +2500,108 @@ The process for triple integrals is similar, except now you have a transformatio
     \iiint_R f(x,y,z) \, dV = \iiint_S f(x(u,v,w), y(u,v,w), z(u,v,w)) \,\bigg|\frac{\p (x,y,z)}{\p (u,v,w)} \bigg| \,du\,dv\,dw
 \end{gather*}
 \newpage
+\section{Vector Calculus}
+\subsection{Vector Fields}
+A \textbf{vector field} is a field which associates every point in space with a vector that has magnitude and direction. One type of vector field is a \textit{force field} where the vector being used is a force vector.
+
+We can define a vector field to be a function which assigns each point in its domain $D$ to a vector $\vv{F}$. We can visualize a vector field by drawing the vector at representative points to get general idea of how it looks.
+
+We can define the vector function $\vv{F}(x,y)$ for 2D in terms of two scalar(normal) functions $P$ and $Q$, where:
+\begin{gather*}
+    \vv{F} = P\,\hat{i} = Q\,\hat{j}
+\end{gather*}
+A vector function is continuous if it's component functions are continuous. In general, you can assign each point its position vector $\vv{x} = \vl x,y,z \vr$ and then write $\vv{F}(\vv{x})$.
+\subsubsection{Gradient Fields}
+Remember the gradient function from Chapter 15, where the gradient is a vector. Effectively since the gradient is a vector that depends on the point, we can use the gradient as a vector field which is called the \textbf{gradient field}.
+\begin{gather*}
+    \vv{F}(\vv{x}) = \n f(x,y,z) = f_x \, \hat{i} + f_y \, \hat{j} + f_z \, \hat{k}
+\end{gather*}
+A vector field is called a \textbf{conservative field} if it can be written as the gradient of some scalar function, where $\vv{F} = \n f$. Here $f$ is called the \textbf{potential function}(see the relationship here between force and potential). For example, the gravitational force can be written as the gradient of a potential function. Remember the formula for gravitational potential energy:
+\begin{gather*}
+    U_g = \frac{GMm}{r} = \frac{GMm}{\sqrt{x^2 + y^2 + z^2}}\\
+    \n U_g = \frac{-GMmx}{(x^2 + y^2 + z^2)^{3/2}}\,\hat{i}+\textrm{y and z components}= \vv{F_g}
+\end{gather*}
+\subsection{Line Integrals}
+You can think about a single integral as integrating where the 'region' is just a line. But what if the line is just a general case? What if you want to integrate values of a function over a curve? This could be useful when you're working with wires and magnetism. Using a curve $C$ which is given in 2D by:
+\begin{gather*}
+    x=x(t)\hspace{40pt}y=y(t)\hspace{40pt}a \leqslant t \leqslant b\\
+    \vv{r}(t) = x(t)\,\hat{i} + y(t)\,\hat{j}
+\end{gather*}
+Assuming that this is a smooth curve, we can divide the curve into smaller and smaller elements $\Delta s$ and eventually we get the \textbf{line integral}:
+\begin{gather*}
+    \int_C f(x,y) \,ds = \lim_{n \to \infty}\sum_{i=1}^n f(x_i,y_i) \, \Delta s
+\end{gather*}
+Remember that:
+\begin{gather*}
+    L = \int_C ds = \int_a^b \sqrt{\bigg(\frac{dx}{dt}\bigg)^2 + \bigg(\frac{dy}{dt}\bigg)^2} \,dt
+\end{gather*}
+Finally, to parametrize a curve we can find the final form of the \textbf{line integral with respect to arc length}:
+\begin{gather*}
+    \int_C f(x,y)\,ds = \int_a^b f(x(t),y(t))\,\sqrt{\bigg(\frac{dx}{dt}\bigg)^2 + \bigg(\frac{dy}{dt}\bigg)^2} \,dt
+\end{gather*}
+To check that this works, we can parametrize with $t = x$ and see if we get the normal single integral:
+\begin{gather*}
+    \int_C f(x,y)\,ds \implies \int_a^b f(x) \,dx
+\end{gather*}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3]{LineInt.jpg}
+\caption{Line Integrals Geometrically}
+\label{lineint}
+\end{center}
+\end{figure}
+If $C$ is a \textbf{piecewise-smooth curve}(which means it's made up of many smooth curves connected) then the following should be obvious:
+\begin{gather*}
+    \int_C f(x,y)\,ds = \int_{C_1} f\,ds + \int_{C_2} f\,ds + \int_{C_3} f\,ds...
+\end{gather*}
+Physical interpretations of the line integral depend on the function being integrated. For example, Integrating density gives you mass and center of mass.
+
+Sometimes you will need to calculate line integrals \textbf{with respect to x or y}. Think about what this means, you are only counting the changes in the $x$-direction but not the $y-direction$. So if the normal line integral is the area of the 'curtain' then:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3]{Linedx.jpg}
+\caption{Line Integral With Respect To $x$}
+\label{linedx}
+\end{center}
+\end{figure}
+By using the fact that $dx = \frac{dx}{dt}\,dt$:
+\begin{gather*}
+    \int_C f(x)\,dx = \int_C f(x(t))\,x'(t)\,dt
+\end{gather*}
+Sometimes when you have integrals with respect to $x$ and $y$ they can be written together:
+\begin{gather*}
+    \int_C\,f\,dx + \int_C\,g\,dy = \int_C f\,dx + g\,dy
+\end{gather*}
+Remember this is \textit{just} a shorthand.
+
+When setting up line integrals, parametrizing curves is an important skill, one frequent parametrization is over a line. Given two points, the vector representation:
+\begin{gather*}
+    \vv{r}(t) = (1-t)\vv{r_0} + \vv{r_1}t\hspace{20pt}t \in [0,1]
+\end{gather*}
+When integrating with respect to a variable, you can get different answers based on the direction you're going in, or the curve's \textbf{orientation}.
+\begin{gather*}
+    \int_{-C}\,f\,dx = -\int_C\,f\,dx
+\end{gather*}
+However, this does not apply when integrating over arc length because $ds$ is always positive, while $dx$ can go in any direction.
+\subsubsection{Line Integrals in Space}
+For a curve given by $\vv{r}(t) = \vl x(t),y(t),z(t) \vr$ then in 3D we can say:
+\begin{gather*}
+    \int_C f\,ds = \int_a^b\,f(x(t),y(t),z(t))\,\sqrt{\bigg(\frac{dx}{dt}\bigg)^2 + \bigg(\frac{dy}{dt}\bigg)^2 + \bigg(\frac{dz}{dt}\bigg)^2}\,dt
+\end{gather*}
+Or more generally you can write:
+\begin{gather*}
+    \int_a^b f(\vv{r}(t))\,|\vv{r}'(t)| \,dt
+\end{gather*}
+\subsubsection{Line Integrals in Vector Fields}
+To calculate the work done by a force $\vv{F}$ we can find work as $W = \vv{F} \vdot \vv{D}$. The force vector is obvious, but the displacement vector you need to approximate when $ds$ is small, which would be the \textbf{unit tangent vector} $\vv{T}$. It's a unit vector because you don't want to weight different parts of the curve more or less. So:
+\begin{gather*}
+    W = \int_C \vv{F} \vdot \vv{T}\,ds
+\end{gather*}
+More generally for any continuous vector field:
+\begin{gather*}
+    W = \int_C \vv{F} \vdot \vv{T}\,ds = \int_a^b \vv{F}(\vv{r}(t)) \,\frac{\vv{r}'(t)}{|\vv{r}'(t)|}\,dt = \int_a^b \vv{F}\,(\vv{r}(t)) \vv{r}'(t) \,dt = \int_C \vv{F}\,d\vv{r}
+\end{gather*}
+Remember that when using the $d\vv{r}$ form the integral needs the negative sign because $\vv{T}$ becomes negative when $C$ does.
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
