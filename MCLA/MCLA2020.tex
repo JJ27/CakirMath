@@ -2602,6 +2602,83 @@ More generally for any continuous vector field:
     W = \int_C \vv{F} \vdot \vv{T}\,ds = \int_a^b \vv{F}(\vv{r}(t)) \,\frac{\vv{r}'(t)}{|\vv{r}'(t)|}\,dt = \int_a^b \vv{F}\,(\vv{r}(t)) \vv{r}'(t) \,dt = \int_C \vv{F}\,d\vv{r}
 \end{gather*}
 Remember that when using the $d\vv{r}$ form the integral needs the negative sign because $\vv{T}$ becomes negative when $C$ does.
+\subsection{The Fundamental Theorem For Line Integrals}
+From single-variable calculus,
+\begin{gather*}
+    \int_a^b f'(x)\,dx = f(b)-f(a)
+\end{gather*}
+This should make sense because adding up the individual rates of change is going to give you the total net change.
+
+Similarly, if $C$ is a smooth curve defined by $\vv{r}(t)$ and $f$ is a differentiable function, whose gradient vector is continuous on $C$:
+\begin{gather*}
+    \int_C\n f\,d\vv{r} = f(\vv{r}(b)) - f(\vv{r}(a))
+\end{gather*}
+This means that you can evaluate the line integral over a conservative vector field just by knowing the endpoint values. We can prove this by using the chain rule and the original FTC:
+\begin{gather*}
+    \int_C \n f\,d\vv{r} = \int_a^b \n f(\vv{r}(t)) \,\vv{r}'(t)\,dt\\
+    = \int_a^b \bigg(\frac{\p f}{\p x}\frac{dx}{dt} + \frac{\p f}{\p y}\frac{dy}{dt} + \frac{\p f}{\p z}\frac{dz}{dt}\bigg)\,dt\\
+    = \int_a^b \frac{d}{dt} f(\vv{r}(t))\,dt\\
+    = f(\vv{r}(b)) - f(\vv{r}(a))
+\end{gather*}
+Step 3 here is because of the chain rule in reverse and the final step is just the normal FTC.
+\subsubsection{Path Independence}
+An obvious consequence of this FTC is that for conservative vector fields, the path taken does not matter as long as you have the same initial and final points. A vector function $\vv{F}$ is called path independent if $\int_C \vv{F}\,d\vv{r}$ is the same for any path with the same endpoints.
+
+Now if we imagine a \textbf{closed curve}, which is a curve that connects to itself(which means it technically does not have endpoints). However, if we split the curve into 2 curves using two endpoints(so one curve goes $A\rightarrow B$ and the other $B \rightarrow A$). Then adding those line integrals should give zero because their endpoints are switched. So,
+
+$\int_C \vv{F}\,d\vv{r}$ is \textbf{path independent} if and only if $\int_D \vv{F}\,d\vv{r}$ for any closed path $D$ in the domain.
+
+An \textbf{open region} is a region where every point inside it is contained in a disk that is contained within the region. This means that any boundary points cannot be included(because then you can't have a disk). If you have a path independent vector field on that open region that is continuous, then you can say that the vector field is conservative on that region.
+\begin{proof}
+If we choose an open region $D$, then there must be a disk around any point $(x,y)$ in $D$. If you choose another point to the left of the point $(x_1,y)$ where $x_1 < x$. Then choose any other path $C_2$ from the initial point $(a,b)$ since the function is path independent it shouldn't matter. Then let $f$:
+\begin{gather*}
+    f(x,y) = \int_{C_1} \vv{F}\,d\vv{r} + \int_{C_2}\vv{F}\,d\vv{r} = \int_{(a,b)}^{(x_1,y)}\vv{F}\,d\vv{r} + \int_{C_2}\vv{F}\,d\vv{r}
+\end{gather*}
+Since the first integral doesn't depend on $x$, we can take the partial derivative of $f$ on both sides and that first integral will zero out.
+\begin{gather*}
+    \frac{\p}{\p x}f(x,y) = 0 + \frac{\p}{\p x}\int_{C_2}\vv{F}\,d\vv{r}
+\end{gather*}
+Because $C_2$ is horizontal, $dy = 0$ and so there is no relevant $y$-component to $\vv{F}$. This means that we can rewrite $\vv{F}\,d\vv{r}$ as just the scalar function $P\,dx$. Using a parameter $t$ so we can use FTC:
+\begin{gather*}
+    \frac{\p}{\p x}f(x,y) = \frac{\p}{\p x}\int_{C_2}P\,dx = \frac{\p}{\p x}\int_{x_1}^x P(t,y)\,dt = P(x,y)
+\end{gather*}
+The last step is because of the original FTC. Similarly we can show using a vertical line as $C_2$ that:
+\begin{gather*}
+    \frac{\p}{\p y}f(x,y) = Q(x,y)
+\end{gather*}
+Now since $\vv{F} = \vl P,Q \vr = \vl f_x, f_y \vr$, $\n f = F$ and so $\vv{F}$ is conservative.
+\end{proof}
+If $\vv{F} = \vl P, Q \vr$ is conservative, then we can write for $\vv{F} = \n f$:
+\begin{gather*}
+    P = \frac{\p f}{\p x}\hspace{40pt}Q = \frac{\p f}{\p y}
+\end{gather*}
+So by taking the other variable's derivative on both equations, and using the fact that the order of the derivatives doesn't matter:
+\begin{gather*}
+    \frac{\p P}{\p y} = \frac{\p^2 f}{\p y \p x} = \frac{\p Q}{\p x}
+\end{gather*}
+If the converse of this is true, then we can use this to find if a vector field is conservative. However, in order to make this work we need stricter conditions, so we define a \textbf{simple curve} to be one that doesn't intersect itself(like an infinity sign would not be simple). We can also define a \textbf{simply-connected region}(for use in 3D stuff) to be such that any simple closed curve in the region that you can draw between two points never leaves the region. This means no holes, gaps, or divisions.
+
+So if the vector field satisfies the partial derivative condition and it is present on the open simply-connected region then we can say it is conservative. The reason for this is discussed in 17.4.
+
+Now to actually find the potential function $f$(where $\vv{F} = \n f$, we can use \textbf{partial integration}(which is really just normal single integration)) to get one variable but you will need to deal with the '+C' issues because a constant with respect to one variable can still be a function of the other two.
+\subsubsection{Conservation of Energy}
+We can use the ideas of this section to show how energy is conserved in a conservative field. Using Newton's Second Law:
+\begin{gather*}
+    \vv{F} = m\vv{a} = m\vv{r}''(t)\\
+    W_k = \int_C \vv{F}\,d\vv{r} = \int_a^b \vv{F}(\vv{r}(t)) \vv{r}'(t)\,dt = \int_a^b m\vv{r}''(t)\vdot \vv{r}'(t)\,dt
+\end{gather*}
+Now using the identity $\vv{r}'(t) \vdot \vv{r}''(t) + \vv{r}''(t)\vdot \vv{r}'(t) = 2\vv{r}'(t)\vdot\vv{r}''(t) = \dfrac{d}{dt} \bigg[\vv{r}'(t) \vdot \vv{r}'(t)\bigg] = \dfrac{d}{dt}\bigg|\vv{r}'(t)\bigg|^2$
+\begin{gather*}
+    = \frac{1}{2}m\int_a^b\dfrac{d}{dt}\bigg|\vv{r}'(t)\bigg|^2\,dt = \frac{1}{2}m\bigg[|\vv{r}'(b)|^2 - |\vv{r}'(a)|^2\bigg]
+\end{gather*}
+Since $\vv{r}'(t)$ is just velocity, this shows how $W = \Delta \frac{1}{2}mv^2 = \Delta KE$. Now we can define potential energy as the potential function where $\vv{F} = -\n P$, which makes sense because work is the negative of the change in PE.
+\begin{gather*}
+    W_p = \int_C \vv{F}\,d\vv{r} = -\int_C \n P\,d\vv{r} = P(a)-P(b)
+\end{gather*}
+Adding these two equations proves the \textbf{conservation of energy}:
+\begin{gather*}
+    P(a) + K(a) = P(b) + K(b)
+\end{gather*}
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
