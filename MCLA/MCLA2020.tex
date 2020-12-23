@@ -2833,6 +2833,64 @@ So this means:
     \oint_C \vv{F}\vdot\vv{n}\,ds = \iint_D \diver \vv{F}(x,y)\,dA
 \end{gather*}
 This version means that the line integral of the \textbf{normal} component of $\vv{F}$ along $C$ is equal to the double integral of the divergence of $\vv{F}$ over $D$.
+\subsection{Parametric Surfaces and Their Areas}
+\subsubsection{Parametric Surfaces}
+To describe more general surfaces, we can use parametric equations in which case they are called \textbf{parametric surfaces}, which we can use two parameters $u$ and $v$.
+\begin{gather*}
+    \vv{r}(u,v) = x(u,v)\,\hat{i} + y(u,v)\,\hat{j} + z(u,v)\,\hat{k}
+\end{gather*}
+As $u$ and $v$ vary, each point will give a point on $S$, which is traced out by $\vv{r}$.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.9]{gridcurves.png}
+\caption{Grid Curves}
+\label{gridcurves}
+\end{center}
+\end{figure}
+There are two useful groups of curves, called \textbf{grid curves} that use constant values of one parameter, say if we make $u = u_0$ and let $v$ vary. This creates a curve given by $\vv{r}(u_0,v)$($\Phi$ in the figure). Parametric equations are useful in order to solve the problem of how to express a surface in terms of equations. Just a note, to express $z = f(x,y)$ in parametric equations, we can just use:
+\begin{gather*}
+    x = x\hspace{20pt}y=y\hspace{20pt}z= f(x,y)
+\end{gather*}
+\subsubsection{Surfaces of Revolution}
+Let's consider a simple case of rotating the curve $y = f(x)$ around the $x-axis$, where $f(x) \geqslant 0$ for now. Let $\theta$ be the angle of rotation. If $(x,y,z)$ is an arbitrary point,
+\begin{gather*}
+    x = x\hspace{20pt}y = f(x)\,\cos(\theta)\hspace{20pt}z = f(x)\,\sin(\theta)
+\end{gather*}
+(because $z$ is the height, etc.)
+\subsubsection{Tangent Planes}
+Remember the general parametric surface:
+\begin{gather*}
+    \vv{r}(u,v) = x(u,v)\,\hat{i} + y(u,v)\,\hat{j} + z(u,v)\,\hat{k}
+\end{gather*}
+At the point ($u_0,v_0$), we can find the tangent vector:
+\begin{gather*}
+    \vv{r_v} = \frac{\p x}{\p v}\,\hat{i} + \frac{\p y}{\p v}\,\hat{j} + \frac{\p z}{\p v}\,\hat{k}\\
+    \vv{r_u} = \frac{\p x}{\p u}\,\hat{i} + \frac{\p y}{\p u}\,\hat{j} + \frac{\p z}{\p u}\,\hat{k}\\
+\end{gather*}
+If $\vv{r_u} \times \vv{r_v} \neq 0$, then the surface is a \textbf{smooth surface}, and the plane's normal vector is given by that cross product.
+\subsubsection{Surface Area}
+We can approximate the surface's infinitesimal element as a parallelogram, so the surface area element would be:
+\begin{gather*}
+    |\vv{r_u} \times \vv{r_v}|\,du\,dv
+\end{gather*}
+So we can write the surface area of a general parametric surface as:
+\begin{gather*}
+    A(S) = \iint_D |\vv{r_u} \times \vv{r_v}|\,du\,dv
+\end{gather*}
+\subsubsection{Surface Area of the Graph of a Function}
+For the special case of $z = f(x,y)$, we can use the parametric equations described previously and solve:
+\begin{gather*}
+    A(S) = \iint_D \sqrt{1 + \bigg(\frac{\p z}{\p x}\bigg)^2 + \bigg(\frac{\p z}{\p y}\bigg)^2}\,dA
+\end{gather*}
+To check if this agrees with the single-variable formula for surfaces of revolution, use:
+\begin{gather*}
+    x=x\hspace{20pt}y = f(x)\,\cos(\theta)\hspace{20pt}z=f(x)\,\sin(\theta)
+\end{gather*}
+After you perform the cross product and solve, you get:
+\begin{gather*}
+    A = 2\pi \int_a^b f(x)\,\sqrt{1 + (f'(x))^2}\,dx
+\end{gather*}
+This is the exact formula used in single-variable calculus, so this does agree.
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
