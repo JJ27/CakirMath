@@ -41,6 +41,8 @@
 \newcommand*\vdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
 \newcommand{\p}{\partial}
 \newcommand{\n}{\nabla}
+\newcommand{\curl}{\nabla \times}
+\newcommand{\diver}{\nabla \vdot}
 \makeatother
 
 \begin{document}
@@ -2679,6 +2681,158 @@ Adding these two equations proves the \textbf{conservation of energy}:
 \begin{gather*}
     P(a) + K(a) = P(b) + K(b)
 \end{gather*}
+\subsection{Green's Theorem}
+\textbf{Green's Theorem} is useful because it provides a connection between the line integral of the border of a region and the double integral over that region. To use this we need to have \textbf{positive orientation}, which simply means always going counterclockwise so the region is always on the left.
+
+If $C$ is a positively oriented, piecewise-smooth, simple closed curve in a plane and $D$ is a region bounded by $C$. If $P$ and $Q$ have continuous partial derivatives on the open region that contains $D$, then:
+\begin{gather*}
+    \oint_C P\,dx + Q\,dy = \iint_D \bigg(\frac{\p Q}{\p x} - \frac{\p P}{\p y}\bigg)\,dA
+\end{gather*}
+The new integral notation simply signifies a line integral in the positively oriented direction. Also the notation $\p D$ is used to signfiy the border of $D$. To prove this, let's define a region that can be expressed as a combination of type I and type II, called a \textbf{simple region}.
+\begin{proof}
+To prove Green's Theorem, we will need to split up the integral and prove that:
+\begin{gather*}
+    \oint_C P\,dx = -\iint_D \frac{\p P}{\p y}\,dA\\
+    \oint_C Q\,dy = \iint_D \frac{\p Q}{\p x}\,dA
+\end{gather*}
+So to prove the first one we can express $D$ as a type I region(bounded by two functions of $y$). So using the partial FTC:
+\begin{gather*}
+    \iint_D \frac{\p P}{\p y}\,dA = \int_a^b\int_{g_1(y}^{g_2(y)}\frac{\p P}{\p y}\,dy\,dx = \int_a^b P(x,g_2(x)) - P(x,g_1(x))\,dx
+\end{gather*}
+So now to get the line integral, we can split the region into 4 curves, two that go up and down, and 2 that are defined by $g_1(y)$ and $g_2(y)$. Since we're going counterclockwise, one of the $g$-functions will be going the right way and one the wrong way. So we add the negative sign to it to work.
+\begin{gather*}
+    \oint_{C_1}P(x,y)\,dx = -\int_a^b P(x,g_2(x))\,dx\\
+    \oint_{C_3}P(x,y)\,dx = \int_a^b P(x,g_1(x))\,dx
+\end{gather*}
+Now because the other 2 curves are vertical, they won't have any $dx$ so they don't contribute to the integral in the $x$-direction. So we can write:
+\begin{gather*}
+    \oint_C P(x,y)\,dx = \int_a^b P(x,g_1(x))\,dx - \int_a^b P(x,g_2(x))\,dx
+\end{gather*}
+Comparing the two equations we got, we can see how:
+\begin{gather*}
+    \oint_C P(x,y)\,dx = -\iint_D \frac{\p P}{\p y}\,dA
+\end{gather*}
+\end{proof}
+When using this theorem, sometimes the line integral or the double integral might be easier to evaluate. For example, if both $P$ and $Q$ are zero on the \textbf{boundary}, then the line integral and the double integral will always be zero.
+
+You can use it to find areas if you can find $P$ and $Q$ which make the integrand $1$. When you apply some possibilities:
+\begin{gather*}
+    \iint_D \,dA = A = \oint_C x\,dy = -\oint_C y\,dx = \frac{1}{2}\oint_C x\,dy - y\,dx
+\end{gather*}
+If you want to use Green's Theorem on a region with holes you can do that by adding up smaller regions that work with the theorem. The theorem can be extended to show that this works.
+\subsubsection{Consequences of Green's Theorem}
+Last section, we needed to prove that if $\vv{F} = \vl P,Q \vr$ is on an open simply connected region, and both scalar functions have continuous partial derivatives(1st order) and that:
+\begin{gather*}
+    \frac{\p P}{\p y} = \frac{\p Q}{\p x}
+\end{gather*}
+Then we can see how:
+\begin{gather*}
+    \oint_C \vv{F}\,d\vv{r} = \oint_C P\,dx + Q\,dy = \iint_R \bigg(\frac{\p Q}{\p x} - \frac{\p P}{\p y}\bigg)\,dA = \iint_R 0\,dA = 0
+\end{gather*}
+So if the field does no work while going around the curve, then $\vv{F}$ is conservative.
+\subsection{Curl and Divergence}
+Now we can define operations that can be performed \textit{on} vector fields.
+\subsubsection{Curl}
+If $\vv{F} = P\,\hat{i} + Q\,\hat{j} + R\,\hat{k}$ is a 3D vector field, with continuous first partial derivatives, then the \textbf{curl} $\curl{\vv{F}}$ is:
+\begin{gather*}
+    \curl \vv{F} = \bigg(\frac{\p R}{\p y} - \frac{\p Q}{\p z}\bigg)\,\hat{i} + \bigg(\frac{\p P}{\p z} - \frac{\p R}{\p x}\bigg)\,\hat{j} + \bigg(\frac{\p Q}{\p x} - \frac{\p P}{\p y}\bigg)\,\hat{k}
+\end{gather*}
+You can think of the $\n$ operator as acting as the partial operator for each unit vector in each direction.
+So the notation for the \textbf{curl} should make sense because it is basically a determinant:
+\begin{gather*}
+    \curl \vv{F} = \begin{bmatrix}
+    \hat{i} & \hat{j} & \hat{k}\\
+    \vspace{2pt}
+    \dfrac{\p}{\p x} & \dfrac{\p}{\p y} & \dfrac{\p }{\p z}\\
+    \vspace{5pt}
+    P & Q & R\\
+    \end{bmatrix}
+\end{gather*}
+Now using curl, we can say that if $f$ is a 3D with continuous second partial derivatives:
+\begin{gather*}
+    \curl (\n f) = 0
+\end{gather*}
+\begin{proof}
+    $\curl (\n f) = \begin{bmatrix}
+    \hat{i} & \hat{j} & \hat{k}\\
+    \vspace{2pt}
+    \dfrac{\p}{\p x} & \dfrac{\p}{\p y} & \dfrac{\p }{\p z}\\
+    \vspace{5pt}
+    \dfrac{\p f}{\p x} & \dfrac{\p f}{\p y} & \dfrac{\p f}{\p z}\\
+    \end{bmatrix}
+    = \bigg(\dfrac{\p^2 f}{\p y\p z} - \dfrac{\p^2 f}{\p z\p y}\bigg)... = 0$
+\end{proof}
+Because any conservative field would have $\n f$, we can say that if $\vv{F}$ is conservative, then $\curl \vv{F} = 0$.
+
+The converse of this is only true if $\vv{F}$ is defined everywhere, or if the domain is simply connected(no gaps), so if this is true and all $P,Q,R$ have continuous partial derivatives, if $\curl \vv{F} = 0$, then $\vv{F}$ is conservative.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.15]{curl.png}
+\caption{Curl Geometrically}
+\label{curl}
+\end{center}
+\end{figure}
+The curl vector is named so because it has significance with rotations. Think of a fluid that flows in the direction out of the circle(think of that as a cross section of a pipe). If $\curl \vv{F} = 0$, then at that point the fluid is only moving straight, not rotating at all. If it does not, then the fluid particles rotate as well, the direction of the curl vector specifies the direction of rotation(right hand rule).
+\subsubsection{Divergence}
+Given $\vv{F} = \vl P,Q,R \vr$, and the first partial derivatives exist, then the \textbf{divergence of} $\vv{F}$ is:
+\begin{gather*}
+    \diver \vv{F} = \frac{\p P}{\p x} + \frac{\p Q}{\p y} + \frac{\p R}{\p z}
+\end{gather*}
+This notation should make sense since it's just a dot product of the operator $\n$ and the vector field, which produces a \textit{scalar field}.
+
+If the second order partial derivatives are continuous, then we can say that:
+\begin{gather*}
+    \diver(\curl \vv{F})) = 0
+\end{gather*}
+This can easily be proved by applying the definitions of the two operations and the terms will cancel out because of Clairaut's Theorem.
+
+The physical interpretation of this would be the change in the mass of a fluid per unit volume at a point. In other words, it measures the \textbf{compressibility}, or the tendency of the fluid to diverge from the point. So if $\diver \vv{F} = 0$, then we can say that the fluid is \textbf{incompressible}.
+
+If you try to take the divergence of a graident you get:
+\begin{gather*}
+    \diver \n f = \frac{\p^2 f}{\p x^2} + \frac{\p^2 f}{\p y^2} + \frac{\p^2 f}{\p z^2}
+\end{gather*}
+We have seen this before, in the \textbf{Laplacian} operator, which works with the notation, since $\n^2 f = \n \vdot \n$.
+\subsubsection{Vector Forms of Green's Theorem}
+These two new operators allow us to rewrite Green's Theorem in a way that is more useful for vector calculus. So starting with the integral:
+\begin{gather*}
+    \oint_C \vv{F}\,d\vv{r} = \oint_C P\,dx + Q\,dy
+\end{gather*}
+The curl would be:
+\begin{gather*}
+    \curl \vv{F} = \begin{bmatrix}
+    \hat{i} & \hat{j} & \hat{k}\\
+    \vspace{2pt}
+    \dfrac{\p}{\p x} & \dfrac{\p}{\p y} & \dfrac{\p }{\p z}\\
+    \vspace{5pt}
+    P & Q & 0\\
+    \end{bmatrix}
+    = \bigg(\frac{\p Q}{\p x} - \frac{\p P}{\p y}\bigg)\,\hat{k}\\
+    (\curl \vv{F})\vdot \hat{k} = \bigg(\frac{\p Q}{\p x} - \frac{\p P}{\p y}\bigg)\,\hat{k} \vdot \hat{k} = \bigg(\frac{\p Q}{\p x} - \frac{\p P}{\p y}\bigg)
+\end{gather*}
+Therefore, we can use this in the right side of Green's Theorem:
+\begin{gather*}
+    \oint_C \vv{F}\,d\vv{r} = \iint_D (\curl \vv{F})\vdot \hat{k}\,dA
+\end{gather*}
+The above equation uses $d\vv{r}$, the \textbf{tangential} component of $\vv{F}$ along $C$, now we can get a second formula that uses the \textbf{normal} component to $C$:
+\begin{gather*}
+    C: \vv{r}(t) = x(t)\,\hat{i} + y(t)\,\hat{j}\\
+    \vv{T}(t) = \frac{x'(t)}{|\vv{r}'(t)|}\,\hat{i} + \frac{y'(t)}{|\vv{r}'(t)|}\,\hat{j}
+\end{gather*}
+So it can be shown that the unit normal vector $\vv{n} = \frac{\vv{T}'(t)}{|\vv{T}'(t)|}$:
+\begin{gather*}
+    \vv{n} = \frac{y'(t)}{|\vv{r}'(t)|}\,\hat{i} + \frac{x'(t)}{|\vv{r}'(t)|}\,\hat{j}
+\end{gather*}
+So using $\frac{ds}{dt} = |\vv{r}'(t)|$:
+\begin{gather*}
+    \oint_C (\vv{F}\vdot \vv{n})\,ds = \int_a^b (\vv{F}\vdot\vv{n})\,|\vv{r}'(t)|\,dt = \int_a^b P(x(t),y(t))\,y'(t) - Q(x(t),y(t))\,x'(t)\,dt \\= \oint_C P\,dx - Q\,dx = \iint_D\bigg(\frac{\p P}{\p x} + \frac{\p Q}{\p y}\bigg)\,dA
+\end{gather*}
+So this means:
+\begin{gather*}
+    \oint_C \vv{F}\vdot\vv{n}\,ds = \iint_D \diver \vv{F}(x,y)\,dA
+\end{gather*}
+This version means that the line integral of the \textbf{normal} component of $\vv{F}$ along $C$ is equal to the double integral of the divergence of $\vv{F}$ over $D$.
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
