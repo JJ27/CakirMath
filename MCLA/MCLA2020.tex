@@ -2877,6 +2877,16 @@ So we can write the surface area of a general parametric surface as:
 \begin{gather*}
     A(S) = \iint_D |\vv{r_u} \times \vv{r_v}|\,du\,dv
 \end{gather*}
+\subsubsection{Infinitestimal Surface Area}
+Using this surface area formula, we can express $dA$ as a general expression:
+\begin{gather*}
+    d\vv{A} = (\vv{r_u} \times \vv{r_v})\,du\,dv
+\end{gather*}
+This gives us a way to find $d\vv{A}$ in any coordinate system with parameters such as these. In fact, this is an idea that connects to the Jacobian. For example, in cartesian we know that $\vv{r_x} = \hat{i}$ and $\vv{r_y} = \hat{j}$. So the cross product $\hat{i} \times \hat{j} = \hat{k}$. So $d\vv{A}$ in cartesian:
+\begin{gather*}
+    d\vv{A} = dx\,dy\,\hat{k}
+\end{gather*}
+We can apply this to any of the other coordinate systems as well. For 3+ parameter systems, we can use the Jacobian to convert.
 \subsubsection{Surface Area of the Graph of a Function}
 For the special case of $z = f(x,y)$, we can use the parametric equations described previously and solve:
 \begin{gather*}
@@ -2891,6 +2901,81 @@ After you perform the cross product and solve, you get:
     A = 2\pi \int_a^b f(x)\,\sqrt{1 + (f'(x))^2}\,dx
 \end{gather*}
 This is the exact formula used in single-variable calculus, so this does agree.
+\subsection{Surface Integrals}
+The connection between surface integrals and surface area are similar to line integrals and arc length. The integral is just adding \textit{something} over the whole space. So the form for the surface integral would be:
+\begin{gather*}
+    \iint_S f(x,y,z)\,dS = \lim_{m,n \to \infty} \sum_{i = 1}^m \sum_{j = 1}^n f(P_{ij})\,\Delta S
+\end{gather*}
+\subsubsection{Graphs}
+If the surface is a graph with $z = g(x,y)$, you can account for the curvature of that surface by approximating as before. Using the cross product with the parallelogram gets you:
+\begin{gather*}
+    \iint_S f(x,y,z)\,dS = \iint_D f(x,y,g(x,y)) \sqrt{(g_x)^2 + (g_y)^2 + 1}\,dA
+\end{gather*}
+Notice how that functions as a correction factor(think like the Jacobian transformation style). You can do this with the $yz$ projection as well by changing the correction factor to have the partials of the variables not used.
+
+The applications of these are similar, for example if I have a thin sheet(thickness is negligible), I can find the total mass of it:
+\begin{gather*}
+    m = \iint_S \rho(x,y,z)]\,dS
+\end{gather*}
+This sheet will have \textbf{center of mass}, for example $\bar{x} = \dfrac{1}{m}\iint_S x\rho(x,y,z)\,dS$
+\subsubsection{Parametric Surfaces}
+We can also apply this idea to parametric surfaces, pretty much the same way as we did for surface area, by applying our correction factor when transforming to the parametric form:
+\begin{gather*}
+    \iint_S f(x,y,z)\,dS = \iint_D f(\vv{r}(u,v))\,|\vv{r_u}\times\vv{r}_v| \,dA
+\end{gather*}
+Notice that if you evaluate $\iint_S\,dS$, you get the surface area equation discussed previously. To further show this, if we use the $z = g(x,y)$ in the last subsection, we get
+\begin{gather*}
+    |\vv{r_x} \times \vv{r_y}| = \sqrt{1 + (g_x)^2 + (g_y)^2}
+\end{gather*}
+\subsubsection{Oriented Surfaces}
+To orient a surface(like we did with a curve) we need to make sure it's possible. For example, the \textbf{Mobius Strip} only has one side and so it's not orientable. But for curves that are, the would be two possible normal vectors from each point, one that goes into the surface and one that goes out, such that $\vv{n_1} = -\vv{n_2}$.
+
+So for a surface given by $z = g(x,y)$ we can find the orientation given by the unit normal vector:
+\begin{gather*}
+    \vv{n} = \frac{-g_x\hat{i} - g_y\hat{j} + \vv{k}}{\sqrt{1 + (g_x)^2 + (g_y)^2}}
+\end{gather*}
+Since the $\hat{k}$ part is positive, this is the \textbf{upward orientation} of the surface. For any smooth surface, you can find it's normal orientation:
+\begin{gather*}
+    \vv{n} = \frac{\vv{r_u} \times \vv{r_v}}{|\vv{r_u} \times \vv{r_v}|}
+\end{gather*}
+For any \textbf{closed surface}(a solid shape that is closed), the convention for \textbf{positive orientation} is where the normal vector points \textit{outside} the surface.
+\subsubsection{Surface Integrals on Vector Fields}
+Imagine a surface $S$ with a normal vector $\vv{n}$, if the fluid velocity is given by $\vv{v}$, then we can write:
+\begin{gather*}
+    \frac{m}{t} = (\rho\vv{v} \vdot \vv{n})A
+\end{gather*}
+for each point. This works because you can approximate each point on a surface as being nearly planar, so the amount going through would be on the normal vector. This is called the \textbf{flux}, and can be written as:
+\begin{gather*}
+    \iint_S \vv{F}\vdot d\vv{S} = \iint_S \vv{F} \vdot \vv{n}\,dS
+\end{gather*}
+This should make sense because the flux through the surface is counted when it goes through in the direction of the normal vector(the stuff going in and out will always point parallel to the normal).
+\paragraph{Graphs}
+If we apply the formula:
+\begin{gather*}
+    \iint_S\vv{F}\vdot d\vv{S} = \iint_S \vv{F}\vdot\vv{n}\,dS = \iint_D \vl P,Q,R\vr \vdot \frac{\vl -g_x, -g_y, 1}{\sqrt{1 + (g_x)^2 + (g_y)^2}} \sqrt{1 + (g_x)^2 + (g_y)^2}\,dA\\
+    \iint_S \vv{F}\,d\vv{S} = \iint_D(-P(g_x) - Q(g_y) + R)\,dA
+\end{gather*}
+If the unit normal vector is downward, then you multiply this by $-1$.
+\paragraph{Parametric Surfaces}
+Using the same idea:
+\begin{gather*}
+    \iint_S \vv{F}\vdot \vv{S} = \iint_S \vv{F}\vdot\frac{\vv{r_u} \times \vv{r_v}}{|{\vv{r_u} \times \vv{r_v}|}}\,dS = \iint_D \bigg[\vv{F}(\vv{r}(u,v))\vdot\frac{\vv{r_u} \times \vv{r_v}}{|{\vv{r_u} \times \vv{r_v}|}}\bigg]|\vv{r_u} \times \vv{r_v}|\,dA\\
+    \iint_S \vv{F}\vdot d\vv{S} = \iint_D \vv{F} \vdot (\vv{r_u} \times \vv{r_v})\,dA
+\end{gather*}
+
+The idea can be applied to electrostatics, where \textbf{Gauss's Law} states that:
+\begin{gather*}
+    Q = \varepsilon_0 \iint_S \vv{E}\vdot d\vv{S}
+\end{gather*}
+Where $\varepsilon_0$ is the permittivity of free space. You can also deal with heat flow:
+\begin{gather*}
+    \vv{F} = -K\n u
+\end{gather*}
+where $K$ is the experimentally determined \textit{conductivity} of the substance, so the rate of heat flow throughout the surface of the body is given by:
+\begin{gather*}
+    \iint_S \vv{F}\vdot d\vv{S} = -K\iint_S \n u\vdot d\vv{S}
+\end{gather*}
+This is just found by integrating both sides around the surface to add up the total heat flow on the surface per unit time.a
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
