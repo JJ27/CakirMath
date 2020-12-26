@@ -2902,7 +2902,7 @@ After you perform the cross product and solve, you get:
 \end{gather*}
 This is the exact formula used in single-variable calculus, so this does agree.
 \subsection{Surface Integrals}
-The connection between surface integrals and surface area are similar to line integrals and arc length. The integral is just adding \textit{something} over the whole space. So the form for the surface integral would be:
+The connection between surface integrals and surface area is similar to line integrals and arc length. The integral is just integrating \textit{something} over the whole space. So the form for the surface integral would be:
 \begin{gather*}
     \iint_S f(x,y,z)\,dS = \lim_{m,n \to \infty} \sum_{i = 1}^m \sum_{j = 1}^n f(P_{ij})\,\Delta S
 \end{gather*}
@@ -2928,7 +2928,7 @@ Notice that if you evaluate $\iint_S\,dS$, you get the surface area equation dis
     |\vv{r_x} \times \vv{r_y}| = \sqrt{1 + (g_x)^2 + (g_y)^2}
 \end{gather*}
 \subsubsection{Oriented Surfaces}
-To orient a surface(like we did with a curve) we need to make sure it's possible. For example, the \textbf{Mobius Strip} only has one side and so it's not orientable. But for curves that are, the would be two possible normal vectors from each point, one that goes into the surface and one that goes out, such that $\vv{n_1} = -\vv{n_2}$.
+To orient a surface(like we did with a curve) we need to make sure it's possible. For example, the \textbf{Mobius Strip} only has one side and so it's not orientable. But for curves that are, there would be two possible normal vectors from each point, one that goes into the surface and one that goes out, such that $\vv{n_1} = -\vv{n_2}$.
 
 So for a surface given by $z = g(x,y)$ we can find the orientation given by the unit normal vector:
 \begin{gather*}
@@ -2952,14 +2952,14 @@ This should make sense because the flux through the surface is counted when it g
 \paragraph{Graphs}
 If we apply the formula:
 \begin{gather*}
-    \iint_S\vv{F}\vdot d\vv{S} = \iint_S \vv{F}\vdot\vv{n}\,dS = \iint_D \vl P,Q,R\vr \vdot \frac{\vl -g_x, -g_y, 1}{\sqrt{1 + (g_x)^2 + (g_y)^2}} \sqrt{1 + (g_x)^2 + (g_y)^2}\,dA\\
+    \iint_S\vv{F}\vdot d\vv{S} = \iint_S \vv{F}\vdot\vv{n}\,dS = \iint_D \vl P,Q,R\vr \vdot \frac{\vl -g_x, -g_y, 1 \vr}{\sqrt{1 + (g_x)^2 + (g_y)^2}} \sqrt{1 + (g_x)^2 + (g_y)^2}\,dA\\
     \iint_S \vv{F}\,d\vv{S} = \iint_D(-P(g_x) - Q(g_y) + R)\,dA
 \end{gather*}
 If the unit normal vector is downward, then you multiply this by $-1$.
 \paragraph{Parametric Surfaces}
 Using the same idea:
 \begin{gather*}
-    \iint_S \vv{F}\vdot \vv{S} = \iint_S \vv{F}\vdot\frac{\vv{r_u} \times \vv{r_v}}{|{\vv{r_u} \times \vv{r_v}|}}\,dS = \iint_D \bigg[\vv{F}(\vv{r}(u,v))\vdot\frac{\vv{r_u} \times \vv{r_v}}{|{\vv{r_u} \times \vv{r_v}|}}\bigg]|\vv{r_u} \times \vv{r_v}|\,dA\\
+    \iint_S \vv{F}\vdot d\vv{S} = \iint_S \vv{F}\vdot\frac{\vv{r_u} \times \vv{r_v}}{|{\vv{r_u} \times \vv{r_v}|}}\,dS = \iint_D \bigg[\vv{F}(\vv{r}(u,v))\vdot\frac{\vv{r_u} \times \vv{r_v}}{|{\vv{r_u} \times \vv{r_v}|}}\bigg]|\vv{r_u} \times \vv{r_v}|\,dA\\
     \iint_S \vv{F}\vdot d\vv{S} = \iint_D \vv{F} \vdot (\vv{r_u} \times \vv{r_v})\,dA
 \end{gather*}
 
@@ -2971,11 +2971,65 @@ Where $\varepsilon_0$ is the permittivity of free space. You can also deal with 
 \begin{gather*}
     \vv{F} = -K\n u
 \end{gather*}
-where $K$ is the experimentally determined \textit{conductivity} of the substance, so the rate of heat flow throughout the surface of the body is given by:
+where $K$ is the experimentally-determined \textit{conductivity} of the substance, so the rate of heat flow throughout the surface of the body is given by:
 \begin{gather*}
     \iint_S \vv{F}\vdot d\vv{S} = -K\iint_S \n u\vdot d\vv{S}
 \end{gather*}
-This is just found by integrating both sides around the surface to add up the total heat flow on the surface per unit time.a
+This is just found by integrating both sides around the surface to add up the total heat flow on the surface per unit time.
+\subsection{Stokes' Theorem}
+Green's Theorem can be regarded as just a special case of \textbf{Stokes' Theorem}. Green's Theorem connects the line integral of a boundary to the double integral of the area, while Stokes connects the line integral of the boundary to a \textit{surface integral} of a surface enclosed.
+
+To do this, we need to define the \textbf{positive orientation} of a boundary curve on a surface. If your head points in the direction of the normal vector, the curve orientation is positive if the direction you walk along the curve keeps the surface \textit{to the left of you}. In other words, a surface with upward normal has a CCW curve, downward gives a clockwise curve(relative to the viewer looking at the upside down surface).
+
+If $S$ is a oriented smooth curve that is bounded by a simple, closed, smooth boundary curve $C$ with a positive orientation, and $\vv{F}$ is a vector field that has continuous partial derivatives on an open region that contains $S$, then:
+\begin{gather*}
+    \oint_C \vv{F}\,d\vv{r} = \iint_S (\curl \vv{F})\,d\vv{S}
+\end{gather*}
+\begin{proof}
+It is difficult to prove this theorem for any surface, but for the graph $z = g(x,y)$ and $\vv{F} = \vl P,Q, R \vr$, we can apply the $-Pg_x - Qg_y +R$ formula but using $\curl \vv{F}$ instead of $\vv{F}$:
+\begin{gather*}
+    \iint_S (\curl \vv{F})\,d\vv{S} = \iint_D \bigg[-\bigg(\frac{\p R}{\p y} - \frac{\p Q}{\p z}\bigg)\frac{\p z}{\p x} - \bigg(\frac{\p P}{\p z} - \frac{\p R}{\p x}\bigg)\frac{\p z}{\p y} + \bigg(\frac{\p Q}{\p x} - \frac{\p P}{\p y}\bigg)\bigg]\,dA
+\end{gather*}
+If the parametric equations for the projection of the boundary curve to the $xy$-plane are $x(t),y(t)$, then the actual curve would have $z(t) = g(x(t),y(t))$, so using the chain rule:
+\begin{gather*}
+    \oint_C\vv{F}\,d\vv{r} = \int_a^b \bigg(P\frac{dx}{dt} + Q\frac{dy}{dt} + R\frac{dz}{dt}\bigg)\,dt = \int_a^b \bigg[P\frac{dx}{dt} + Q\frac{dy}{dt} + R\bigg(\frac{\p z}{\p x}\frac{dx}{dt} + \frac{\p z}{\p y}\frac{dy}{dt}\bigg)\bigg]\,dt\\
+    = \int_a^b \bigg[\bigg(P+R\frac{\p z}{\p x}\bigg)\frac{dx}{dt} + \bigg(Q+R\frac{\p z}{\p y}\bigg)\frac{dy}{dt}\bigg]\,dt = \oint_{C_1} \bigg(P+R\frac{\p z}{\p x}\bigg)dx + \bigg(Q+R\frac{\p z}{\p y}\bigg)dy\\
+    = \iint_D \bigg[\frac{\p}{\p x}\bigg(Q + R\frac{\p z}{\p y}\bigg) - \frac{\p}{\p y}\bigg(P + R\frac{\p z}{\p x}\bigg)\bigg]\,dA
+\end{gather*}
+The last step used Green's Theorem. We can use the chain rule again on $P,Q,R$ which are all functions of $x,y,z$. $z$ is also a function of $x,y$. So apply the product rule and then the chain rule:
+\begin{gather*}
+    \oint_{C} \vv{F}\,d\vv{r} = \iint_D \bigg[\bigg(\frac{\p Q}{\p x} + \frac{\p Q}{\p z}\frac{\p z}{\p x} + \frac{\p R}{\p x}\frac{\p z}{\p y} + \frac{\p R}{\p z}\frac{\p z}{\p x}\frac{\p z}{\p y} + R\frac{\p^2 z}{\p x\p y}\bigg) - \textrm{similar for the partial y part}\bigg]\,dA
+\end{gather*}
+Four terms will cancel out and the six that are left will resemble the right side of the curl equation, which lets us prove Stokes' theorem.
+\end{proof}
+This means that the line integral around a boundary curve of the tangential component of $\vv{F}$ is the same as the surface integral of the normal component, because:
+\begin{gather*}
+    \oint_C \vv{F}\,d\vv{r} = \oint_C \vv{F}\vdot\vv{T}\,ds\hspace{50pt}\iint_S (\curl \vv{F})\vdot\,d\vv{S} = \iint_S (\curl \vv{F}) \vdot \vv{n}\,dS
+\end{gather*}
+For the special case where $S$ is just flat, the upward orientation gives a unit normal $\vv{n} = \hat{k}$, so:
+\begin{gather*}
+    \oint_C \vv{F}\,d\vv{r} = \iint_S (\curl \vv{F})\vdot\,d\vv{S} = \iint_S (\curl \vv{F})\vdot\hat{k}\,dA
+\end{gather*}
+This matches up with the vector form of Green's Theorem.
+
+Stokes' theorem means that two oriented surfaces with the same oriented boundary will have the same curl surface integral. This can possibly help transform a difficult surface integral into an easier one.
+\paragraph{The Curl Vector}
+Stokes' theorem allows a better physical interpretation of the curl vector. Imagine a fluid velocity field $\vv{v}$, where the line integral:
+\begin{gather*}
+    \oint_C \vv{v}\,d\vv{r} = \int_C \vv{v}\vdot\vv{T}\,ds
+\end{gather*}
+$\vv{v}\vdot\vv{T}$(since it is the component of velocity in the $\vv{T}$-direction) means that the integral is just a measure of the tendency of the fluid to move around $C$, which is called the \textbf{circulation}.
+
+If $P_0$ is a point on the fluid and $S_a$ is a small disk with $r = a$ and center $P_0$, then we can assume $(\curl \vv{F})(P) = (\curl \vv{F})(P_0)$ because $S_a$ is small and the curl function is continuous. So using Stokes' theorem:
+\begin{gather*}
+    \oint_{C_a}\vv{v}\vdot\,d\vv{r} = \iint_{S_a}(\curl \vv{v})\vdot\vv{n}\,dS = (\curl \vv{v}) \vdot \vv{n}(\pi a^2)\implies \textrm{circulation} = \lim_{a \to 0}\frac{1}{\pi a^2}\int_{C_a}\vv{v}\vdot\,d\vv{r}
+\end{gather*}
+So the circulation is greatest on the axis of the normal and curl vectors.
+
+Stokes' Theorem also lets us see why if $\curl \vv{F} = 0$ on $\mathbb{R}^3$, then $\vv{F}$ is a conservative field, simply because:
+\begin{gather*}
+    \oint_C \vv{F}\,d\vv{r} = \iint_S (\curl \vv{F})\vdot\,d\vv{S} = 0
+\end{gather*}
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
