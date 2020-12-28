@@ -3030,6 +3030,129 @@ Stokes' Theorem also lets us see why if $\curl \vv{F} = 0$ on $\mathbb{R}^3$, th
 \begin{gather*}
     \oint_C \vv{F}\,d\vv{r} = \iint_S (\curl \vv{F})\vdot\,d\vv{S} = 0
 \end{gather*}
+\subsection{The Divergence Theorem}
+In 17.5, we showed how one vector form of Green's Theorem was:
+\begin{gather*}
+    \oint_C (\vv{F}\vdot\vv{n})\,ds = \iint_D (\diver \vv{F})\,dA
+\end{gather*}
+So to extend this theorem into 3D, a reasonable guess could be:
+\begin{gather*}
+    \iint_S (\vv{F}\vdot\vv{n})\,dS = \iint_S \vv{F}\vdot d\vv{S} = \iiint_E (\diver \vv{F})\,dV
+\end{gather*}
+In fact, this equation is actually true under certain conditions and is called \textbf{The Divergence Theorem}. We can prove this theorem here for \textbf{simple solid surfaces}, those that are of types 1,2 and 3(not bounded by just functions of a 2 variables). Examples are spheres and cubes. The boundary $E$ of a simple closed solid here would be a simple closed surface.
+\begin{proof}
+\begin{gather*}
+    \diver \vv{F} = \frac{\p P}{\p x} + \frac{\p Q}{\p y} + \frac{\p R}{\p z}\\
+    \iiint (\diver \vv{F})\,dV = \iiint_E \frac{\p P}{\p x}\,dV + \textrm{y and z integrals}
+\end{gather*}
+For the left side:
+\begin{gather*}
+    \iint_S (\vv{F}\vdot \vv{n})\,dS = \iint_S\vl P,Q,R\vr\vdot\vv{n}\,dS = \iint_S P\,\hat{i}\vdot\vv{n}\,dS + \textrm{y and z integrals}
+\end{gather*}
+So to prove this theorem, we need to prove that each component of the first equation is equal to it's corresponding component in the second.
+
+For now we can just prove one of them:
+\begin{gather*}
+    \iint_S R\,\hat{k}\vdot\vv{n}\,dS = \iiint_E \frac{\p R}{\p z}\,dV
+\end{gather*}
+To do this we can think of $E$ as a type 1 region(for now since it's all three types), so it's bounded by two surfaces $u_1(x,y)$ and $u_2(x,y)$.
+\begin{gather*}
+    \iiint_E \frac{\p R}{\p z}\,dV = \iint_D \bigg[\int_{u_1}^{u_2} \frac{\p R}{\p z}\,dz\bigg]\,dA
+\end{gather*}
+So using the partial FTC:
+\begin{gather*}
+= \iint_D R(x,y,u_2) - R(x,y,u_1)\,dA
+\end{gather*}
+because the two $u$-functions are constants with respect to $z$. If you imagine a type 1 solid, it's boundary consists of the bottom surface $S_1 = u_1$, the top surface $S_2 = u_2$, and possibly the vertical surface in between(think a curtain or the long part of a cylinder). For the vertical surface:
+\begin{gather*}
+    \iint_{S_3}R\,\hat{k}\vdot\vv{n}\,dS = 0
+\end{gather*}
+because $\hat{k}$ goes up and $\vv{n}$ goes outward, so they'll always be orthogonal. We can convert from $dS$ to $dA$ using the equation with the partial derivatives of the surface. So for the remaining surfaces:
+\begin{gather*}
+    \iint_{S_2} R\,\hat{k}\vdot\vv{n}\,dS = \iint_D R(x,y,u_2)\,dA\\
+    \iint_{S_3} R\,\hat{k}\vdot\vv{n}\,dS = -\iint_D R(x,y,u_1)\,dA\\
+\end{gather*}
+The negative sign is because the outward normal vector on the bottom surface needs to point down.
+So when you add these two together you get the same $R(u_2) - R(u_1)$ integral. This can also be proved for type 2 and type 1.
+\end{proof}
+This also works for solid surfaces, where the normal vector needs to point inward on one side and outward on another. This will create a negative sign which is used in the above proof.
+
+Using a similar method to the last section, we can show that the divergence of a point can be expressed as:
+\begin{gather*}
+    \diver \vv{F}(P_0) = \lim_{a \to 0}\frac{1}{V(B_a)}\iint_{S_a}\vv{F}\,d\vv{S}
+\end{gather*}
+Where $B_a$ is a small ball and $S_a$ is the outer surface of it. This shows how the divergence is simply the net rate of flux per unit volume(since the integral there is just flux). If it's $> 0$, then we can say that $P_0$ is a \textbf{source}, while if it's less then it is a \textbf{sink}, since it takes in more than it takes out. So if the vectors point inward at a point, then you can say $\diver \vv{F} < 0$, and the opposite for outward flux.
+\section{Second-Order Differential Equations}
+A \textbf{differential equation} is an equation that contains the derivatives of a function. They have applications in many fields such as harmonic oscillators and electric circuits.
+\subsection{Second-Order Linear Equations}
+A \textbf{second-order linear differential equation} is one with the form:
+\begin{gather*}
+    P(x)\frac{d^2y}{dx^2} + Q(x)\frac{dy}{dx} + R(x)y = G(x)
+\end{gather*}
+If $G(x)=0$ for all $x$, then we can call this equation \textbf{homogeneous}, if not it's \textbf{nonhomogenous}. For equations of this type, we can say that if $y_{1,2}(x)$ is a solution, then all $y(x)$ is a solution if:
+\begin{gather*}
+    y(x) = c_1y_1(x) + c_2y_2(x)
+\end{gather*}
+where $y(x)$ is called a \textbf{linear combination}.
+\begin{proof}
+If $y_1$ and $y_2$ are solutions, then we can write:
+\begin{gather*}
+    P(x)y_1'' + Q(x)y_1' + R(x)y_1 = 0\\
+    P(x)y_2'' + Q(x)y_2' + R(x)y_2 = 0\\
+\end{gather*}
+So if we attempt to substitute the linear combination:
+\begin{gather*}
+    P(c_1y_1'' + c_2y_2'') + Q(c_1y_1' + c_2y_2') + R(c_1y_1 + c_2y_2)\\
+    = c_1[Py_1'' + Qy_1' + Ry_1] + c_2[Py_2'' + Qy_2' + Ry_2] = c_1(0) + c_2(0) = 0
+\end{gather*}
+\end{proof}
+The next theorem works on \textbf{linearly independent} solutions(meaning that $y_1 \neq c y_2$ and vice versa). So the functions $5x$ and $x$ are dependent while $e^x$ and $xe^x$ are not.
+
+If the solutions are not linearly dependent, and $P(x) \neq 0$, then the \textbf{general solution} is given by:
+\begin{gather*}
+    y(x) = c_1y_1(x) + c_2y_2(x)
+\end{gather*}
+This means that if we know two linearly independent solutions then we know all the solutions. However this is difficult, if the coefficients are constants, such that:
+\begin{gather*}
+    ay'' + by' + cy = 0
+\end{gather*}
+To do this, we know that $y = e^{rx}$ has a derivative that is just a constant multiple of itself. So if we use $y = e^{rx}$:
+\begin{gather*}
+    ar^2e^{rx} + bre^{rx} + ce^{rx} = 0 \implies ar^2 + br + c = 0
+\end{gather*}
+because $e^{rx} \neq 0$(and you can factor it out). This quadratic equation is called the \textbf{auxiliary} equation of the DE.
+
+We know that using the quadratic formula, we can define different cases based on the discriminant $b^2 - 4ac$.
+\paragraph{Disc $>$ 0} This means that you have two distinct real solutions and your general solution would then be:
+\begin{gather*}
+    y = c_1e^{r_1x}+ c_2e^{r_2x}
+\end{gather*}
+\paragraph{Disc $=$ 0} Then the roots of the equation would be $r = \dfrac{-b}{2a}$(from the quadratic equation this is easy to see). So $2ar + b = 0$. So in this case the general solution is:
+\begin{gather*}
+    y = c_1 e^{rx} + c_2 xe^{rx}
+\end{gather*}
+which is just the linear combination of $y_1 = e^{rx}$ and $y_2 = xe^{rx}$. You can verify this by checking that $ay_2'' + by_2' + cy_2 = 0$.
+\paragraph{Disc $<$ 0} This means that both roots are complex numbers(both because they occur in conjugate pairs). So:
+\begin{gather*}
+    r_1 = \alpha + i \beta\hspace{40pt}r_2 = \alpha + i \beta
+\end{gather*}
+So using $e^{i\theta} = \cos(\theta) + i\sin(\theta)$:
+\begin{gather*}
+    y = C_1e^{(\alpha + i \beta)x} + C_2e^{(\alpha + i \beta)x} = C_1e^{\alpha x}(\cos(\beta x) + i\sin(\beta x)) + C_2e^{\alpha x}(\cos(\beta x) - i\sin(\beta x))\\
+    = e^{\alpha x}[(C_1 + C_2)\cos(\beta x) + i(C_1 - C_2)\sin(\beta x)]\\
+    = e^{\alpha x}(c_1\cos(\beta x) + c_2\sin(\beta x))
+\end{gather*}
+\subsubsection{Initial and Boundary Value Problems}
+An \textbf{initial-value problem} consists of finding the solution given the initial conditions:
+\begin{gather*}
+    y(x_0) = y_0\hspace{30pt}y'(x_0) = y_1
+\end{gather*}
+If all the coefficient functions are continuous and $P(x) \neq 0$, then there must be a unique solution to this problem. The basic method here is to find the general solution and plug those values in to get a system, and then solve for the constants $c_1$ and $c_2$.
+
+A \textbf{boundary-value problem} is a similar idea, to figure out the system and then solve for the constants, however it's important to note that these problems do not have guaranteed solutions, this time you are given two boundary conditions:
+\begin{gather*}
+    y(x_0) = y_0\hspace{30pt}y(x_1)=y_1
+\end{gather*}
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
