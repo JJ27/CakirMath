@@ -3153,6 +3153,60 @@ A \textbf{boundary-value problem} is a similar idea, to figure out the system an
 \begin{gather*}
     y(x_0) = y_0\hspace{30pt}y(x_1)=y_1
 \end{gather*}
+\subsection{Non-homogeneous Linear Equations}
+Now we can figure out how to solve \textbf{non-homogeneous} differential equations, of the form:
+\begin{gather*}
+    ay'' + by + cy = G(x)
+\end{gather*}
+The corresponding homogeneous equation(same but $G(x) = 0$) is called the \textbf{complementary equation} and is a useful part of solving. The general solution of a non-homogeneous equation is:
+\begin{gather*}
+    y(x) = y_p(x) + y_c(x)
+\end{gather*}
+where $y_p$ is the particular solution of the homogeneous one and $y_c$ the general solution of the complementary one(which we know how to solve).
+\begin{proof}
+We can show this by showing that $y-y_p$ is a solution of the complementary equation(because that's $y_c$):
+\begin{gather*}
+    ay'' - ay_p'' + by' - by_p' + cy - cy_p = (ay'' + by' + cy) - (ay_p'' + by_p' + cy_p) = 0
+\end{gather*}
+\end{proof}
+There are two methods to determine $y_p$, the method of undetermined coefficients(easier but works on fewer cases) and variation of parameters(harder but works for every function).
+\subsubsection{Method of Undetermined Coefficients}
+We can solve first for the case where $G(x)$ is a polynomial of degree $n$, and it's reasonable to assume that $y_p$ is also a polynomial of degree $n$ because they need to be equal. So we can do that by substituting into the DE because each differential step removes a degree off the polynomial.
+So for degree 2:
+\begin{gather*}
+    y_p = Ax^2 + Bx + C
+\end{gather*}
+Then take derivatives and set them equal to the component of the equation. For example, $y_p'' = 2A$, we can substitute  $2A$ in the original equation for $y''$. Then solve for the coefficient values using the fact that corresponding coefficients must be equal.
+
+If $G(x)$ is in the form $G(x) = Ce^{kx}$, try $y_p = Ae^{kt}$, then solve for $A$. If the function is trig, try $A\cos(kx) + B\sin(kx)$. If it's a product of any of the functions we know, then use a product of the trial functions. If $G(x) = x \cos(x)$, then use $y_p = (Ax+B)\cos(x) + (Cx+D)\sin(x)$. If it's a sum of functions split them out and solve the two DEs separately, then add the solutions together according to the \textbf{superposition principle}, which should make sense.
+
+Sometimes the recommended trial solution is a solution of the complementary equation, and so can't be a solution of the real one(because $G(x) \neq 0$ always) so then modify the trial equation by multiplying $x$ or $x^2$ in, which should fix the issue.
+\subsubsection{Method of Variation of Parameters}
+Let's say we already solved the complementary differential equation and found the solution:
+\begin{gather*}
+    y = c_1y_1(x) + c_2y_2(x)
+\end{gather*}
+Now we can \textbf{vary parameters} by replacing the constants with variable functions, since we picked two functions, we can impose two conditions on them. One of them is that the DE must equal $G(x)$. The form now looks like:
+\begin{gather*}
+    y_p = u_1(x)y_1(x) + u_2(x)y_2(x)
+\end{gather*}
+By taking the derivative and rearranging, we can get:
+\begin{gather*}
+    y_p' = (u_1'y_1 + u_2'y_2) + (u_1y_1' + u_2y_2')
+\end{gather*}
+We can set our condition as $(u_1'y_1 + u_2'y_2) = 0$ because then we are left with just derivatives of $y$. We can also take the derivative again:
+\begin{gather*}
+    y_p'' = u_1'y_1' + u_2'y_2' + u_1y_1'' + u_2y_2''
+\end{gather*}
+Putting both of these values back in to the DE(remember it's a solution) and rearranging:
+\begin{gather*}
+    u_1(ay_1'' + by_1' + cy_1) + u_2(ay_2'' + by_2' + cy_2) + a(u_1'y_1' + u_2y_2') = G(x)
+\end{gather*}
+The first two terms disappear because they are solutions to the complementary equation(which equals $0$).
+\begin{gather*}
+    a(u_1'y_1' + u_2'y_2') = G(x)
+\end{gather*}
+We can solve the system given by the condition we set and the equation above, and integrate to solve for $u_1$ and $u_2$.
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
