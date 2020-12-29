@@ -3180,7 +3180,7 @@ Then take derivatives and set them equal to the component of the equation. For e
 
 If $G(x)$ is in the form $G(x) = Ce^{kx}$, try $y_p = Ae^{kt}$, then solve for $A$. If the function is trig, try $A\cos(kx) + B\sin(kx)$. If it's a product of any of the functions we know, then use a product of the trial functions. If $G(x) = x \cos(x)$, then use $y_p = (Ax+B)\cos(x) + (Cx+D)\sin(x)$. If it's a sum of functions split them out and solve the two DEs separately, then add the solutions together according to the \textbf{superposition principle}, which should make sense.
 
-Sometimes the recommended trial solution is a solution of the complementary equation, and so can't be a solution of the real one(because $G(x) \neq 0$ always) so then modify the trial equation by multiplying $x$ or $x^2$ in, which should fix the issue.
+Sometimes the recommended trial solution is a solution of the complementary equation, and so can't be a solution of the real one(because sometimes $G(x) \neq 0$) so then modify the trial equation by multiplying $x$ or $x^2$ in, which should fix the issue.
 \subsubsection{Method of Variation of Parameters}
 Let's say we already solved the complementary differential equation and found the solution:
 \begin{gather*}
@@ -3207,6 +3207,74 @@ The first two terms disappear because they are solutions to the complementary eq
     a(u_1'y_1' + u_2'y_2') = G(x)
 \end{gather*}
 We can solve the system given by the condition we set and the equation above, and integrate to solve for $u_1$ and $u_2$.
+\subsection{Applications of Second Order Differential Equations}
+These equations have many applications, two important ones are vibrating springs(oscillators) and electric circuits.
+\subsubsection{Vibrating Springs}
+Imagine an object of mass $m$ connected to a spring that is horizontal on a level surface. So we can say according to Hooke's law that $\Sigma F = -kx$, where $k$ is the \textbf{spring constant} for that spring. So using Newton's 2nd Law:
+\begin{gather*}
+    \Sigma F = ma = m\frac{d^2x}{dt^2} = -kx\implies m\frac{d^2x}{dt^2}+kx = 0
+\end{gather*}
+So we solve $mr^2 + k = 0$ which gives roots $r = \pm \omega i$, where $\omega = \sqrt{k/m}$, the general solution is:
+\begin{gather*}
+    x(t) = c_1\cos(\omega t) + c_2\sin(\omega t)\implies A\cos(\omega t + \delta)\\
+    \textrm{Frequency }\omega = \sqrt{\frac{k}{m}}\\
+    \textrm{Amplitude }A = \sqrt{c_1^2 + c_2^2}\\
+    \textrm{Phase angle } \cos(\delta) = \frac{c_1}{A}\hspace{30pt}\sin(\delta) = -\frac{c_2}{A}
+\end{gather*}
+This type of motion is called \textbf{simple harmonic motion}.
+\subsubsection{Damped Vibrations}
+Next we can consider spring motion but this time with some kind of friction or opposing force. Forces like friction or a medium are approximately proportional to the velocity and they act against the velocity:
+\begin{gather*}
+    F_d = -c\frac{dx}{dt}\\
+    m\frac{d^x}{dt^2} = \Sigma F = F_c + F_s = -kx - c\frac{dx}{dt}\\
+    m\frac{d^2x}{dt^2}+c\frac{dx}{dt} + kx = 0
+\end{gather*}
+So we can solve $mr^2 + cr + k = 0$, which gives:
+\begin{gather*}
+    r = \frac{-c \pm \sqrt{c^2 - 4mk}}{2m}
+\end{gather*}
+So as in 18.1, we can discuss the different discriminant cases.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.7]{damping.png}
+\caption{Types of Vibrational Damping}
+\label{damping}
+\end{center}
+\end{figure}
+\paragraph{Overdamping/Strong Damping} This happens when the discriminant is greater than zero. Because all the numbers are positive, $\sqrt{c^2 - 4mk} < c$, which means in the quadratic formula this shows both roots will be negative. So this means that $x \to 0$ over time according to the $e^{rt}$ solutions, which is consistent with physical knowledge. Overdamping means that the mass does not really vibrate, it passes through $x = 0$ \textit{at most once}.
+\paragraph{Critical Damping} This means that
+\begin{gather*}
+    r = \frac{-c}{2m}
+\end{gather*}
+This is the lowest possible fluid viscosity or friction coefficient required to maintain damping, meaning that no vibration will occur and only passing equilibrium once. Any decrease in viscosity or friction will allow vibration to occur.
+\paragraph{Underdamping} This means that we have complex roots:
+\begin{gather*}
+    r = \frac{-c}{2m} \pm \omega i\\
+    \omega = \frac{\sqrt{4mk - c^2}}{2m}
+\end{gather*}
+Because we have all positive variables here, $-c/2m < 0$ and so $e^{rt} \to 0$. We have vibration but it slows down until it stops moving eventually. The two gray curves which bound the underdamping are $x = \pm Ae^{(-c/2m)t}$.
+\subsubsection{Forced Vibration}
+Now imagine if we have another external force affecting all of this, in which case when can modify our general equation:
+\begin{gather*}
+    m\frac{d^2x}{dt^2} + c\frac{dx}{dt} + kx = F(t)
+\end{gather*}
+This is no longer homogenous so it's harder to solve. A common type of force is the periodic force: $F(t) = F_0\cos(\omega_0 t)$ where $\omega_0 \neq \omega$, where in this case $\omega = \sqrt{k/m}$. If it is equal, it's called \textbf{resonance} where we have constructive frequency interference which creates large wave amplitude. Using undetermined coefficients, an undamped solution would be:
+\begin{gather*}
+    x(t) = c_1\cos(\omega t) + c_2\sin(\omega t) + \frac{F_0}{m(\omega^2 - \omega_0^2)}\cos(\omega_0 t)
+\end{gather*}
+\subsubsection{Electric Circuits}
+Using second order linear differential equations, we can now solve RLC circuits, consisting of a resistor, capacitor, and inductor in series. If the charge on the capacitor is $Q(t)$, then the current is just $dQ/dt$, and we know the voltage drops on the circuit are equal to the battery.
+\begin{gather*}
+    E = V_l + V_r + V_c = L\frac{dI}{dt} + IR + Q/C\\
+    L\frac{d^2Q}{dt^2} + R\frac{dQ}{dt} + \frac{1}{c}Q = E(t)
+\end{gather*}
+We can also have the initial charge $Q(0)$ and the initial current $Q'(0)$ to solve initial and boundary problems. If you take the derivative of that equation, you can get a second order equation in $I$:
+\begin{gather*}
+    L\frac{d^2I}{dt^2} = R\frac{dI}{dt} + \frac{1}{C}I = E'(t)
+\end{gather*}
+The solution to a differential equation in $Q$ consists of the complementary solution which goes to zero as $t \to \infty$ and a particular solution, called the \textbf{steady state solution}, which becomes more and more accurate after a long time, and describes the circuit after a long time.
+
+Overall, there are many analogies between spring vibration and electric circuits. Some are obvious, like displacement vs. charge. But you also have the resistance $R$ and the damping $c$, and the voltage $E(t)$ vs the external force $F(t)$.
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
