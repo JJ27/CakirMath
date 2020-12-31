@@ -3226,7 +3226,7 @@ This type of motion is called \textbf{simple harmonic motion}.
 Next we can consider spring motion but this time with some kind of friction or opposing force. Forces like friction or a medium are approximately proportional to the velocity and they act against the velocity:
 \begin{gather*}
     F_d = -c\frac{dx}{dt}\\
-    m\frac{d^x}{dt^2} = \Sigma F = F_c + F_s = -kx - c\frac{dx}{dt}\\
+    m\frac{d^2x}{dt^2} = \Sigma F = F_c + F_s = -kx - c\frac{dx}{dt}\\
     m\frac{d^2x}{dt^2}+c\frac{dx}{dt} + kx = 0
 \end{gather*}
 So we can solve $mr^2 + cr + k = 0$, which gives:
@@ -3266,7 +3266,7 @@ This is no longer homogenous so it's harder to solve. A common type of force is 
 Using second order linear differential equations, we can now solve RLC circuits, consisting of a resistor, capacitor, and inductor in series. If the charge on the capacitor is $Q(t)$, then the current is just $dQ/dt$, and we know the voltage drops on the circuit are equal to the battery.
 \begin{gather*}
     E = V_l + V_r + V_c = L\frac{dI}{dt} + IR + Q/C\\
-    L\frac{d^2Q}{dt^2} + R\frac{dQ}{dt} + \frac{1}{c}Q = E(t)
+    L\frac{d^2Q}{dt^2} + R\frac{dQ}{dt} + \frac{1}{C}Q = E(t)
 \end{gather*}
 We can also have the initial charge $Q(0)$ and the initial current $Q'(0)$ to solve initial and boundary problems. If you take the derivative of that equation, you can get a second order equation in $I$:
 \begin{gather*}
@@ -3275,6 +3275,17 @@ We can also have the initial charge $Q(0)$ and the initial current $Q'(0)$ to so
 The solution to a differential equation in $Q$ consists of the complementary solution which goes to zero as $t \to \infty$ and a particular solution, called the \textbf{steady state solution}, which becomes more and more accurate after a long time, and describes the circuit after a long time.
 
 Overall, there are many analogies between spring vibration and electric circuits. Some are obvious, like displacement vs. charge. But you also have the resistance $R$ and the damping $c$, and the voltage $E(t)$ vs the external force $F(t)$.
+\subsection{Series Solutions}
+Many differential equations cannot be solved by explicitly writing them as combinations of simple functions, instead we could write them in a power series:
+\begin{gather*}
+    y = f(x) = \sum_{n = 0}^\infty c_nx^n = c_0 + c_1x + c_2x^2 + c_3x^3...
+\end{gather*}
+Write and differentiate the general power series like so:
+\begin{gather*}
+    y' = c_1 + 2c_2x + 3c_3x^2... = \sum_{n=1}^\infty nc_nx^{n-1}\\
+    y'' = 2c^2 + 2*3c_3x... = \sum_{n=2}^\infty n(n-1)c_nx^{n-2} = \sum_{n=0}^\infty (n+2)(n+1)c_{n+2}x^n
+\end{gather*}
+The last one changed the starting $n$ to $0$ from $2$, so everything with an $n$ got a $+2$ boost. Next, put this into your differential equation, and equate coefficients. Then you can solve a \textbf{recursion relation} which gives $c_{n+p}$ in terms of $c_n$, and you should be able to see a pattern and write it in a more general form(not always possible). This is your solution, you can solve initial value problems by just plugging in for $x$ as you normally would.
 \part{Linear Algebra}
 \setcounter{section}{0}
 \section{Vectors}
