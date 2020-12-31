@@ -8,6 +8,8 @@ Running Notes
 14. Vector Functions
 15. Partial Derivatives
 16. Multiple Integrals
+17. Vector Calculus
+18. Second-Order Differential Equations
 
 Linear Algebra 2020-21
 
