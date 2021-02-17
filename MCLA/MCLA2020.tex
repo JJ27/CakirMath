@@ -2628,7 +2628,7 @@ An obvious consequence of this FTC is that for conservative vector fields, the p
 
 Now if we imagine a \textbf{closed curve}, which is a curve that connects to itself(which means it technically does not have endpoints). However, if we split the curve into 2 curves using two endpoints(so one curve goes $A\rightarrow B$ and the other $B \rightarrow A$). Then adding those line integrals should give zero because their endpoints are switched. So,
 
-$\int_C \vv{F}\,d\vv{r}$ is \textbf{path independent} if and only if $\int_D \vv{F}\,d\vv{r}$ for any closed path $D$ in the domain.
+$\int_C \vv{F}\,d\vv{r}$ is \textbf{path independent} if and only if $\int_D \vv{F}\,d\vv{r} = 0$ for any closed path $D$ in the domain.
 
 An \textbf{open region} is a region where every point inside it is contained in a disk that is contained within the region. This means that any boundary points cannot be included(because then you can't have a disk). If you have a path independent vector field on that open region that is continuous, then you can say that the vector field is conservative on that region.
 \begin{proof}
@@ -2783,7 +2783,7 @@ This notation should make sense since it's just a dot product of the operator $\
 
 If the second order partial derivatives are continuous, then we can say that:
 \begin{gather*}
-    \diver(\curl \vv{F})) = 0
+    \diver(\curl \vv{F}) = 0
 \end{gather*}
 This can easily be proved by applying the definitions of the two operations and the terms will cancel out because of Clairaut's Theorem.
 
@@ -3512,7 +3512,7 @@ There is one type of system that always has at least one solution, the \textbf{h
 
 If there are more variables than equations in a homogeneous system then the system has an infinite number of solutions.
 \begin{proof}
-Since the system has one solution at least, rank($A) \leqslant m$), where $m$ is the number of equations, which is true because the number of equations is less than the number of variables. So,
+Since the system has one solution at least, rank($A) \leqslant m$, where $m$ is the number of equations, which is true because the number of equations is less than the number of variables. So,
 \begin{gather*}
     \textrm{num of free variables} = n - \textrm{rank}(A) \geqslant n - m > 0
 \end{gather*}
@@ -3602,6 +3602,90 @@ Another method is to treat the vectors as rows of a matrix. Since performing ele
 
 In other words, if the \textit{rank} of the matrix is less than the original number of equations, then the set is dependent.
 
-One really thoughtful method concludes that if there are $m$ vectors in the set in $\mathbb{R}^n$, the set is linearly dependent is $m > n$. This is true because if the matrix form $[A,0]$ has a nontrivial solution, then we have dependence. This will always be true if we have more columns than rows(more variables(vectors) than equations), since the scalar on the "free" variable can balance out the sum of the other ones to make zero. We can always pick a scalar that works here, and so this means that if $m$(variables/num of vectors) is greater than $n$(equations/dimensions of the vector), the set is linearly dependent.
-\setcounter{subsection}{4}
+One really thoughtful method concludes that if there are $m$ vectors in the set in $\mathbb{R}^n$, the set is linearly dependent if $m > n$. This is true because if the matrix form $[A,0]$ has a nontrivial solution, then we have dependence. This will always be true if we have more columns than rows(more variables(vectors) than equations), since the scalar on the "free" variable can balance out the sum of the other ones to make zero. We can always pick a scalar that works here, and so this means that if $m$(variables/num of vectors) is greater than $n$(equations/dimensions of the vector), the set is linearly dependent.
+\section{Matrices}
+\subsection{Matrices and Matrix Operations}
+A \textbf{matrix} is a rectangular array of numbers called \textbf{entries}. A matrix is normally called $m \times n$ if it has $m$ rows and $n$ columns. Any matrix with a single row($1 \times n$) is a row matrix and single column is a column matrix. Double subscript notation(used also with 2D arrays in CS) is used to find a specific matrix element. $A_{23}$ is used to locate the element on the second row and third column of matrix $A$.
+
+The \textbf{diagonal entries} of $A$ can be written as $A_{11}, A_{22},A_{33}...$. If $m = n$ for a matrix the matrix is a \textbf{square matrix}. A square matrix whose entries are nonzero only on the diagonal is called a \textbf{diagonal matrix} and if all those diagonal numbers are the same it's a \textbf{scalar matrix}. Finally, if all those scalars are $1$ then you have an \textbf{identity matrix}.
+
+Two matrices are \textbf{equal} if they have the same size($m$ and $n$), and if their corresponding entries are the same. Note that even if their entries are the same but they have different sizes, they are \textit{not equal}. Even a row matrix and a column matrix with the same numbers are \textit{not equal}.
+\subsubsection{Matrix Addition}
+The sum of matrices(from vector addition) is just the sum of the corresponding components of the matrices. Note that this means that addition cannot be defined for matrices of different sizes.
+\begin{gather*}
+    A+B = [A_{ij} + B_{ij}]
+\end{gather*}
+Also from vectors, a scalar multiplication is carried out by multiplying the entries in the matrix as well. The \textbf{zero matrix} $O$ is a matrix of any size that is filled with just zeroes. It follows that:
+\begin{gather*}
+    A + O = A\qquad A - A = O
+\end{gather*}
+\subsubsection{Matrix Multiplication}
+Multiplying matrices is a little bit more complicated. This time it's not componentwise, but more of a dot product-type setup. Start from the top left($1,1$) and then multiply each item in the row of $A$ by the corresponding entry but in the \textit{column} of $B$.
+\begin{gather*}
+    AB = C \implies c_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j}+...
+\end{gather*}
+This requires that number of columns in $A$ be equal to the number of rows in $B$, and that the final matrix is going to have the number of rows in $A$ and the number of columns in $B$. This form of approaching matrix products has a lot more applications than componentwise.
+
+Interestingly, any linear system can be written in the form of a matrix multiplication of $A\vv{x} = \vv{b}$. For example, the linear system:
+\begin{gather*}
+    x_1 - 2x_2 + 3x_3 = 5\\
+    -x_1 + 3x_2 + x_3 = 1\\
+    2x_1 - x_2 + 4x_3 = 14
+\end{gather*}
+can be written as:
+\begin{gather*}
+    \begin{bmatrix}
+        1 & -2 & 3\\
+        -1 & 3 & 1\\
+        2 & -1 & 4\\
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1 \\ x_2 \\ x_3
+    \end{bmatrix} =
+    \begin{bmatrix}
+        5 \\ 1 \\ 14
+    \end{bmatrix}
+\end{gather*}
+In fact, \textit{all} linear systems can be written this way. Of course, the system only has a solution if $\vv{b}$ is a linear combination of the columns of $A$.
+
+An interesting consequence arises when you start to multiply matrices and unit vectors. If you multiply a unit vector by a matrix, then you'll get that row of the matrix. If you multiply in the opposite order you'll get the column of the matrix.
+\begin{proof}
+Let's prove that $A\hat{q}$ will give the $q$th column of $A$:
+\begin{gather*}
+    A\hat{q} = 0\vv{a}_1 + 0\vv{a}_2... + 1\vv{a}_q..+0\vv{a}_{q+1} = \vv{a}_q
+\end{gather*}
+\end{proof}
+\subsubsection{Partitioned Matrices}
+Sometimes it's more convenient to introduce horizontal and vertical lines into a matrix in order to divide it into matrix \textbf{blocks}. Such a matrix is called a \textbf{partitioned matrix}. There is normally a natural way to do it, as you can spot scalar, identity, diagonal, etc. submatrices inside the larger one. You can treat each submatrix as an entry in the larger matrix, which allows for multiplication and operations.
+
+For example, some natural matrix partitions include \textbf{row-column} representations, where you partition $A$ into $A$ into rows and $B$ into columns:
+\begin{gather*}
+    A = \begin{bmatrix}
+        \vv{a_1} & \vv{a_2} & \vv{a_3}
+    \end{bmatrix}\quad
+    \textrm{as well as:}\quad B = \begin{bmatrix}
+        \vv{b_1} \\ \vv{b_2} \\ \vv{b_3}
+    \end{bmatrix}
+\end{gather*}
+Multiplying these yields $AB = \vv{a_1}\vv{b_1} + \vv{a_2}\vv{b_2}...$ which resembles a dot product expansion, this is called an \textbf{outer-product expansion}.
+\subsubsection{Matrix Powers}
+When $A$ and $B$ are both square matrices of the same size, you can say that $AB$ will also be $n \times n$. When $A = B$, you can define $A^2 = AA$, and $A^k = AAA...A_k$. Also, $A^1 = A$ and $A^0 = I_n$, where $I$ is the identity matrix. Similar exponent rules apply here(power and addition of exponents).
+\subsubsection{The Transpose of a Matrix}
+The \textbf{transpose} of an $m \times n$ matrix $A$ is the $n \times m$ matrix $A^T$ which is found just be interchanging the rows and columns of $A$.
+
+For example, the matrix $A$:
+\begin{gather*}
+    A = \begin{bmatrix}
+        1 & 3 & 4\\
+        2 & 5 & 8
+    \end{bmatrix},
+    A^T = \begin{bmatrix}
+        1 & 2\\
+        3 & 5\\
+        4 & 8
+    \end{bmatrix}
+\end{gather*}
+In other words $A_{ij} = A^T_{ji}$.
+
+Using this, a square matrix is \textbf{symmetric} if $A = A^T$, if you can transpose the square matrix and leave it unchanged, then the matrix is symmetric. This can be seen if the matrix entries are symmetric around the matrix's diagonal.
 \end{document}
