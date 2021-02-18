@@ -3658,7 +3658,7 @@ Let's prove that $A\hat{q}$ will give the $q$th column of $A$:
 \subsubsection{Partitioned Matrices}
 Sometimes it's more convenient to introduce horizontal and vertical lines into a matrix in order to divide it into matrix \textbf{blocks}. Such a matrix is called a \textbf{partitioned matrix}. There is normally a natural way to do it, as you can spot scalar, identity, diagonal, etc. submatrices inside the larger one. You can treat each submatrix as an entry in the larger matrix, which allows for multiplication and operations.
 
-For example, some natural matrix partitions include \textbf{row-column} representations, where you partition $A$ into $A$ into rows and $B$ into columns:
+For example, some natural matrix partitions include \textbf{row-column} representations, where you partition $A$ into $A$ into rows and $B$ into columns. Also there is the \textbf{column-row} representation:
 \begin{gather*}
     A = \begin{bmatrix}
         \vv{a_1} & \vv{a_2} & \vv{a_3}
@@ -3688,4 +3688,28 @@ For example, the matrix $A$:
 In other words $A_{ij} = A^T_{ji}$.
 
 Using this, a square matrix is \textbf{symmetric} if $A = A^T$, if you can transpose the square matrix and leave it unchanged, then the matrix is symmetric. This can be seen if the matrix entries are symmetric around the matrix's diagonal.
+\subsection{Matrix Algebra}
+All of the properties for the addition and scalar multiplication of vectors also carry over to matrices, including commutativity, associativity, identity, and distributivity.
+
+If we have a set of matrices $A_1,A_2...A_k$ and a set of scalars $c_1,c_2...c_k$, then their \textbf{linear combination} is:
+\begin{gather*}
+    c_1A_1 + c_2A_2 + c_3A_3...c_kA_k
+\end{gather*}
+So the \textbf{span} of a set of matrices is the set of all linear combinations of those matrices. Therefore a set of matrices is \textbf{linearly independent} if the only solution to the above is the trivial one.
+\subsubsection{Matrix Multiplication}
+Matrix multiplication is a little different than real number multiplication. Here associativity holds, and also distributivity is going to hold on the left and right sides(matrix multiplication is not commutative). The identity property is also fine:
+\begin{gather*}
+    I_mA = A = AI_n
+\end{gather*}
+for a matrix $A$ with size $m \times n$. To prove these properties, partition the left matrix into rows and the right one into columns and multiply.
+\subsubsection{Matrix Transpose}
+Transpose properties:
+\begin{gather*}
+    (A^T)^T = A\qquad(A+B)^T = A^T + B^T\\
+    (kA)^T = k(A^T)\qquad (AB)^T = B^TA^T\\
+    (A^r)^T = (A^T)^r\textrm{ for all } r \geqslant 0
+\end{gather*}
+The reason the fourth property exists is because the transposed matrix will have opposite dimensions as the original. So the multiplication needs to be done in reverse for them to have the same size. This is why it's $B^TA^T$ and not the other way around.
+
+
 \end{document}
