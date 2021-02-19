@@ -21,9 +21,17 @@
 \usepackage{etoolbox}
 \usepackage{esvect}
 \usepackage{hyperref}
+\usepackage{enumitem}
 
 \AtBeginEnvironment{gather}{\setcounter{equation}{0}}
 
+\newcommand{\changeitem}{%
+  \let\latexitem\item
+  \renewcommand\item[1][]{\latexitem\relax{\bfseries##1} }%
+}
+\newenvironment{descenum}[1][]
+  {\begin{enumerate}[before=\changeitem,#1]}
+  {\end{enumerate}}
 \renewcommand{\qedsymbol}{$\blacksquare$}
 \let\oldvec\vv
 \renewcommand{\vv}[1]{\oldvec{\mathbf{#1}}}
@@ -3711,5 +3719,111 @@ Transpose properties:
 \end{gather*}
 The reason the fourth property exists is because the transposed matrix will have opposite dimensions as the original. So the multiplication needs to be done in reverse for them to have the same size. This is why it's $B^TA^T$ and not the other way around.
 
+\subsection{The Inverse of a Matrix}
+Going back to the general equation of a linear system: $A\vv{x} = \vv{b}$, we can see that the solution would require a division. For example, the normal equation $ax = b$ can be solved to $x = \frac{b}{a}$ for $a \neq 0$. However, it isn't that easy for matrices. In fact, we need to find a matrix $A'$ such that $AA'$ and $A'A$ are both equal to $I$(the identity matrix, the $1$ of matrix algebra). Of course, for both products to be defined, both matrices must be square in the same dimensions. For example:
+\begin{gather*}
+    A = \begin{bmatrix}
+        2 & 5 \\ 1 & 3
+    \end{bmatrix}
+    \quad A' = \begin{bmatrix}
+        3 & -5 \\ -1 & 2
+    \end{bmatrix}
+\end{gather*}
+Multiply these two in any order will yield $I_2$. Interesting consequence here: the zero matrix in any dimensions doesn't have an inverse, because you can't have $OO' = 1$.
 
+Now this begs the question, can a matrix have multiple inverses? The answer there is no and we can prove it by showing that any general matrices that satisfy the inverse definition are actually the same matrix.
+\begin{proof}
+\begin{gather*}
+    AA' = I = A'A\qquad AA'' = I = A''A\\
+    A' = A'I = A'(AA'') = (A'A)A'' = IA'' = A''
+\end{gather*}
+The above used associativity of multiplication in matrices and the identity property. This shows that any inverses are actually the same inverse.
+\end{proof}
+The actual notation for this inverse is $A^{-1}$, which should make sense as an inverse. Note that you \textbf{cannot divide by a matrix}, so $A^{-1} \neq \frac{1}{A}$, if you need to divide by a matrix just multiply by it's inverse.
+
+So now we can use matrix inverses in order to solve our original problem. It turns out that if $A$ is invertible and square, then the system $A\vv{x} = \vv{b}$ has a unique solution given by $\vv{x} = A^{-1}\vv{b}$ for any $\vv{b}$ in $\mathbb{R}^n$.
+\begin{proof}
+\begin{gather*}
+    A\vv{x} \Rightarrow A(A^{-1}\vv{b}) \Rightarrow (AA^{-1})\vv{b} \Rightarrow I\vv{b} = \vv{b}
+\end{gather*}
+To prove this is a unique solution just try this with another vector $\vv{y}$ in place of $\vv{x}$, and multiply both sides of $A\vv{y} = \vv{b}$ by $A^{-1}$ and you'll end up with the same solution. Therefore it must be unique.
+\end{proof}
+So to actually find the inverse of a matrix, it's a little more complicated. For a $2 \times 2$ matrix, we can derive a pretty simple formula:
+\begin{gather*}
+    A^{-1} = \frac{1}{ad - bc}\begin{bmatrix}
+        d & -b \\ -c & a
+    \end{bmatrix} = \frac{1}{\det A}\begin{bmatrix}
+        d & -b \\ -c & a
+    \end{bmatrix}
+\end{gather*}
+Where $ad - bc$ is the \textbf{determinant} of $A$. Therefore, the inverse exists if and only if the determinant isn't zero. So the inverse is possible when $ad - bc \neq 0$. Later we will see how a determinant can be defined for all square matrices.
+\begin{proof}
+\begin{gather*}
+\begin{bmatrix}
+    a & b \\ c & d
+\end{bmatrix}
+\begin{bmatrix}
+    d  & -b \\ -c & a
+\end{bmatrix} =
+\begin{bmatrix}
+    ad - bc & -ab + ba \\ cd - dc & -cb + da
+\end{bmatrix} =
+\begin{bmatrix}
+    ad - bc & 0 \\ 0 & ad - bc
+\end{bmatrix} =
+\det A
+\begin{bmatrix}
+    1 & 0 \\ 0 & 1
+\end{bmatrix}
+\end{gather*}
+Now take the starting step and the formed identity matrix and multiply both sides by $\frac{1}{\det A}$, which will show you how you can get $AA^{-1} = I$. If you try it with $\det A = 0$, you'll see that the second row of the matrix would just become a multiple of the first one.
+\end{proof}
+It might seem like inversion is an easier method to solve systems now, but elimination works for more matrices and is almost always faster than inversion.
+
+\subsubsection{Properties of Invertible Matrices}
+\begin{enumerate}
+    \item $(A^{-1})^{-1} = A$
+    \item $(cA)^{-1} = \frac{1}{c}A^{-1}$
+    \item $(AB)^{-1} = B^{-1}A^{-1}$
+    \item $(A^T)^{-1} = (A^{-1})^T$
+    \item $(A^n)^{-1} = (A^{-1})^n$ for all nonnegative $n$
+\end{enumerate}
+We can also define negative exponents:
+\begin{gather*}
+    A^{-n} = (A^{-1})^n = (A^n)^{-1}
+\end{gather*}
+\subsubsection{Elementary Matrices}
+An \textbf{elementary matrix} is any matrix that can be obtained by performing an elementary row operation on an identity matrix. There are three elementary row operations, so there are three types of elementary matrices. This means that performing an elementary row operation is the same as multiplying by an identity matrix that has that operation performed on it. So since elementary row operations can be reversed, it makes sense that these matrices are invertible. Also, any inverted elementary matrix is also an elementary matrix.
+
+This all leads to the \textbf{Fundamental Theorem of Invertible Matrices} whcih is a set of 5 statements which are all \textbf{equivalent}, meaning that they're either all true or all false.
+\begin{enumerate}
+    \item $A$ is invertible
+    \item $A\vv{x} = \vv{b}$ has one unique solution for every $\vv{b}$
+    \item $A\vv{x} = \vv{0}$ has only the trivial solution
+    \item The reduced row echelon form of $A$ is $I_n$
+    \item $A$ is a product of elementary matrices
+\end{enumerate}
+\begin{proof}
+We can prove this by showing that each statement proves the next, so that they are either all true or all false together. Each point will show that if the current point is true, the next one must also be true.
+\begin{descenum}
+    \item We already showed this earlier.
+    \item If we choose $\vv{0}$ as our $\vv{b}$, it only has one solution which means that solution must be the trivial one.
+    \item Because the solution will have $x_1,x_2,x_3...=0$, we know that the row reduced form(since it's unique) will be the identity matrix. Think about how you get the solutions from the row reduced form, and think of that in reverse.
+    \item Because the row reduced form is the identity matrix(and all elementary row operations are reversible), we can see that by multiplying $I_n$ by some elementary matrices, we get $A$.
+    \item Because $A$ is a product of elementary matrices, and all elementary matrices are invertible, we can say that $A$ is also invertible.
+\end{descenum}
+\end{proof}
+If $A$ and $B$ is are square matrices such that either $AB = I$ or $BA = I$, then $A$ is invertible and $B = A^{-1}$.
+\begin{proof}
+Suppose $BA = I$, then if we think about $A\vv{x} = \vv{0}$, and multiply both sides on the left by $B \Rightarrow BA\vv{x} = B\vv{0} \Rightarrow I\vv{x} = 0$. So because $A\vv{x} = \vv{0}$ only has the trivial solution, $A$ is invertible by $(3)$. If you use $BA = I \Rightarrow BAA^{-1} = A^{-1} \Rightarrow B = A^{-1}$
+\end{proof}
+Let $A$ be a square matrix, if a sequence of elementary row operations converts $A \Rightarrow I$, then the same sequence applied to $I$ will convert it to $A^{-1}$.
+\begin{proof}
+This proof is quite simple, just call the sequence of elementary matrices $B$, which gives $BA = I$. As a consequence of the previous theorem, $BI = B = A^{-1}$.
+\end{proof}
+\subsubsection{The Gauss-Jordan Method}
+We can perform row operations on two matrices at the same time by just adjoining them into what's called a "super-augmented matrix" $[A | I]$, which is a combination of $A$ and the identity matrix. Because of the previous theorem, if we row reduce $A$(but apply those operations to the whole matrix, we will end up with $[I | A^{-1}]$. You can also think of this as solving a bunch of linear systems. Since $I = \vv{e}_1, \vv{e}_2...$, you can denote each column of $A$ by $\vv{x}_1, \vv{x}_2...$ which gives you the linear systems:
+\begin{gather*}
+    A\vv{x}_1 = \vv{e}_1, A\vv{x}_2 = \vv{e}_2...\Rightarrow [A|I_n]
+\end{gather*}
 \end{document}
