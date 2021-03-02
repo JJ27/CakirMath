@@ -3,7 +3,7 @@
 
 \title{Multivariable Calculus and Linear Algebra}
 \author{Josh Joseph}
-\date{Summer 2020}
+\date{2020-2021}
 
 \addtolength{\oddsidemargin}{-.875in}
 \addtolength{\evensidemargin}{-.875in}
@@ -3826,4 +3826,32 @@ We can perform row operations on two matrices at the same time by just adjoining
 \begin{gather*}
     A\vv{x}_1 = \vv{e}_1, A\vv{x}_2 = \vv{e}_2...\Rightarrow [A|I_n]
 \end{gather*}
+\subsection{The LU Factorization}
+The LU method is a method of \textit{matrix factorization}, where $U$ is the row reduction of $A$ (not reduced though), and using the elementary matrices we can write:
+\begin{gather*}
+    E_nE_{n-1}E_{n-2}...E_1A = U
+\end{gather*}
+Solving for $A$, we get $A = LU$, where $L = E_1^{-1}E_2^{-1}...$ where $U$ is \textbf{upper triangular} and $L$ is \textbf{lower triangular}. Note that because no row reductions were necessary. $A$ has an $LU$ factorization, because all the elementary matrices were lower triangular, and inverses and products of lower triangular matrices are lower triangular.
+
+We can use this so solve $A\vv{x} = \vv{b}$, because if $A = LU$, then $L(U\vv{x}) = \vv{b}$, and we can set $\vv{y} = U\vv{x}$, and solve $L\vv{y} = \vv{b}$ by normal substitution (this is because of the triangular shape of the matrix). Then you can solve $U\vv{x} = \vv{y}$ using the reverse order substitution (back substitution). If we reduce a matrix $A$ without interchanging rows, we can use $R_i - kR_j$ to do all elementary operations, in which case $k$ will be the element $(i,j)$ in $L$. Notice the $-$ sign in the expression.
+
+When doing this, it's important to perform elementary row operations from top to bottom in each column, so that you can use the above property of the multiplier $k$.
+
+An even \textit{faster} way to find $L$ is to use the pivots in each column and construct one column matrices with all the elements on or below the pivot, but normalize them by the pivot. This will give you a lower triangular matrix with the unfilled spaces $0$.
+
+If $A$ is invertible with an $LU$ factorization, then $L$ and $U$ are unique.
+
+\begin{proof}
+We can prove uniqueness by proving $A = LU$ and the other $A = L_1U_1$ are indeed the same the matrices. All $L$ are lower triangular and all $U$ are upper triangular. So we know from $A$ that $LU = L_1U_1$ So if we start with:
+\begin{gather*}
+    L_1^{-1}(LU)U^{-1} = L_1^{-1}(L_1U_1)U^{-1} \implies L_1^{-1}L I = U_1U^{-1}
+\end{gather*}
+Because all $L$ are lower triangular and all $U$ are upper triangular, the left side is lower and the right side is upper. The only matrix where this works is the identity matrix, which gives $L = L_1$ and $U = U_1$.
+\end{proof}
+Now we can focus on the case where row switching is actually necessary to reduce (e.g. when the top row has a 0 in the first entry). The elementary matri(ces) corresponding to the needed switching operations can be multiplied into a \textbf{permutation matrix} $P$, and the rest are $E$, such that $EPA = U$, so $A = P^{-1}E^{-1}U = P^{-1}LU$, since $E^{-1} = L$.
+
+If $P$ is a permutation matrix, then $P^{-1} = P^T$.
+\begin{proof}
+We need to prove that $PP^T = I$, but any row of $P$ is just a column of $P^T$, which are both the same unit vector. Since matrix multiplication is the same as multiplying the rows of the first vector by the columns of the second is just dot product of the same unit vector, or $1$. Multiplying the wrong unit vectors together gives $0$, which gives the final identity matrix.
+\end{proof}
 \end{document}
