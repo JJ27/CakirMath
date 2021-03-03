@@ -3854,4 +3854,60 @@ If $P$ is a permutation matrix, then $P^{-1} = P^T$.
 \begin{proof}
 We need to prove that $PP^T = I$, but any row of $P$ is just a column of $P^T$, which are both the same unit vector. Since matrix multiplication is the same as multiplying the rows of the first vector by the columns of the second is just dot product of the same unit vector, or $1$. Multiplying the wrong unit vectors together gives $0$, which gives the final identity matrix.
 \end{proof}
+\subsection{Subspaces, Basis, Dimension, and Rank}
+A \textbf{subspace} of $\mathbb{R}^n$ is any collection of vectors in $\mathbb{R}^n$ where the zero vector is in the set and adding or multiplying any vectors in the set results in a vector in the set. The last part just means that the linear combinations of all set vectors are in the set.
+
+We can show that for vectors $\vv{v}$ in $\mathbb{R}^n$, $\textrm{span}(\vv{v_1},\vv{v_2}...\vv{v_k})$ is a subspace of $\mathbb{R}^n$
+\begin{proof}
+The span is the set of all linear combinations, so the zero vector is obviously in the set. Since the span is already by definition the set of all linear combinations, it also must be a subspace.
+\end{proof}
+We can define the \textbf{row space} and the \textbf{column space} of a matrix $A$ to be the subspace of all vectors spanned by the rows or columns of $A$. If two matrices are row equivalent, we can say their linear combinations span the same set, because the row operations can be used to convert one linear combination to another.
+
+If we have a set of solutions for $A\vv{x} = 0$, then that set must be a subspace because obviously the zero vector must be in the set as a trivial solution, but also adding two set vectors together will equal to zero because of the distributive property and similar for multiplication, so the set contains all required to make it a subspace. A set like this would be called the \textbf{nullspace} of $A$.
+
+Take $A\vv{x} = \vv{b}$, any system of this form will either have zero, one, or infinitely many solutions.
+\begin{proof}
+If the system has zero or one solution, then it need not be considered. Lets say the system has two solutions, $\vv{x_1}$ and $\vv{x_2}$, then:
+\begin{gather*}
+    A(\vv{x_1} - \vv{x_2}) = \vv{b} - \vv{b} = 0
+\end{gather*}
+Since $\vv{x_1} - \vv{x_2}$ is now in the nullspace, so is $c(\vv{x_1} - \vv{x_2})$, so of we write a vector given by $\vv{x_1} + c(\vv{x_1} - \vv{x_2})$, that vector in the system will give $\vv{b} + c0 = \vv{b}$, and now for varying values of $c$ we can have infinitely many solutions.
+\end{proof}
+\subsubsection{Basis}
+For a plane, we only need two non-parallel vectors to \textit{span} the plane. One is not enough and more aren't needed. A \textbf{basis} for a subspace $S$ is a set of vectors such that the set spans $S$ and is linearly independent. For examples, the unit vectors will form a basis, since they fit both categories. To find the basis of a row space, simply put all the rows into a matrix and row reduce to solve. Due to the leading ones, these reduced matrices must be linearly independent. To do it with a column space, you need to solve $A\vv{x} = 0$, a linear \textbf{dependence relation}, row reducing this will lead to columns with the same dependence relation as the original. Find the linearly dependent columns from the reduction, and then use those columns from the \textit{original matrix} for the basis.
+
+Any two bases for the same subspace will have the same number of vectors.
+\begin{proof}
+Assume the first base has $r$ vectors and the second has $s$. This means that if $r < s$, then the number of equations will be less than the number of variables when solving $A\vv{x} = 0$, which means that they are not linearly dependent, which contracts the definition of a base. By using the two bases in reverse you can show that $s \nless r$ which proves that $r = s$.
+\end{proof}
+This common number of the subspace is called the \textbf{dimension}. The rank of a matrix is the same as its dimension (of the row and column spaces), because the dimension also represents the number of not free rows (linearly independent rows).
+Because $A^T$ transforms rows into columns and vice-versa, and since the row space and column space have the same dimension, we can say that $\textrm{rank}(A) = \textrm{rank}(A^T)$.
+
+The \textbf{nullity} of the matrix is the dimension of its null space, or basically the number of free variables.
+
+If $A$ is an $n$-column matrix, then
+\begin{gather*}
+    \textrm{rank}(A) + \textrm{nullity}(A) = n
+\end{gather*}
+This should make sense, because the rank represents the not free variables, the nullity represents the free variables, and $n$ represents the number of total variables.
+
+\subsubsection{Fundamental Theorem of Invertible Matrices}
+Now we can add to our list of equivalent statements about invertible matrices:
+\begin{enumerate}
+    \item $A$ is invertible
+    \item $A\vv{x} = \vv{b}$ has one unique solution for every $\vv{b}$
+    \item $A\vv{x} = \vv{0}$ has only the trivial solution
+    \item The reduced row echelon form of $A$ is $I_n$
+    \item $A$ is a product of elementary matrices
+    \item rank($A) = n$, nullity($A) = 0$
+    \item Column vectors are linearly independent
+    \item Column vectors span $\mathbb{R}^n$
+    \item Column vectors form a basis for $\mathbb{R}^n$
+    \item Properties 7-9 also applicable to row vectors.
+\end{enumerate}
+By the rank theorem, \#6 should make sense. Since $A\vv{x} = 0$ has only the trivial solution, columns vectors are linearly independent. Because of the independence, $A\vv{x} = \vv{b}$ has a unique solution. Because any $\vv{b}$ does have a solution, then the columns must be a spanning set. Due to spanning set and linear independence, the columns are a basis for $\mathbb{R}^n$. By transposing the rows to columns these same rules apply for rows.
+
+We can also prove that $\textrm{rank}(A^TA) = \textrm{rank}(A)$ because they will both have the same $n$-value, so the sum of rank and nullity is the same. You can prove both the nullities are the same by starting with $A\vv{x} = 0$ and multiplying both sides by the transpose. You can do a similar method in reverse realizing that if $(A\vv{x}) \cdot (A\vv{x}) = 0$ then $A\vv{x} = 0$ and then the condition is satisfied. Since nullities are equal you can subtract from both sides and say that the ranks are equal.
+
+To establish a coordinate system on a plane (specified in $\mathbb{R}^3$), we can start with a position vector $\vv{v} = c_1\vv{v_1} + c_2\vv{v_2}...c_n\vv{v_n}$. To prove this is unique, we can try a different set using $d_1,d_2...d_n$. Setting them equal to each other yields $(c_1-d_1)\vv{v_1}...$, since the set is linearly independent, $c_1 - d_1 = 0 \implies c_1 = d_1...$ and so the coordinates are unique.
 \end{document}
