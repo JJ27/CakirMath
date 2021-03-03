@@ -3910,4 +3910,46 @@ By the rank theorem, \#6 should make sense. Since $A\vv{x} = 0$ has only the tri
 We can also prove that $\textrm{rank}(A^TA) = \textrm{rank}(A)$ because they will both have the same $n$-value, so the sum of rank and nullity is the same. You can prove both the nullities are the same by starting with $A\vv{x} = 0$ and multiplying both sides by the transpose. You can do a similar method in reverse realizing that if $(A\vv{x}) \cdot (A\vv{x}) = 0$ then $A\vv{x} = 0$ and then the condition is satisfied. Since nullities are equal you can subtract from both sides and say that the ranks are equal.
 
 To establish a coordinate system on a plane (specified in $\mathbb{R}^3$), we can start with a position vector $\vv{v} = c_1\vv{v_1} + c_2\vv{v_2}...c_n\vv{v_n}$. To prove this is unique, we can try a different set using $d_1,d_2...d_n$. Setting them equal to each other yields $(c_1-d_1)\vv{v_1}...$, since the set is linearly independent, $c_1 - d_1 = 0 \implies c_1 = d_1...$ and so the coordinates are unique.
+\subsection{Linear Transformations}
+Just like we have functions in math, we can apply this concept to matrices using a \textbf{transformation} of vectors. Using the form $\vv{w} = T\vv{v}$, which parallels the form $y = f(x)$, we can write a rule which assigns a vector $\vv{v}$ in the \textbf{domain} to a vector $\vv{w}$ in the \textbf{codomain}. We can write the whole thing as $T: \mathbb{R}^n \rightarrow \mathbb{R}^m$, for a transformation from $n \rightarrow m$ space. The set of all possible vectors made by this transformation is aptly named the \textbf{range}.
+
+A transformation is called \textbf{linear} if it is closed over addition and scalar multiplication. You can prove that it's closed over linear combination to accomplish both of these at once. It is simple to see using matrix addition and scalar multiplication that a matrix-defined transformation is always going to be linear, because both matrix operations are defined componentwise.
+
+To find the matrix transformation from the linear transformation, just define each column as what you get when you plug the unit vectors into the transformation.
+\begin{proof}
+\begin{gather*}
+    T(\vv{x}) = T(x_1\vv{e_1} + x_2\vv{e_2}...) = x_1T(\vv{e_1}) + x_2T\vv{e_2}...\\
+    = \begin{bmatrix}
+        T(\vv{e_1}) & T(\vv{e_2}) & \dots
+    \end{bmatrix} \begin{bmatrix}
+        x_1 \\ x_2 \\ \vdots
+    \end{bmatrix}
+\end{gather*}
+\end{proof}
+This matrix is called the \textbf{standard matrix} for this transformation, and it can be used by multiplying this matrix with the desired input vector.
+\subsubsection{Composition}
+If you want to combine two transformations, you can use a \textbf{composition}. If you want to compose $S$ and $T$ you can write $S \circ T$. For this to make sense, the codomain of $S$ much match the domain of $T$. We can of course rewrite this into matrix form:
+\begin{gather*}
+    (S \circ T)(\vv{x}) = S(T(\vv{x})) = [S][T][\vv{x}]
+\end{gather*}
+\begin{proof}
+    $(S \circ T)(\vv{x}) = S(T\vv{x}) = (ST)(\vv{x}) = [S][T][\vv{x}]$
+\end{proof}
+\subsubsection{Linear Transformation Inverses}
+If you take a transformation that turns a rotates a vector $\theta$ degrees, and then another transformation that rotates $-\theta$ degrees. Obviously, the vector is now back where it started. We can write this as $(R \circ S)(\vv{x}) = \vv{x}$, doing the transformations in the reverse order would mean the same thing. This is called an \textbf{identity transformation} and we can write $[R][S] = I$, if $[S][R]$ is also $I$, we can say that $R$ and $S$ are \textbf{inverse transformations}. Because the inverse of an invertible matrix is unique, we can write that:
+\begin{gather*}
+    [T^{-1}] = [T]^{-1}
+\end{gather*}
+Some transformations are not invertible, more specifically, the ones with zeroes in their matrices. Think about multiplying a number by zero. After that, there's no way to recover the original number you multiplied! Same idea if you projected a vector on the $x$-axis, you can't get that vector back, since there are many possible vectors that could've got you there. Therefore that transformation is \textit{not invertible}.
+\subsubsection{Associativity}
+Now we can finally prove $A(BC) = (AB)C$, the associative property of matrix multiplication, using linear transformations, if we convert these to linear transformations:
+\begin{gather*}
+    R \circ (S \circ T) = (R \circ S) \circ T
+\end{gather*}
+If this is true, then the matrix multiplication must also be true. We can use the definition of composition to now prove this one:
+\begin{proof}
+\begin{gather*}
+    (R \circ (S \circ T))\vv{x} = R(S(T\vv{x})) = (R \circ S) (T\vv{x}) = ((R \circ S) \circ T)\vv{x}
+\end{gather*}
+\end{proof}
 \end{document}
