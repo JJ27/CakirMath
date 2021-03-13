@@ -3952,4 +3952,9 @@ If this is true, then the matrix multiplication must also be true. We can use th
     (R \circ (S \circ T))\vv{x} = R(S(T\vv{x})) = (R \circ S) (T\vv{x}) = ((R \circ S) \circ T)\vv{x}
 \end{gather*}
 \end{proof}
+\section{Eigenvalues and Eigenvectors}
+\subsection{Intro to Eigenvalues and Eigenvectors}
+For a square matrix $A$, we want to find if there are any nonzero vectors $\vv{x}$ such that $A\vv{x} = \lambda \vv{x}$, where $\lambda$ is a scalar. This is called an \textit{eigenvalue problem}, where $\lambda$ is the \textit{eigenvalue} and $\vv{x}$ is the \textit{eigenvector}.
+
+If $A\vv{x} = \lambda\vv{x}$, then $(A-\lambda I)\vv{x} = 0$, which means all the eigenvectors for an eigenvalue $\lambda$ are just the nonzero vectors in the nullspace of $(A - \lambda I)$, except for the zero vector. This lets you find all eigenvectors for an eigenvalue, but how do you go the other way around? To do this, observe that $\lambda$ is only an eigenvalue if $(A - \lambda I)$ has a nontrivial nullspace. However, we know from last chapter that this is only true if the matrix is not invertible, or for $2 \times 2$ matrices, $ad - bc = 0$.
 \end{document}
