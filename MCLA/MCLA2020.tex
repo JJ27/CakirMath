@@ -4055,4 +4055,31 @@ If $A$ is invertible $n \times n$, then:
 \end{gather*}
 This isn't normally an easy method.
 \subsection{Eigenvalues and Eigenvectors of Square Matrices}
+Now we can get back to eigenvalues and eigenvectors, if $A - \lambda I$ is not invertible, then $\lambda$ is an eigenvalue. In other words:
+\begin{gather*}
+    |A - \lambda I| = 0
+\end{gather*}
+This equation is called the \textbf{characteristic equation} of $A$ and when you expand it you'll get the \textbf{characteristic polynomial} of $A$. If we have $n \times n$, then the polynomial will be of degree $n$. Therefore it can have at most $n$ different eigenvalues. The reason this is at most is because you can have \textbf{algebraic multiplicity}. One of the roots can count twice in the equation (think $(x-1)^2$). We can say \textbf{geometric multiplicity} of an eigenvalue is the dimension of its eigenspace.
+
+The eigenvalues of a triangular matrix are the entries on its main diagonal.
+\begin{proof}
+If $A$ is triangular, than so is $A - \lambda I$(since the $\lambda I$ doesn't change any non-diagonal entries). So to find the determinant equal to zero we can write that:
+\begin{gather*}
+    (a_{11} - \lambda)(a_{22} - \lambda) \hdots = 0 \implies \lambda = a_{11},a_{22},a_{33}\hdots
+\end{gather*}
+\end{proof}
+A square matrix $A$ is invertible if and only if $0$ is \textit{not} an eigenvalue of $A$.
+\begin{proof}
+If $A$ is invertible, then $|A| = |A - 0I| \neq 0$, so if $0$ does satisfy the equation, then $A$ must not be invertible.
+\end{proof}
+if $A$ is a square matrix with eigenvalue $\lambda$ and eigenvector $\vv{x}$, then the eigenvalue of $A^n$ is $\lambda^n$ for any integer $n > 0$ (this works for any integer in if $A$ is invertible), the eigenvalue of $A^{-1}$ is $\dfrac{1}{\lambda}$.
+
+If $A$ is $n \times n$ with eigenvectors $\vv{v}$ and eigenvalues $\lambda$ and if $\vv{x}$ is a vector that \textit{happens} to be a linear combination of the eigenvectors, we can write:
+\begin{gather*}
+    \vv{x} = c_1\vv{v_1} + c_2\vv{v_2}\hdots\\
+    A^k\vv{x} = c_1\lambda_1^k\vv{v}_1 + c_2\lambda_2^k\vv{v_2}\hdots
+\end{gather*}
+Don't forget that $\vv{x}$ might just not be a linear combination.
+
+If $A$ is an $n \times n$ matrix with \textit{distinct} eigenvalues $\lambda$ and eigenvectors $\vv{v}$, then the eigenvectors are linearly independent.
 \end{document}
