@@ -3954,7 +3954,105 @@ If this is true, then the matrix multiplication must also be true. We can use th
 \end{proof}
 \section{Eigenvalues and Eigenvectors}
 \subsection{Intro to Eigenvalues and Eigenvectors}
-For a square matrix $A$, we want to find if there are any nonzero vectors $\vv{x}$ such that $A\vv{x} = \lambda \vv{x}$, where $\lambda$ is a scalar. This is called an \textit{eigenvalue problem}, where $\lambda$ is the \textit{eigenvalue} and $\vv{x}$ is the \textit{eigenvector}.
+For a square matrix $A$, we want to find if there are any nonzero vectors $\vv{x}$ such that $A\vv{x} = \lambda \vv{x}$, where $\lambda$ is a scalar. This is called an \textit{eigenvalue problem}, where $\lambda$ is the \textbf{eigenvalue} and $\vv{x}$ is the \textbf{eigenvector}.
+
+We can define the \textbf{eigenspace} as the space consisting of all eigenvectors and the zero vector. We can also think of eigenvectors geometrically, since $A\vv{x}$ and $\vv{x}$ must be parallel (aligned, possibly intersecting) to each other, since they are just scalar multiples.
 
 If $A\vv{x} = \lambda\vv{x}$, then $(A-\lambda I)\vv{x} = 0$, which means all the eigenvectors for an eigenvalue $\lambda$ are just the nonzero vectors in the nullspace of $(A - \lambda I)$, except for the zero vector. This lets you find all eigenvectors for an eigenvalue, but how do you go the other way around? To do this, observe that $\lambda$ is only an eigenvalue if $(A - \lambda I)$ has a nontrivial nullspace. However, we know from last chapter that this is only true if the matrix is not invertible, or for $2 \times 2$ matrices, $ad - bc = 0$.
+\subsection{Determinants}
+From earlier discussion, the determinant of a $2 \times 2$ matrix is given by $ad - bc$, or $a_{11}a_{22}-a_{12}a_{21}$. This was useful by finding that:
+\begin{gather*}
+    A^{-1} = \frac{1}{\det A} \times A
+\end{gather*}
+Determinants are normally notated with bars, so $\det A = |A|$, but don't confuse with real absolute value. This is only really a problem when dealing with $1 \times 1$, where $\det A = |a| = a$. For matrices larger than $2 \times 2$, we can define the determinant \textit{recursively}. This was described earlier in MC: choose a row or column of the matrix to \textbf{expand}, and take that value and multiply by the determinant of the matrix you get when the row and column of that value are removed. This new mini matrix is called a \textbf{minor}. Add/subtract those together to get the determinant. To add or subtract is determined by an alternating pattern within a row. If the sum of the row and column you're in $(i + j)$ is even, then it's $+$, if not it's $-$. This expansion process it called \textbf{cofactor expansion}, also referred to as the \textbf{Laplace Expansion Theorem}.
+
+It is often useful to expand along a row/col with a zero in it since that removes one minor determinant calculation. This expansion is very useful when you're dealing with a triangular matrix. By expanding along the columns with the most zeros, we can see that the determinant of a triangular matrix is simply \textit{the product of its diagonal entries}.
+
+\subsubsection{Determinant Properties}
+If $A$ is a square matrix:
+\begin{enumerate}
+    \item If $A$ has a zero row, then $|A| = 0$.
+    \item If $B$ is obtained by switching rows of $A$, then $|B| = -|A|$.
+    \item If $A$ has two identical rows, then $|A| = 0$.
+    \item If you multiply a row by $k$, then $|B| = k|A|$.
+    \item If $A, B, C$ are the same except you add the same row in $A, B$ to get that row in $C$, then $|C| = |A| + |B|$.
+    \item If you add a multiple of one row to another row, then $|B| = |A|$, \textbf{not} $k|A|.$
+\end{enumerate}
+(1) should make sense because of expansion. (3) comes off of (2) since switching twice yields $|A| = -|A| \implies |A| = 0$. (4) comes from the fact that if you expand along that row, then the determinant is just $k$ times the original. For (5) use sum properties to show that $\Sigma (c_{ij}) = \Sigma (a_{ij} + b_{ij}) = \Sigma a_{ij} + \Sigma b_{ij}$. (2) and (6) can be figured out using row reduction.
+
+Row reduction greatly simplifies this process because you can row reduce to always an upper triangular matrix, then just multiply the diagonal and work backwards to figure out the original determinant. You can also use row and column operations on the same matrix interestingly.
+
+\subsubsection{Elementary Matrices}
+Let $E$ be an elementary matrix (resulting from applying elementary row operations to $I$):
+\begin{enumerate}
+    \item If $E$ is a row switching matrix, then $|E| = -1$.
+    \item If $E$ is a row constant multiple matrix, then $|E| = k$.
+    \item If $E$ is an add one multiple of a row to another row matrix, then $|E| = 1$.
+\end{enumerate}
+This is simple to see by applying $|I| = 1$.
+
+If $E$ is an $n \times n$ elementary matrix and $B$ is a matrix of the same size:
+\begin{gather*}
+    |EB| = |E||B|
+\end{gather*}
+This is true because left multiplying a matrix by an elementary matrix is the same as doing those row operations on the matrix.
+
+Now we can figure out why this is useful at all: A square matrix is invertible if and only if $|A| = 0$.
+\begin{proof}
+Let's call the reduced form $R$:
+\begin{gather*}
+    E_1E_2...E_rA = R \implies |E_1||E_2|...|E_r||A| = |R|
+\end{gather*}
+However $|E| \neq 0$, which means that $|A| = 0$ if and only if $|R| = 0$. Using the Fundamental Theorem of Invertible Matrices, if $A$ is invertible then $R = I_n$, and so $|R| = 1 \neq 0$, which means $|A| \neq 0$. On the flip side, if $|A| \neq 0$, then $|R| \neq 0$ and so $R$ can't have a zero row. Therefore $R = I_n$(think about the matrix rank) and so $A$ must be invertible by the Fundamental Theorem.
+\end{proof}
+\subsubsection{Determinants and Operations}
+If $A$ is an $n \times n$ (square) matrix:
+\begin{gather*}
+    |kA| = k^n|A|
+\end{gather*}
+This is a consequence of where we said that $k$ times a row changes the determinant by a factor of $k$. So doing this to $n $ rows would have a factor of $k^n$.
+
+If $A$ and $B$ are $n \times n$, then $|AB| = |A||B|$. If $A$ is invertible, then it must be an elementary matrix so we can write it as $AB = E_rB \implies |AB| = |E_r||B|$. If $A$ is not invertible, then $|A| = 0$ so we don't need to go further.
+
+If $A$ is invertible then:
+\begin{gather*}
+    |A^{-1}| = \frac{1}{|A|}
+\end{gather*}
+You might not even need to remember the invertible part since this isn't defined at $|A| = 0$. This is true because $AA^{-1} = I$ and $|I| = 1$.
+
+Since you can expand along a row or a column, we can say that $|A| = |A^T|$.
+\subsubsection{Cramer's Rule and the Adjoint}
+To discuss Cramer's rule, we need to talk about $A_i$ notation. Basically, $A_i(\vv{b})$ is a matrix where column $i$ of $A$ is replaced by $\vv{b}$.
+
+If $A$ is invertible and $n \times n$ and $\vv{b}$ is a vector in $\mathbb{R}^n$, then any solution of $A(\vv{x}) = \vv{b}$ is given by:
+\begin{gather*}
+    x_i = \frac{|A_i(\vv{b})|}{|A|}
+\end{gather*}
+\begin{proof}
+The columns of $I_n$ are unit vectors:
+\begin{gather*}
+    AI_i(\vv{x}) = A[\vv{e_1} \hdots \vv{x}\hdots \vv{e_n}] = [A\vv{e_1} \hdots \vv{b}\hdots A\vv{e_n}] = A_i(\vv{b})\\
+    |A||I_i(\vv{x})| = |AI_i(\vv{x})| = |A_i(\vv{b})|
+\end{gather*}
+If you expand along row $i$ of $|I_i(\vv{x})|$ (which is just zeros except for $x_i$), then you can see that $|I_i(\vv{x})| = x_i$.
+\begin{gather*}
+    |A|x_i = |A_i(\vv{b})|
+\end{gather*}
+\end{proof}
+Now we can use Cramer's Rule to find a formula for the inverse of a matrix. If $AX = I$, then $X = A^{-1}$ (since the inverse is unique). So if we take column $j$ of $X$, then $A\vv{x_j} = \vv{e_j}$, now we can write Cramer's Rule:
+\begin{gather*}
+    x_{ij} = \frac{|A_i(\vv{e_j})|}{|A|}
+\end{gather*}
+If you write out $A_i(\vv{e_j})$, there will be zeroes in column $i$ (the replaced column) except for a $1$ in row $j$ (because of the unit vector). Therefore you actually have the flip of the normal determinant method:
+\begin{gather*}
+    (-1)^{j+i}|A_{ji}| = C_{ji}
+\end{gather*}
+remember this is the \textbf{cofactor} of $(j,i)$, what you get when you delete row $j$ and column $i$ and put the right sign on it. You can also write this as $[C_{ij}]^T$, called the \textbf{adjoint} of $A$.
+
+If $A$ is invertible $n \times n$, then:
+\begin{gather*}
+    A^{-1} = \frac{\textrm{adj}\, A}{|A|}
+\end{gather*}
+This isn't normally an easy method.
+\subsection{Eigenvalues and Eigenvectors of Square Matrices}
 \end{document}
