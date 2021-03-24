@@ -4082,4 +4082,44 @@ If $A$ is $n \times n$ with eigenvectors $\vv{v}$ and eigenvalues $\lambda$ and 
 Don't forget that $\vv{x}$ might just not be a linear combination.
 
 If $A$ is an $n \times n$ matrix with \textit{distinct} eigenvalues $\lambda$ and eigenvectors $\vv{v}$, then the eigenvectors are linearly independent.
+\subsection{Similarity and Diagonalization}
+Gaussian Elimination does not preserve the eigenvalues of a matrix, so we need to find another way to easily get the eigenvalues.
+
+if $A$ and $B$ are $n \times n$, we can say that $A$ is similar to $B$ if there is an invertible matrix $P$ such that $P^{-1}AP = B$. We can denote this similarity with $A \sim B$.
+
+From this we can write $A = PBP^{-1}$ or $AP = PB$. Similarity does have a direction, but it works in reverse.
+
+If $A$, $B$, $C$ are $n \times n$
+\begin{itemize}
+    \item $A \sim A$
+    \item $A \sim B \implies B \sim A$
+    \item $A \sim B + B \sim C \implies A \sim C$
+\end{itemize}
+For the first one, $I^{-1}AI = A$. For the second, using the given we know that $P^{-1}AP = B \implies (P^{-1})^{-1}BP^{-1} = PBP^{-1} = A$. This proves it because of the earlier statement. For the third one, $P^{-1}AP = B$ and similarly $R^{-1}BR = C$. So:
+\begin{gather*}
+    C = R^{-1}BR = R^{-1}(P^{-1}AP)R = (R^{-1}P^{-1})A(PR) = (PR)^{-1}A(PR) = C
+\end{gather*}
+Therefore, $A \sim C$. Notice how we used the property where when you take the inverse of a multiplication you switch the order.
+
+If $A \sim B$, then
+\begin{enumerate}
+    \item $|A| = |B|$
+    \item $A$ and $B$ are either both or neither invertible
+    \item Same rank
+    \item Same characteristic polynomial/equation
+    \item Same eigenvalues
+    \item $A^m \sim B^m$ for all $m \geqslant 0$ and just all integers $m$ if $A$ is invertible
+\end{enumerate}
+\subsubsection{Diagonalization}
+A matrix is \textbf{diagonalizable} if there is a diagonal matrix $D$ such that $A \sim D$, in other words $P^{-1}AP = D$. $A$ is diagonalizable if and only if $A$ has $n$ linearly independent eigenvectors. You can use these eigenvectors to build the columns of $P$ and the eigenvalues to find the diagonal entries of $D$. You can prove this by writing out the product and equating columns.
+
+The basis vectors for all the eigenspaces of distinct eigenvalues are linearly independent for an $n \times n$ matrix $A$. This is because if you write the dependence relation, they're all going to be eigenvectors, which means they have to be linearly independent.
+
+Using this and the previous result, we can say that if a matrix has $n$ distinct eigenvalues (no extra algebraic multiplicity), then it is diagonalizable.
+
+The geometric multiplicity of an eigenvalue will be less than or equal to its algebraic one. If you call the geometric multiplicity $p$ then the basis will have $p$ vectors. It gets a little complex here and hard to put into a \LaTeX\, document, but see page 307 of the LA book for the rest.
+
+We can say that these statements are equivalent: $A$ is diagonalizable, the bases of the eigenspaces of $A$ contain $n$ vectors totally, and the algebraic multiplicity of each eigenvalue is the same as its geometric one.
+
+If $A$ is diagonalizable, then it must have $n$ independent eigenvectors and since each vector corresponds with an eigenvalue the bases must contain at least $n$ vectors. But since they're linearly independent you can't remove one and still span the set, so it must contain exactly $n$ vectors, no extra ones. From this we can say that the geometric multiplicities (vectors in the basis) must sum up to $n$. But so do the algebraic ones because a polynomial of degree $n$ will have $n$ solutions (counting the duplicates). But we know that algebraic must be greater or equal to geometric. Since it can't be greater AND less (to balance out), it must be equal to.
 \end{document}
