@@ -4122,4 +4122,77 @@ The geometric multiplicity of an eigenvalue will be less than or equal to its al
 We can say that these statements are equivalent: $A$ is diagonalizable, the bases of the eigenspaces of $A$ contain $n$ vectors totally, and the algebraic multiplicity of each eigenvalue is the same as its geometric one.
 
 If $A$ is diagonalizable, then it must have $n$ independent eigenvectors and since each vector corresponds with an eigenvalue the bases must contain at least $n$ vectors. But since they're linearly independent you can't remove one and still span the set, so it must contain exactly $n$ vectors, no extra ones. From this we can say that the geometric multiplicities (vectors in the basis) must sum up to $n$. But so do the algebraic ones because a polynomial of degree $n$ will have $n$ solutions (counting the duplicates). But we know that algebraic must be greater or equal to geometric. Since it can't be greater AND less (to balance out), it must be equal to.
+
+\section{Orthogonality}
+\subsection{Orthogonality in $\mathbb{R}^n$}
+Now instead of defining orthogonality for vectors we can define it for vector \textit{sets}. A set of vectors is called an \textbf{orthogonal set} if all the vectors are orthogonal to each other. Basically $\vv{v_i} \vdot \vv{v_j} = 0$ for $i \neq j$. So if you imagine a orthogonal set of vectors in $\mathbb{R}^3$, you'd imagine the axes just tilted around. An orthogonal set must obviously be linearly independent.
+\begin{proof}
+We can show this by testing independence like we normally do:
+\begin{gather*}
+    c_1\vv{v_1} + \hdots + c_k\vv{v_k} = \vv{0}
+\end{gather*}
+So then since $\vv{0} \vdot$ anything is $0$:
+\begin{gather*}
+    (c_1\vv{v_1} + \hdots c_k\vv{v_k}) \vdot \vv{v_i} = 0\\
+    c_1(\vv{v_1}\vdot\vv{v_i}) + \hdots + c_i(\vv{v_i} \vdot \vv{v_i}) + \hdots + c_k(\vv{v_k}\vdot\vv{v_i}) = 0
+\end{gather*}
+However since these vectors are orthogonal, the only nonzero dot product will be the center one, so:
+\begin{gather*}
+    c_i(\vv{v_i} \vdot \vv{v_i}) = 0 \implies c_i = 0
+\end{gather*}
+Since this is true for every vector as $i$ changes, we have linear independence.
+\end{proof}
+We can define an \textbf{orthogonal basis} as a normal basis but made up of vectors that form an orthogonal set. The advantage to going through the extra work to get this basis is that you can find coordinates with respect to that relatively easily:
+
+If we have an orthogonal basis and and we want to find the coordinates of a vector $\vv{w}$ with respect to the basis. Then if the basis vectors are $\vv{v}_i$, each coordinate $c_i$ is given by:
+\begin{gather*}
+    c_i = \frac{\vv{w} \vdot \vv{v_i}}{\vv{v_i} \vdot \vv{v_i}}
+\end{gather*}
+\begin{proof}
+If $c_i$ are the coordinates of $\vv{w}$ with respect to $\vv{v}$, then we can write:
+\begin{gather*}
+    \vv{w} = c_1\vv{v_1} + \hdots + c_k\vv{v_k}\\
+    \vv{w} \vdot \vv{v_i} = (c_1\vv{v_1} + \hdots + c_k\vv{v_k}) \vdot \vv{v_i}\\
+    = c_1(\vv{v_1}\vdot\vv{v_i}) + \hdots + c_i(\vv{v_i} \vdot \vv{v_i}) + \hdots + c_k(\vv{v_k}\vdot\vv{v_i}) \\
+    = c_i(\vv{v_i} \vdot \vv{v_i})
+\end{gather*}
+Divide both sides by the $\vv{v_i} \vdot \vv{v_i}$ and you get the formula.
+\end{proof}
+We can extend this to the notion of an \textbf{orthonormal set} (and basis), which is simply an orthogonal set composed just of unit vectors. A consequence of this is that $\vv{v_i} \vdot \vv{v_i} = 1$ now. You can get an orthonormal set from an orthogonal set just by normalizing the vectors (since the directions are unchanged).
+\subsubsection{Orthogonal Matrices}
+We can call matrices that have orthonormal columns \textbf{orthogonal matrices}. The name can be confusing since you need ortho\textit{normal} columns to make an ortho\textit{gonal} matrix.
+
+The columns of an $n \times n$ matrix $Q$ form an orthonormal set if and only if $Q^TQ = I_n$.
+\begin{proof}
+Basically we have to show that $(Q^TQ)$ is $1$ whenever $i = j$ and $0$ when $i \neq j$. Sound familiar? That's because $\vv{q_i} \vdot \vv{q_j}$ is $0$ when $i \neq j$ and $1$ when $i = j$. Since matrix multiplication is just row $i$ of $Q^T$ and column $j$ of $Q$, we can say that the entry of $Q^TQ$ is given by $\vv{q_i} \vdot \vv{q_j}$. The rest should make sense from there.
+\end{proof}
+A square matrix $Q$ is orthogonal if and only if $Q^{-1} = Q^T$. This is true because $Q^TQ = I$.
+
+If $Q$ is an $n \times n$ matrix, the following are either all true or false:
+\begin{enumerate}
+    \item $Q$ is orthogonal
+    \item $|Q\vv{x}| = |\vv{x}|$ for all $\vv{x}$ in $\mathbb{R}^n$
+    \item $Q\vv{x} \vdot Q\vv{y} = \vv{x} \vdot \vv{y}$ for all $\vv{x},\vv{y}$ in $\mathbb{R}^n$.
+\end{enumerate}
+\begin{proof}
+If $\vv{x}$ and $\vv{y}$ are column vectors then $\vv{x} \vdot \vv{y} = \vv{x}^T\vv{y}$ (because matrix multiplication is row times column).
+So if we assume $Q$ is orthogonal, then $Q^TQ = I$ so:
+\begin{gather*}
+    Q\vv{x} \vdot Q\vv{y} = (Q\vv{x})^T Q\vv{y}) = \vv{x}^TQ^TQ\vv{y} = \vv{x}^TI\vv{y} = \vv{x} \vdot \vv{y}
+\end{gather*}
+If we take the last result but use $\vv{x} = \vv{y}$, then $(Q\vv{x} \vdot Q\vv{x}) = \vv{x} \vdot \vv{x} \implies |Q\vv{x}| = |\vv{x}|$.
+You can find that $\vv{x} \vdot \vv{y} = Q\vv{x} \vdot Q\vv{y}$. If $\vv{q_i}$ is column $i$ of $Q$, then $\vv{q_i} = Q\vv{e_i}$, so $\vv{q_i} \vdot \vv{q_j} = Q\vv{e_i} \vdot Q\vv{e_j} = \vv{e_i} \vdot \vv{e_j}$, and since the standard unit vectors are an orthonormal set, $Q$ must also be an orthogonal matrix.
+\end{proof}
+If $Q$ is orthogonal, then its rows are also an orthonormal set.
+\begin{proof}
+This should make sense since $Q^{-1} = Q^T$, then $(Q^T)^{-1} = (Q^T)^T$, which means $Q^T$ is also orthogonal so its columns (the rows of $Q$) are orthonormal.
+\end{proof}
+We can also list a few other properties mostly that we won't prove right now.
+\begin{enumerate}
+    \item $Q^{-1}$ is orthogonal.
+    \item $|Q| = \pm 1$
+    \item $|\lambda| = 1$
+    \item If $Q_1$ and $Q_2$ are orthogonal and $n \times n$, then so is $Q_1Q_2$.
+\end{enumerate}
+We can prove the third one by realizing that $|Q\vv{x}| = |\vv{x}|$ and taking $\vv{x}$ to be an eigenvector. From there $|\vv{x}| = |\lambda \vv{x}|$.
 \end{document}
