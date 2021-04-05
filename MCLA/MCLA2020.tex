@@ -4195,4 +4195,53 @@ We can also list a few other properties mostly that we won't prove right now.
     \item If $Q_1$ and $Q_2$ are orthogonal and $n \times n$, then so is $Q_1Q_2$.
 \end{enumerate}
 We can prove the third one by realizing that $|Q\vv{x}| = |\vv{x}|$ and taking $\vv{x}$ to be an eigenvector. From there $|\vv{x}| = |\lambda \vv{x}|$.
+
+\subsection{Orthogonal Complements and Orthogonal Projections}
+\subsubsection{Orthogonal Complements}
+An \textbf{orthogonal complement} is a set of all vectors that are orthogonal to a subspace $W$ (think plane). Basically the orthogonal complement is the line perpendicular to the plane. So off of this we can get a few points:
+\begin{enumerate}
+    \item $W^\perp$ is a subspace of $\mathbb{R}^n$
+    \item $(W^\perp)^\perp = W$
+    \item $W \cap W^\perp = \vv{0}$
+    \item If $W = \textrm{span}(\vv{w_i})$, then $\vv{v}$ is in $W^\perp$ if and only if $\vv{v} \vdot \vv{w_i} = 0$ for all the vectors inside the span brackets.
+\end{enumerate}
+For the first one, you can prove that the dot product equaling $0$ is closed over addition and scalar multiplication. The second one should make sense because the perpendicular of the perpendicular is the same thing itself. The third one, the only thing that the normal and $\perp$ sets share is the zero vector. Finally, since orthogonality only considers direction and not length, you can use the vectors inside the span to test for orthogonal complement.
+
+If $A$ is an $m \times n$ matrix, then the orthgonal complement of the row space or column space is just the nullspace.
+\begin{proof}
+If $\vv{x}$ is in row$^\perp$ then $A \vdot \vv{x} = 0$ or $A\vv{x} = 0$ since matrix multiplication uses a dot product. This means that $\vv{x}$ has to be in the nullspace. The same argument applies for column space using $A^T$.
+\end{proof}
+These four subspaces, row, null, col, and $\textrm{null}(A^T)$ are the \textbf{fundamental subspaces} of $A$.
+
+\subsubsection{Orthogonal Projections}
+Remember that the projection is given by:
+\begin{gather*}
+    \textrm{proj}_{\vv{u}} (\vv{v}) = \left(\frac{\vv{u} \vdot \vv{v}}{\vv{u} \vdot \vv{u}}\right)\vv{u}
+\end{gather*}
+So the perpendicular vector would just be $\vv{v} - \textrm{proj}_{\vv{u}}(\vv{v})$. If we let $W = \textrm{span}(\vv{u})$ then the projected vector must be in $W$ and $\textrm{perp}_{\vv{u}}(\vv{v})$ is in $W^\perp$.
+
+So if $W$ is a subspace and the vectors $\vv{u}$ form a basis for it, then the \textbf{orthogonal projection} would be:
+\begin{gather*}
+    \textrm{proj}_{\vv{u}} (\vv{v}) = \left(\frac{\vv{u_1} \vdot \vv{v}}{\vv{u_1} \vdot \vv{u_1}}\right)\vv{u_1} + \hdots
+\end{gather*}
+Think of $W$ as a plane and the basis vectors are the direction vectors. So adding the projection of the vector on each of the direction vectors gives the projection of the vector onto the plane. This is a special case for $\mathbb{R}^3$ that gives a geometric interpretation.
+
+Now we can figure that there are unique vectors $\vv{w}$ and $\vv{w}^\perp$ such that:
+\begin{gather*}
+    \vv{v} = \vv{w} + \vv{w}^\perp
+\end{gather*}
+\begin{proof}
+We already know that this \textbf{decomposition} exists from the previous discussion, but we need to show that this is \textit{unique}.
+So lets pretend that we have another decomposition $\vv{w_1}$ and $\vv{w_1}^\perp$. We know that $\vv{w} - \vv{w_1}$ is in $W$ since it's closed under addition and same for $\vv{w_1}^\perp - \vv{w}^\perp$. However, the only vector they have in common is $\vv{0}$, so if $\vv{w} - \vv{w_1} = \vv{0}$, then $\vv{w} = \vv{w_1}$, and so it's the same vector and unique. The same applies to $\vv{w_1}^\perp$.
+\end{proof}
+The uniqueness of these vectors shows that they don't depend on what exact basis you choose, they'll still be the same.
+
+If $W$ is a subspace of $\mathbb{R}^n$, then
+\begin{gather*}
+    \dim(W) + \dim(W^\perp) = n
+\end{gather*}
+\begin{proof}
+Lets say the vectors $\vv{u_0}\hdots \vv{u_k}$ are an orthogonal basis for $W$ and same for $\vv{v_0}\hdots \vv{v_l}$ and $W^\perp$. Then $\dim(W) = k$ and $\dim(W^\perp) = l$ If we define $\beta = \vv{u}\hdots\vv{v}$, then since $\vv{u} \vdot \vv{v} = 0$ (since they're $\perp$), $\beta$ is an orthogonal basis. Now the last theorem says we can write $\vv{q} = \vv{w} + \vv{w}^\perp$ if $\vv{q}$ is in $\mathbb{R}^n$. Since $\vv{w}$ is a linear combination of vectors $\vv{u}$ and $\vv{w}^\perp$ is a linear combination of vectors $\vv{v}$, then any $\vv{q}$ can be written as a linear combination of vectors in $\beta$ and so $\beta$ spans $\mathbb{R}^n$ and so it's a basis and we can get the result from that.
+\end{proof}
+Interestingly the rank theorem can also happen from that if $W = \textrm{row}(A)$ and $W^\perp = \textrm{null}(A)$. Then $\textrm{rank}(A) + \textrm{nullity}(A) = n$.
 \end{document}
