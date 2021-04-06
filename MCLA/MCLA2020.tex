@@ -4244,4 +4244,45 @@ If $W$ is a subspace of $\mathbb{R}^n$, then
 Lets say the vectors $\vv{u_0}\hdots \vv{u_k}$ are an orthogonal basis for $W$ and same for $\vv{v_0}\hdots \vv{v_l}$ and $W^\perp$. Then $\dim(W) = k$ and $\dim(W^\perp) = l$ If we define $\beta = \vv{u}\hdots\vv{v}$, then since $\vv{u} \vdot \vv{v} = 0$ (since they're $\perp$), $\beta$ is an orthogonal basis. Now the last theorem says we can write $\vv{q} = \vv{w} + \vv{w}^\perp$ if $\vv{q}$ is in $\mathbb{R}^n$. Since $\vv{w}$ is a linear combination of vectors $\vv{u}$ and $\vv{w}^\perp$ is a linear combination of vectors $\vv{v}$, then any $\vv{q}$ can be written as a linear combination of vectors in $\beta$ and so $\beta$ spans $\mathbb{R}^n$ and so it's a basis and we can get the result from that.
 \end{proof}
 Interestingly the rank theorem can also happen from that if $W = \textrm{row}(A)$ and $W^\perp = \textrm{null}(A)$. Then $\textrm{rank}(A) + \textrm{nullity}(A) = n$.
+
+\subsection{The Gram-Schmidt Process and QR Factorization}
+Now we want to think about finding a process to find the orthogonal basis for a subspace, given the subspace's normal basis.
+\subsubsection{The Gram-Schmidt Process}
+The idea here is to \textit{orthogonalize} each vector in the basis one at a time. So lets imagine a subspace with a 2-dimensional basis. Lets call our original basis vectors $\vv{x}$ and our orthogonal basis vectors $\vv{v}$. So we'll start with $\vv{v_1} = \vv{x_1}$. And then lets find the second vector by projecting $\vv{x_2}$ over $\vv{x_1} = \vv{v_1}$. This guarantees that the new vector is in the same plane but also orthogonal to the first vector. Since they're both in the subspace and orthogonal, they must form an orthogonal basis for the subspace. This is an example of the \textbf{Gram-Schmidt Process}.
+Basically:
+\begin{enumerate}
+    \item $\vv{v_1} = \vv{x_1}$
+    \item $\vv{v_2} = \vv{x_2} - \left(\dfrac{\vv{v_1} \vdot \vv{x_2}}{\vv{v_1} \vdot \vv{v_1}}\right)\vv{v_1}$
+    \item $\vv{v_3} = \vv{x_3} - \left(\dfrac{\vv{v_1} \vdot \vv{x_3}}{\vv{v_1} \vdot \vv{v_1}}\right)\vv{v_1} - \left(\dfrac{\vv{v_3} \vdot \vv{x_3}}{\vv{v_3} \vdot \vv{v_3}}\right)\vv{v_2}$\\
+    \vdots
+\end{enumerate}
+The vectors $\vv{v}$ form an orthogonal basis for the subspace. If you want an orthonormal basis, just normalize the orthogonal one.
+\subsubsection{The QR Factorization}
+If we take a matrix $m \times n$ $A$, with linearly independent columns (so $m \geqslant n$), then we can apply the Gram-Schmidt Process to it and obtain an orthonormal-columned matrix $Q$, which lets you factorize $A$ into $Q$ and an upper triangular matrix $R$. This is called the \textbf{QR Factorization}, and we can display it by taking the linearly independent columns of $A$, $\vv{a_1}\hdots\vv{a_n}$ and the orthonormal vectors after applying the process $\vv{q_1}\hdots\vv{q_n}$, since they're both bases for the same subspace:
+\begin{gather*}
+    W_i = \textrm{span}(\vv{a_1}\hdots\vv{a_i}) = \textrm{span}(\vv{q_1}\hdots\vv{q_i})\\
+    \vv{a_i} = r_{1i}\vv{q_1} + r_{2i}\vv{q_2} + r_{ii}\vv{q_i}\\
+    \vv{a_1} = r_{11}\vv{q_1}\\
+    \vv{a_2} = r_{12}\vv{q_1} + r_{22}\vv{q_2}\\
+    \vdots\\
+    \vv{a_n} = r_{1n}\vv{q_1} + r_{2n}\vv{q_2}+\hdots+r_{nn}\vv{q_n}
+\end{gather*}
+which in matrix form:
+\begin{gather*}
+    A = \begin{bmatrix}
+        \vv{a_1} & \vv{a_2} & \hdots & \vv{a_n}
+    \end{bmatrix} = QR =
+    \begin{bmatrix}
+        \vv{q_1} & \vv{q_2} & \vv{q_3} & \hdots & \vv{q_n}
+    \end{bmatrix}
+    \begin{bmatrix}
+        r_{11} & r_{12} & \hdots & r_{1n}\\
+        0 & r_{22} & \hdots & r_{2n}\\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \hdots & r_{nn}
+    \end{bmatrix}
+\end{gather*}
+To show that the matrix is upper triangular, we have to prove that the diagonal entries are nonzero. Assume that $r_{ii} = 0$, then in the earlier eq. $\vv{a_i}$ is a linear combination of $\vv{q_1}\hdots\vv{q_{i-1}}$, which means it is in $W_{i-1}$. But since it's in $W_{i-1}$ it must by definition by a linear combination of $\vv{a_1}\hdots\vv{a_{i-1}}$, which can't be true cause the vectors $\vv{a}$ are linearly independent. That means that $r_{ii} \neq 0$.
+
+But why do the columns of $A$ have to be linearly independent. Since $R$ is an upper triangular matrix it must be invertible so we have $Q = AR^{-1}$ and so $Q$ and $A$ must have the same rank. The columns of $Q$ are linearly independent because they're orthogonal, so $\textrm{rank}(Q) = n$, which means $\textrm{rank}(A) = n$ and so columns of $A$ must be linearly independent.
 \end{document}
