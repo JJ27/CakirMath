@@ -1,4 +1,4 @@
-# MCLA2020
+# CakirMath
 Multivariable Calculus 2020-21
 Running Notes
 
@@ -16,5 +16,10 @@ Linear Algebra 2020-21
 1. Vectors
 2. Systems of Linear Equations
 3. Matrices
+
+Differential Equations 2021-22
+
+1. Introduction to Differential Equations
+2. First Order Differential Equations
 
 LaTeX typeset notes summarizing important definitions, concepts, figures, and proofs.
